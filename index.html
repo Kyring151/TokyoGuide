@@ -53,6 +53,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .calc-row{display:flex;gap:10px;margin-bottom:10px;align-items:center}
 .calc-row label{font-size:13px;width:70px;color:#4a5568;flex-shrink:0}
 .calc-row select{flex:1;height:36px;border:1px solid #c6f6d5;border-radius:8px;padding:0 10px;font-size:13px}
+.calc-detail{font-size:12px;color:#5b7462;background:#f0faf3;border-left:3px solid #68d391;padding:6px 10px;border-radius:0 6px 6px 0;margin:-6px 0 12px;line-height:1.5;user-select:text;-webkit-user-select:text}
 .calc-result{text-align:center;padding:10px;background:#fff;border-radius:8px;font-size:18px;font-weight:600;color:#276749;margin-top:10px}
 .japan-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
 .japan-item:last-child{border-bottom:none}
@@ -215,69 +216,76 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
                 <option value="10">10天</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailDay">5天行程：住宿按 4 晚、其余按 5 天计算</div>
         <div class="calc-row">
             <label>住宿档次</label>
             <select id="calcHotel">
-                <option value="180">胶囊/青旅（约180元/晚）</option>
-                <option value="400" selected>经济型酒店（约400元/晚）</option>
-                <option value="800">中端舒适酒店（约800元/晚）</option>
-                <option value="1500">高端星级酒店（约1500元/晚）</option>
+                <option value="180">胶囊/青旅 ¥180/晚</option>
+                <option value="500" selected>经济型 ¥500/晚</option>
+                <option value="900">中端舒适 ¥900/晚</option>
+                <option value="1600">高端星级 ¥1600/晚</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailHotel">参考：APA / 东横INN / 超级酒店，房间小但干净，部分含早餐</div>
         <div class="calc-row">
             <label>餐饮标准</label>
             <select id="calcFood">
-                <option value="150">简餐便利店（约150元/天）</option>
-                <option value="400" selected>正常正餐（约400元/天）</option>
-                <option value="800">美食探店（约800元/天）</option>
+                <option value="150">简餐 ¥150/天</option>
+                <option value="300" selected>正常正餐 ¥300/天</option>
+                <option value="800">美食探店 ¥800/天</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailFood">例：便利店早＋定食午餐＋居酒屋晚餐＋饮料，约¥5000日元/天</div>
         <div class="calc-row">
             <label>市内交通</label>
             <select id="calcTraffic">
-                <option value="60">纯公共交通（约60元/天）</option>
-                <option value="180" selected>偶尔打车（约180元/天）</option>
-                <option value="400">频繁打车（约400元/天）</option>
+                <option value="60">纯公交 ¥60/天</option>
+                <option value="180" selected>偶尔打车 ¥180/天</option>
+                <option value="400">频繁打车 ¥400/天</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailTraffic">公交为主＋1-2次短途打车（起步¥500日元）</div>
         <div class="calc-row">
             <label>门票娱乐</label>
             <select id="calcTicket">
-                <option value="100">经典观光为主（约100元/天）</option>
-                <option value="250" selected>深度收费景点（约250元/天）</option>
+                <option value="100">经典观光 ¥100/天</option>
+                <option value="250" selected>深度收费 ¥250/天</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailTicket">晴空塔展望台(¥2100日元)＋teamLab/美术馆等收费景点</div>
         <div class="calc-row">
             <label>特殊项目</label>
             <select id="calcExtra">
-                <option value="0">无额外项目</option>
-                <option value="500">+1天迪士尼/海洋（约500元门票）</option>
-                <option value="1000">+2天主题乐园（约1000元）</option>
-                <option value="500">+JR Pass 7天通票（约500元）</option>
+                <option value="0" selected>无额外项目</option>
+                <option value="500">+1天迪士尼（约¥500）</option>
+                <option value="1000">+2天主题乐园（约¥1000）</option>
+                <option value="760">东京广域周游券3日（约¥760）</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailExtra">迪士尼一日券官方¥8,900日元起（动态票价）；广域券3日¥15,180日元</div>
         <div class="calc-row">
             <label>购物预留</label>
             <select id="calcShop">
                 <option value="0">不购物</option>
-                <option value="1000">少量伴手礼（约1000元）</option>
-                <option value="3000" selected>正常购物（约3000元）</option>
-                <option value="6000">购物扫货（约6000元）</option>
+                <option value="1000">少量伴手礼 ¥1000</option>
+                <option value="3000" selected>正常购物 ¥3000</option>
+                <option value="6000">购物扫货 ¥6000</option>
             </select>
         </div>
+        <div class="calc-detail" id="detailShop">药妆＋伴手礼＋1-2件衣物，正常购物水平</div>
         
         <div style="margin-top:12px; padding-top:12px; border-top:1px solid #c6f6d5;">
             <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
-                <span>住宿（按晚数算）：</span><span id="resHotel">1600</span> 元
+                <span id="resHotelLabel">住宿（4晚×¥500）</span>：<span id="resHotel">2000</span> 元
             </div>
             <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
-                <span>餐饮：</span><span id="resFood">2000</span> 元
+                <span id="resFoodLabel">餐饮（5天×¥300）</span>：<span id="resFood">1500</span> 元
             </div>
             <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
-                <span>市内交通：</span><span id="resTraffic">900</span> 元
+                <span id="resTrafficLabel">市内交通（5天×¥180）</span>：<span id="resTraffic">900</span> 元
             </div>
             <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
-                <span>门票娱乐：</span><span id="resTicket">1250</span> 元
+                <span id="resTicketLabel">门票娱乐（5天×¥250）</span>：<span id="resTicket">1250</span> 元
             </div>
             <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
                 <span>特殊项目：</span><span id="resExtra">0</span> 元
@@ -287,8 +295,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             </div>
         </div>
         
-        <div class="calc-result" id="calcResult">约 8750 元 / 人</div>
-        <p style="font-size:11px; color:#718096; text-align:center; margin-top:6px;">* 不含国际机票，为人民币参考值</p>
+        <div class="calc-result" id="calcResult">约 8650 元 / 人</div>
+        <p style="font-size:11px; color:#718096; text-align:center; margin-top:6px;">* 不含国际机票，为人民币参考值；点选各选项可查看具体参考</p>
     </div>
 
     <div class="section-title">高频日语短句（点击复制）</div>
@@ -366,8 +374,8 @@ const SPOTS_AND_FOOD = [
     { id:25, area:"台场", type:"spot", name:"彩虹大桥", tags:["free"], desc:"东京标志性夜景，台场海滨公园最佳观赏点。", address:"江东区台场海滨公园", traffic:"台场站步行10分钟", ticket:"免费", time:"全天" },
     { id:26, area:"台场", type:"food", name:"台场海鲜餐厅", tags:["local"], desc:"临海景餐厅，边看彩虹大桥边用餐。", address:"江东区青海1-4", traffic:"台场站步行5分钟", price:"人均4000日元", book:"建议预约" },
     
-    { id:27, area:"迪士尼", type:"spot", name:"东京迪士尼乐园", tags:["must"], desc:"经典迪士尼乐园，梦幻童话世界。", address:"千叶县浦安市舞滨1-1", traffic:"JR京叶线舞滨站", ticket:"一日券7900日元", time:"9:00-21:00（随季节变动）" },
-    { id:28, area:"迪士尼", type:"spot", name:"东京迪士尼海洋", tags:["must"], desc:"全球唯一迪士尼海洋，刺激项目更多。", address:"千叶县浦安市舞滨1-13", traffic:"JR舞滨站换乘迪士尼专线", ticket:"一日券7900日元", time:"9:00-21:00" },
+    { id:27, area:"迪士尼", type:"spot", name:"东京迪士尼乐园", tags:["must"], desc:"经典迪士尼乐园，梦幻童话世界。", address:"千叶县浦安市舞滨1-1", traffic:"JR京叶线舞滨站", ticket:"一日券8900日元", time:"9:00-21:00（随季节变动）" },
+    { id:28, area:"迪士尼", type:"spot", name:"东京迪士尼海洋", tags:["must"], desc:"全球唯一迪士尼海洋，刺激项目更多。", address:"千叶县浦安市舞滨1-13", traffic:"JR舞滨站换乘迪士尼专线", ticket:"一日券8900日元", time:"9:00-21:00" },
     
     { id:29, area:"镰仓", type:"spot", name:"镰仓高校前站", tags:["must"], desc:"灌篮高手取景地，青春回忆打卡点。", address:"神奈川县镰仓市镰仓高校前", traffic:"江之电镰仓高校前站", ticket:"免费", time:"全天" },
     { id:30, area:"镰仓", type:"spot", name:"镰仓大佛", tags:["must"], desc:"日本国宝，高德院镰仓大佛像。", address:"神奈川县镰仓市长谷4-2-28", traffic:"江之电极乐寺站步行10分钟", ticket:"200日元", time:"8:00-17:00" },
@@ -626,6 +634,46 @@ function initSearch() {
 }
 
 // 预算计算器
+const BUDGET_DETAILS = {
+    day: {
+        3: "3天行程：住宿按 2 晚、其余按 3 天计算",
+        5: "5天行程：住宿按 4 晚、其余按 5 天计算",
+        7: "7天行程：住宿按 6 晚、其余按 7 天计算",
+        10: "10天行程：住宿按 9 晚、其余按 10 天计算"
+    },
+    hotel: {
+        180: "参考：9h胶囊 / First Cabin / 安心お宿，公共卫浴，适合背包客",
+        500: "参考：APA / 东横INN / 超级酒店，房间小但干净，部分含早餐",
+        900: "参考：Dormy Inn(带温泉) / 三井花园 / 相铁Fresa，设施更全",
+        1600: "参考：希尔顿 / 凯悦 / 帝国酒店，含行政酒廊与优质景观"
+    },
+    food: {
+        150: "例：便利店早餐＋牛丼午餐＋拉面晚餐，约¥2000日元/天",
+        300: "例：便利店早＋定食午餐＋居酒屋晚餐＋饮料，约¥5000日元/天",
+        800: "例：银座/涩谷名店：寿司、烧肉(叙叙苑人均¥1万起)、怀石晚餐"
+    },
+    traffic: {
+        60: "地铁/电车4-6次(单程¥170-320)，或地铁24h券¥800日元",
+        180: "公交为主＋1-2次短途打车(起步¥500日元)",
+        400: "多次打车或深夜返程，东京打车每公里约¥300日元"
+    },
+    ticket: {
+        100: "浅草寺、明治神宫、都厅(免费)为主＋偶尔收费博物馆",
+        250: "晴空塔展望台(¥2100)＋teamLab/美术馆等收费景点"
+    },
+    extra: {
+        0: "无额外项目",
+        500: "迪士尼一日券官方¥8,900日元起(约¥445-500，动态票价)",
+        1000: "迪士尼乐园＋海洋各一天，约¥1,000",
+        760: "东京广域周游券3日¥15,180日元(≈¥760)，连续3天JR东日本区域无限乘"
+    },
+    shop: {
+        0: "不购物",
+        1000: "药妆＋零食＋御守等伴手礼",
+        3000: "药妆＋伴手礼＋1-2件衣物",
+        6000: "奢侈品 / 大量药妆 / 家电等扫货"
+    }
+};
 function initBudget() {
     const d = document.getElementById('calcDay');
     const h = document.getElementById('calcHotel');
@@ -642,6 +690,21 @@ function initBudget() {
     const rE = document.getElementById('resExtra');
     const rS = document.getElementById('resShop');
     const res = document.getElementById('calcResult');
+    
+    const detDay = document.getElementById('detailDay');
+    const detHotel = document.getElementById('detailHotel');
+    const detFood = document.getElementById('detailFood');
+    const detTraffic = document.getElementById('detailTraffic');
+    const detTicket = document.getElementById('detailTicket');
+    const detExtra = document.getElementById('detailExtra');
+    const detShop = document.getElementById('detailShop');
+    
+    const lH = document.getElementById('resHotelLabel');
+    const lF = document.getElementById('resFoodLabel');
+    const lT = document.getElementById('resTrafficLabel');
+    const lTk = document.getElementById('resTicketLabel');
+    
+    function showDetail(el, map, val){ if(el && map && map[val] !== undefined) el.innerText = map[val]; }
     
     function calc(){
         const days = parseInt(d.value);
@@ -667,6 +730,19 @@ function initBudget() {
         rE.innerText = extraTotal;
         rS.innerText = shopTotal;
         res.innerText = `约 ${total} 元 / 人`;
+        
+        showDetail(detDay, BUDGET_DETAILS.day, days);
+        showDetail(detHotel, BUDGET_DETAILS.hotel, hotel);
+        showDetail(detFood, BUDGET_DETAILS.food, food);
+        showDetail(detTraffic, BUDGET_DETAILS.traffic, traffic);
+        showDetail(detTicket, BUDGET_DETAILS.ticket, ticket);
+        showDetail(detExtra, BUDGET_DETAILS.extra, extra);
+        showDetail(detShop, BUDGET_DETAILS.shop, shop);
+        
+        lH.innerText = `住宿（${days-1}晚×¥${hotel}）`;
+        lF.innerText = `餐饮（${days}天×¥${food}）`;
+        lT.innerText = `市内交通（${days}天×¥${traffic}）`;
+        lTk.innerText = `门票娱乐（${days}天×¥${ticket}）`;
     }
     
     d.onchange = calc;
