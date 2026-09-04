@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>东京自由行实操手册</title>
+<title>东京自由行实操手册·交互版</title>
 <meta name="version" content="1.0.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
@@ -13,9 +13,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .top-bar .search-box{flex:1;max-width:200px;height:32px;background:rgba(255,255,255,.15);border:none;border-radius:16px;padding:0 15px;color:#fff;font-size:13px;outline:none;user-select:text;-webkit-user-select:text}
 .top-bar .search-box::placeholder{color:rgba(255,255,255,.6)}
 .metro-line{position:fixed;top:50px;left:0;right:0;height:4px;z-index:999;background:linear-gradient(90deg,#c53030 0%,#c53030 20%,#2b6cb0 20%,#2b6cb0 40%,#38a169 40%,#38a169 60%,#d69e2e 60%,#d69e2e 80%,#805ad5 80%,#805ad5 100%)}
-.page{display:none !important;padding:15px;animation:fadeIn .25s ease}
-.page.active{display:block !important}
+
+/* 分页核心样式 强制生效 */
+.page { display: none !important; padding: 15px; animation: fadeIn .25s ease; }
+.page.active { display: block !important; }
 @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
 .card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.06);transition:transform .15s ease}
 .card:active{transform:scale(.99)}
 .card-title{font-size:15px;font-weight:600;color:#1a365d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
@@ -26,7 +29,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .card-detail{max-height:0;overflow:hidden;transition:max-height .3s ease, padding .3s ease;font-size:13px;color:#4a5568}
 .card-detail.open{max-height:500px;padding-top:10px;margin-top:10px;border-top:1px dashed #e2e8f0}
 .card-detail p{margin-bottom:6px;user-select:text;-webkit-user-select:text}
-.card-detail .copy-btn{display:inline-block;padding:2px 8px;font-size:11px;background:#edf2f7;border:none;border-radius:4px;color:#2b6cb0;cursor:pointer;margin-left:8px;user-select:none}
+.card-detail .copy-btn{display:inline-block;padding:2px 8px;font-size:11px;background:#edf2f7;border:none;border-radius:4px;color:#2b6cb0;cursor:pointer;margin-left:8px}
 .pitfall{background:#fff5f5;border-left:4px solid #c53030}
 .pitfall .card-title{color:#c53030}
 .filter-bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
@@ -48,9 +51,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .step-content h4{font-size:14px;margin-bottom:4px;color:#2d3748}
 .budget-calc{background:#f0fff4;border-radius:12px;padding:15px;margin-bottom:15px}
 .calc-row{display:flex;gap:10px;margin-bottom:10px;align-items:center}
-.calc-row label{font-size:13px;width:60px;color:#4a5568}
+.calc-row label{font-size:13px;width:70px;color:#4a5568;flex-shrink:0}
 .calc-row select{flex:1;height:36px;border:1px solid #c6f6d5;border-radius:8px;padding:0 10px;font-size:13px}
-.calc-result{text-align:center;padding:10px;background:#fff;border-radius:8px;font-size:18px;font-weight:600;color:#276749}
+.calc-result{text-align:center;padding:10px;background:#fff;border-radius:8px;font-size:18px;font-weight:600;color:#276749;margin-top:10px}
 .japan-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
 .japan-item:last-child{border-bottom:none}
 .japan-jp{color:#2d3748;font-weight:500;user-select:text;-webkit-user-select:text}
@@ -75,10 +78,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 <div class="watermark">东京自由行实操手册 仅供购买者个人使用</div>
 
 <!-- 首页 -->
-<div class="page active" id="page-home">...</div>
+<div class="page active" id="page-home">
     <div class="hero">
         <h2>东京深度自由行实操手册</h2>
-        <p>2026 最新版 · 本地人实测 · 全程避坑</p>
+        <p>2025-2026 最新版 · 本地人实测 · 全程避坑</p>
         <div class="badges">
             <span class="badge">信息时效至2026</span>
             <span class="badge">零广告纯干货</span>
@@ -136,7 +139,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 </div>
 
 <!-- 分区攻略 -->
-<div class="page" id="page-area">...</div>
+<div class="page" id="page-area">
     <div class="filter-bar">
         <select class="filter-select" id="filterArea">
             <option value="">全部区域</option>
@@ -166,7 +169,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 </div>
 
 <!-- 路线规划 -->
-<div class="page" id="page-route">...</div>
+<div class="page" id="page-route">
     <div class="filter-bar">
         <select class="filter-select" id="filterRouteDay">
             <option value="">全部天数</option>
@@ -186,7 +189,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 </div>
 
 <!-- 避坑指南 -->
-<div class="page" id="page-pitfall">...</div>
+<div class="page" id="page-pitfall">
     <div class="filter-bar">
         <select class="filter-select" id="filterPitfall">
             <option value="">全部分类</option>
@@ -303,7 +306,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <div class="copyright">© 东京自由行实操手册 · 交互版 v1.0.0</div>
 </div>
 
-
 <!-- 底部导航 -->
 <div class="bottom-nav">
     <div class="nav-item active" data-page="home">
@@ -329,64 +331,49 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 </div>
 
 <script>
-// ============================================================
-// ==================== 【数据配置区 开始】 ====================
-// 修改内容只需要改这一部分，下面代码不要动
-// ============================================================
-
-// 景点&美食数据
+// ==================== 数据配置区 ====================
 const SPOTS_AND_FOOD = [
-    // 浅草
     { id:1, area:"浅草", type:"spot", name:"浅草寺", tags:["must"], desc:"东京最古老的寺庙，雷门是标志性打卡点。", address:"东京都台东区浅草2-3-1", traffic:"银座线浅草站1号出口步行5分钟", ticket:"免费", time:"6:00-17:00" },
     { id:2, area:"浅草", type:"spot", name:"晴空塔", tags:["must"], desc:"世界第一高塔，俯瞰东京全景，傍晚日落最美。", address:"东京都墨田区押上1-1-2", traffic:"半藏门线押上站直达", ticket:"展望台2100日元", time:"10:00-21:00" },
     { id:3, area:"浅草", type:"food", name:"浅草人形烧", tags:["local"], desc:"浅草名物，现烤现吃，红豆馅香甜不腻。", address:"浅草寺仲见世通商店街", traffic:"浅草站步行3分钟", price:"人均500日元", book:"不需要" },
     { id:4, area:"浅草", type:"food", name:"大黑家天妇罗", tags:["must"], desc:"百年老店，天妇罗名店，炸虾酥脆鲜嫩。", address:"台东区浅草1-38-10", traffic:"浅草站步行8分钟", price:"人均3000日元", book:"建议预约" },
     
-    // 上野秋叶原
     { id:5, area:"上野", type:"spot", name:"上野公园", tags:["free","must"], desc:"东京赏樱第一名所，园内有多家博物馆。", address:"东京都台东区上野公园", traffic:"JR上野站不忍口出口", ticket:"免费", time:"全天开放" },
     { id:6, area:"上野", type:"spot", name:"秋叶原电器街", tags:["must"], desc:"二次元与电器天堂，动漫周边、手办、游戏机应有尽有。", address:"东京都千代田区外神田", traffic:"JR秋叶原站电器街口", ticket:"免费", time:"店铺10:00-20:00" },
     { id:7, area:"上野", type:"food", name:"一兰拉面 上野店", tags:["must"], desc:"博多豚骨拉面代表，单人隔间体验独特。", address:"台东区上野2-7-8", traffic:"上野站步行3分钟", price:"人均1200日元", book:"不需要，需排队" },
     { id:8, area:"上野", type:"food", name:"秋叶原女仆咖啡厅", tags:["local"], desc:"秋叶原特色文化体验，萌系文化代表。", address:"千代田区外神田3-15-5", traffic:"秋叶原站步行5分钟", price:"人均2000日元", book:"不需要" },
     
-    // 银座
     { id:9, area:"银座", type:"spot", name:"银座四丁目十字路口", tags:["free","must"], desc:"世界最繁华的商业区之一，高端购物天堂。", address:"东京都中央区银座", traffic:"银座线银座站", ticket:"免费", time:"全天" },
     { id:10, area:"银座", type:"spot", name:"筑地市场", tags:["local"], desc:"东京的厨房，新鲜海鲜与市井美食聚集地。", address:"中央区筑地5-2-1", traffic:"日比谷线筑地站", ticket:"免费", time:"市场6:00-14:00" },
     { id:11, area:"银座", type:"food", name:"筑地海鲜饭", tags:["must","local"], desc:"新鲜海胆、三文鱼、金枪鱼盖饭，性价比极高。", address:"筑地市场内", traffic:"筑地站步行2分钟", price:"人均2500日元", book:"不需要，早上去" },
     { id:12, area:"银座", type:"food", name:"寿司大", tags:["must"], desc:"筑地名店，江户前寿司代表，食材顶级新鲜。", address:"中央区筑地5-2-1", traffic:"筑地站步行3分钟", price:"人均4000日元", book:"需要早起排队" },
     
-    // 原宿涩谷
     { id:13, area:"原宿", type:"spot", name:"涩谷十字路口", tags:["free","must"], desc:"世界最繁忙的十字路口，东京经典地标。", address:"东京都涩谷区涩谷", traffic:"JR涩谷站八公口", ticket:"免费", time:"全天" },
     { id:14, area:"原宿", type:"spot", name:"明治神宫", tags:["free","must"], desc:"闹中取静的神圣神社，参天大树环绕。", address:"涩谷区代代木神园町1-1", traffic:"JR原宿站步行10分钟", ticket:"免费", time:"5:00-18:00" },
     { id:15, area:"原宿", type:"food", name:"原宿可丽饼", tags:["local"], desc:"竹下通名物，各种口味奶油水果可丽饼。", address:"涩谷区神宫前1-7-1", traffic:"原宿站竹下通出口", price:"人均800日元", book:"不需要" },
     { id:16, area:"原宿", type:"food", name:"一风堂 涩谷店", tags:["must"], desc:"博多拉面名店，浓郁白汤豚骨拉面。", address:"涩谷区宇田川町13-8", traffic:"涩谷站步行5分钟", price:"人均1300日元", book:"不需要" },
     
-    // 新宿
     { id:17, area:"新宿", type:"spot", name:"新宿御苑", tags:["free"], desc:"东京市中心的皇家园林，四季风景各异。", address:"新宿区新宿1-11-1", traffic:"丸之内线新宿御苑前站", ticket:"500日元", time:"9:00-16:30" },
     { id:18, area:"新宿", type:"spot", name:"都厅展望台", tags:["free","local"], desc:"免费俯瞰东京夜景，比晴空塔性价比高。", address:"新宿区西新宿2-8-1", traffic:"JR新宿站西口步行10分钟", ticket:"免费", time:"9:30-22:00" },
     { id:19, area:"新宿", type:"food", name:"思出横丁烧鸟", tags:["local"], desc:"新宿黄金街，日式居酒屋一条街。", address:"新宿区西新宿1-2", traffic:"新宿站西口步行3分钟", price:"人均3000日元", book:"不需要" },
     { id:20, area:"新宿", type:"food", name:"叙々苑 新宿", tags:["must"], desc:"高端烧肉连锁，和牛品质极佳。", address:"新宿区歌舞伎町1-12-10", traffic:"新宿站东口步行5分钟", price:"人均8000日元", book:"建议预约" },
     
-    // 中目黑
     { id:21, area:"中目黑", type:"spot", name:"目黑川", tags:["local"], desc:"樱花季绝美赏樱地，夜樱灯光璀璨。", address:"目黑区中目黑", traffic:"日比谷线中目黑站", ticket:"免费", time:"全天" },
     { id:22, area:"中目黑", type:"spot", name:"代官山茑屋书店", tags:["local"], desc:"世界最美书店之一，文艺青年必去。", address:"目黑区青叶台2-12-18", traffic:"代官山站步行5分钟", ticket:"免费", time:"7:00-23:00" },
     { id:23, area:"中目黑", type:"food", name:"中目黑咖啡店", tags:["local"], desc:"东京精品咖啡聚集地，多家世界名店。", address:"目黑区中目黑", traffic:"中目黑站周边", price:"人均1000日元", book:"不需要" },
     
-    // 台场
     { id:24, area:"台场", type:"spot", name:"台场高达基地", tags:["must"], desc:"1:1等身高达立像，高达粉丝圣地。", address:"江东区青海1-1-10", traffic:"百合鸥线台场站", ticket:"免费", time:"10:00-21:00" },
     { id:25, area:"台场", type:"spot", name:"彩虹大桥", tags:["free"], desc:"东京标志性夜景，台场海滨公园最佳观赏点。", address:"江东区台场海滨公园", traffic:"台场站步行10分钟", ticket:"免费", time:"全天" },
     { id:26, area:"台场", type:"food", name:"台场海鲜餐厅", tags:["local"], desc:"临海景餐厅，边看彩虹大桥边用餐。", address:"江东区青海1-4", traffic:"台场站步行5分钟", price:"人均4000日元", book:"建议预约" },
     
-    // 迪士尼
     { id:27, area:"迪士尼", type:"spot", name:"东京迪士尼乐园", tags:["must"], desc:"经典迪士尼乐园，梦幻童话世界。", address:"千叶县浦安市舞滨1-1", traffic:"JR京叶线舞滨站", ticket:"一日券7900日元", time:"9:00-21:00（随季节变动）" },
     { id:28, area:"迪士尼", type:"spot", name:"东京迪士尼海洋", tags:["must"], desc:"全球唯一迪士尼海洋，刺激项目更多。", address:"千叶县浦安市舞滨1-13", traffic:"JR舞滨站换乘迪士尼专线", ticket:"一日券7900日元", time:"9:00-21:00" },
     
-    // 镰仓
     { id:29, area:"镰仓", type:"spot", name:"镰仓高校前站", tags:["must"], desc:"灌篮高手取景地，青春回忆打卡点。", address:"神奈川县镰仓市镰仓高校前", traffic:"江之电镰仓高校前站", ticket:"免费", time:"全天" },
     { id:30, area:"镰仓", type:"spot", name:"镰仓大佛", tags:["must"], desc:"日本国宝，高德院镰仓大佛像。", address:"神奈川县镰仓市长谷4-2-28", traffic:"江之电极乐寺站步行10分钟", ticket:"200日元", time:"8:00-17:00" },
     { id:31, area:"镰仓", type:"food", name:"镰仓小町通", tags:["local"], desc:"镰仓美食一条街，各种当地小吃。", address:"神奈川县镰仓市小町", traffic:"JR镰仓站步行2分钟", price:"人均1500日元", book:"不需要" },
 ];
 
-// 路线数据
 const ROUTES = [
     {
         id:1, name:"3天精华经典路线", days:3, type:"classic",
@@ -450,7 +437,6 @@ const ROUTES = [
     }
 ];
 
-// 避坑数据
 const PITFALLS = [
     { id:1, type:"food", title:"浅草周边天价小吃店", content:"浅草寺附近部分面向游客的小吃店价格虚高，比正常贵2-3倍。建议往巷子里走50米，价格恢复正常。" },
     { id:2, type:"food", title:"居酒屋隐性收费", content:"很多居酒屋会收取「お通し」（开胃小菜）费用，一般300-500日元/人，是强制消费，不是免费送的。" },
@@ -473,7 +459,6 @@ const PITFALLS = [
     { id:19, type:"other", title:"WiFi覆盖有限", content:"街头免费WiFi很少且不稳定，建议提前买eSIM或随身WiFi。" }
 ];
 
-// 日语短句
 const JAPAN_PHRASES = [
     { jp:"すみません", cn:"不好意思/打扰一下（万能用语）" },
     { jp:"ありがとうございます", cn:"谢谢" },
@@ -496,14 +481,10 @@ const JAPAN_PHRASES = [
     { jp:"さようなら", cn:"再见" }
 ];
 
-// ============================================================
-// ==================== 【数据配置区 结束】 ====================
-// 下面是功能代码，修改内容不需要动
-// ============================================================
-
+// ==================== 交互逻辑 ====================
 let favorites = JSON.parse(localStorage.getItem('tokyo_favs') || '[]');
 
-// 底部导航
+// 底部导航切换
 const navItems = document.querySelectorAll('.nav-item');
 const pages = document.querySelectorAll('.page');
 navItems.forEach(item => {
@@ -517,7 +498,7 @@ navItems.forEach(item => {
     };
 });
 
-// 渲染分区
+// 渲染分区攻略
 function renderAreaList(area='', type='', tag='') {
     const box = document.getElementById('areaList');
     let html = '';
@@ -580,7 +561,7 @@ function renderPitfallList(type='') {
 }
 window.togglePitfall = id => document.getElementById('pitfall-'+id).classList.toggle('open');
 
-// 渲染日语
+// 渲染日语短句
 function renderJapanList() {
     const box = document.getElementById('japanList');
     let html = '';
@@ -590,7 +571,7 @@ function renderJapanList() {
     box.innerHTML = html;
 }
 
-// 筛选器
+// 筛选器绑定
 document.getElementById('filterArea').onchange = updateArea;
 document.getElementById('filterType').onchange = updateArea;
 document.getElementById('filterTag').onchange = updateArea;
@@ -646,62 +627,59 @@ function initSearch() {
 
 // 预算计算器
 function initBudget() {
-    const dayEl = document.getElementById('calcDay');
-    const hotelEl = document.getElementById('calcHotel');
-    const foodEl = document.getElementById('calcFood');
-    const trafficEl = document.getElementById('calcTraffic');
-    const ticketEl = document.getElementById('calcTicket');
-    const extraEl = document.getElementById('calcExtra');
-    const shopEl = document.getElementById('calcShop');
+    const d = document.getElementById('calcDay');
+    const h = document.getElementById('calcHotel');
+    const f = document.getElementById('calcFood');
+    const t = document.getElementById('calcTraffic');
+    const tk = document.getElementById('calcTicket');
+    const e = document.getElementById('calcExtra');
+    const s = document.getElementById('calcShop');
     
-    const resHotel = document.getElementById('resHotel');
-    const resFood = document.getElementById('resFood');
-    const resTraffic = document.getElementById('resTraffic');
-    const resTicket = document.getElementById('resTicket');
-    const resExtra = document.getElementById('resExtra');
-    const resShop = document.getElementById('resShop');
-    const resultEl = document.getElementById('calcResult');
+    const rH = document.getElementById('resHotel');
+    const rF = document.getElementById('resFood');
+    const rT = document.getElementById('resTraffic');
+    const rTk = document.getElementById('resTicket');
+    const rE = document.getElementById('resExtra');
+    const rS = document.getElementById('resShop');
+    const res = document.getElementById('calcResult');
     
     function calc(){
-        const days = parseInt(dayEl.value);
-        const hotel = parseInt(hotelEl.value);
-        const food = parseInt(foodEl.value);
-        const traffic = parseInt(trafficEl.value);
-        const ticket = parseInt(ticketEl.value);
-        const extra = parseInt(extraEl.value);
-        const shop = parseInt(shopEl.value);
+        const days = parseInt(d.value);
+        const hotel = parseInt(h.value);
+        const food = parseInt(f.value);
+        const traffic = parseInt(t.value);
+        const ticket = parseInt(tk.value);
+        const extra = parseInt(e.value);
+        const shop = parseInt(s.value);
         
-        // 住宿按n天住n-1晚计算，符合真实出行
         const hotelTotal = hotel * (days - 1);
         const foodTotal = food * days;
         const trafficTotal = traffic * days;
         const ticketTotal = ticket * days;
         const extraTotal = extra;
         const shopTotal = shop;
-        
         const total = hotelTotal + foodTotal + trafficTotal + ticketTotal + extraTotal + shopTotal;
         
-        resHotel.innerText = hotelTotal;
-        resFood.innerText = foodTotal;
-        resTraffic.innerText = trafficTotal;
-        resTicket.innerText = ticketTotal;
-        resExtra.innerText = extraTotal;
-        resShop.innerText = shopTotal;
-        resultEl.innerText = `约 ${total} 元 / 人`;
+        rH.innerText = hotelTotal;
+        rF.innerText = foodTotal;
+        rT.innerText = trafficTotal;
+        rTk.innerText = ticketTotal;
+        rE.innerText = extraTotal;
+        rS.innerText = shopTotal;
+        res.innerText = `约 ${total} 元 / 人`;
     }
     
-    dayEl.addEventListener('change', calc);
-    hotelEl.addEventListener('change', calc);
-    foodEl.addEventListener('change', calc);
-    trafficEl.addEventListener('change', calc);
-    ticketEl.addEventListener('change', calc);
-    extraEl.addEventListener('change', calc);
-    shopEl.addEventListener('change', calc);
+    d.onchange = calc;
+    h.onchange = calc;
+    f.onchange = calc;
+    t.onchange = calc;
+    tk.onchange = calc;
+    e.onchange = calc;
+    s.onchange = calc;
     calc();
 }
 
-
-// 禁止右键（防小白查看源码）
+// 禁止右键
 document.addEventListener('contextmenu', e => e.preventDefault());
 
 // 初始化
