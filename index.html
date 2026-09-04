@@ -200,7 +200,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 </div>
 
 <!-- 实用工具 -->
-<div class="page" id="page-tool">
     <div class="section-title">预算计算器</div>
     <div class="budget-calc">
         <div class="calc-row">
@@ -209,18 +208,85 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
                 <option value="3">3天</option>
                 <option value="5" selected>5天</option>
                 <option value="7">7天</option>
+                <option value="10">10天</option>
             </select>
         </div>
         <div class="calc-row">
-            <label>预算档位</label>
-            <select id="calcLevel">
-                <option value="low">穷游（约300元/天）</option>
-                <option value="mid" selected>舒适（约800元/天）</option>
-                <option value="high">奢华（约2000元/天）</option>
+            <label>住宿档次</label>
+            <select id="calcHotel">
+                <option value="180">胶囊/青旅（约180元/晚）</option>
+                <option value="400" selected>经济型酒店（约400元/晚）</option>
+                <option value="800">中端舒适酒店（约800元/晚）</option>
+                <option value="1500">高端星级酒店（约1500元/晚）</option>
             </select>
         </div>
-        <div class="calc-result" id="calcResult">约 4000 元 / 人</div>
+        <div class="calc-row">
+            <label>餐饮标准</label>
+            <select id="calcFood">
+                <option value="150">简餐便利店（约150元/天）</option>
+                <option value="400" selected>正常正餐（约400元/天）</option>
+                <option value="800">美食探店（约800元/天）</option>
+            </select>
+        </div>
+        <div class="calc-row">
+            <label>市内交通</label>
+            <select id="calcTraffic">
+                <option value="60">纯公共交通（约60元/天）</option>
+                <option value="180" selected>偶尔打车（约180元/天）</option>
+                <option value="400">频繁打车（约400元/天）</option>
+            </select>
+        </div>
+        <div class="calc-row">
+            <label>门票娱乐</label>
+            <select id="calcTicket">
+                <option value="100">经典观光为主（约100元/天）</option>
+                <option value="250" selected>深度收费景点（约250元/天）</option>
+            </select>
+        </div>
+        <div class="calc-row">
+            <label>特殊项目</label>
+            <select id="calcExtra">
+                <option value="0">无额外项目</option>
+                <option value="500">+1天迪士尼/海洋（约500元门票）</option>
+                <option value="1000">+2天主题乐园（约1000元）</option>
+                <option value="500">+JR Pass 7天通票（约500元）</option>
+            </select>
+        </div>
+        <div class="calc-row">
+            <label>购物预留</label>
+            <select id="calcShop">
+                <option value="0">不购物</option>
+                <option value="1000">少量伴手礼（约1000元）</option>
+                <option value="3000" selected>正常购物（约3000元）</option>
+                <option value="6000">购物扫货（约6000元）</option>
+            </select>
+        </div>
+        
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid #c6f6d5;">
+            <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
+                <span>住宿（按晚数算）：</span><span id="resHotel">1600</span> 元
+            </div>
+            <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
+                <span>餐饮：</span><span id="resFood">2000</span> 元
+            </div>
+            <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
+                <span>市内交通：</span><span id="resTraffic">900</span> 元
+            </div>
+            <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
+                <span>门票娱乐：</span><span id="resTicket">1250</span> 元
+            </div>
+            <div style="font-size:13px; color:#4a5568; margin-bottom:6px;">
+                <span>特殊项目：</span><span id="resExtra">0</span> 元
+            </div>
+            <div style="font-size:13px; color:#4a5568; margin-bottom:10px;">
+                <span>购物预留：</span><span id="resShop">3000</span> 元
+            </div>
+        </div>
+        
+        <div class="calc-result" id="calcResult">约 8750 元 / 人</div>
+        <p style="font-size:11px; color:#718096; text-align:center; margin-top:6px;">* 不含国际机票，为人民币参考值</p>
     </div>
+
 
     <div class="section-title">高频日语短句（点击复制）</div>
     <div class="card" id="japanList"></div>
@@ -579,18 +645,60 @@ function initSearch() {
 
 // 预算计算器
 function initBudget() {
-    const d = document.getElementById('calcDay');
-    const l = document.getElementById('calcLevel');
-    const r = document.getElementById('calcResult');
+    const dayEl = document.getElementById('calcDay');
+    const hotelEl = document.getElementById('calcHotel');
+    const foodEl = document.getElementById('calcFood');
+    const trafficEl = document.getElementById('calcTraffic');
+    const ticketEl = document.getElementById('calcTicket');
+    const extraEl = document.getElementById('calcExtra');
+    const shopEl = document.getElementById('calcShop');
+    
+    const resHotel = document.getElementById('resHotel');
+    const resFood = document.getElementById('resFood');
+    const resTraffic = document.getElementById('resTraffic');
+    const resTicket = document.getElementById('resTicket');
+    const resExtra = document.getElementById('resExtra');
+    const resShop = document.getElementById('resShop');
+    const resultEl = document.getElementById('calcResult');
+    
     function calc(){
-        const days = parseInt(d.value);
-        const per = l.value==='low'?300:l.value==='mid'?800:2000;
-        r.innerText = `约 ${days*per} 元 / 人（不含机票酒店）`;
+        const days = parseInt(dayEl.value);
+        const hotel = parseInt(hotelEl.value);
+        const food = parseInt(foodEl.value);
+        const traffic = parseInt(trafficEl.value);
+        const ticket = parseInt(ticketEl.value);
+        const extra = parseInt(extraEl.value);
+        const shop = parseInt(shopEl.value);
+        
+        // 住宿按n天住n-1晚计算，符合真实出行
+        const hotelTotal = hotel * (days - 1);
+        const foodTotal = food * days;
+        const trafficTotal = traffic * days;
+        const ticketTotal = ticket * days;
+        const extraTotal = extra;
+        const shopTotal = shop;
+        
+        const total = hotelTotal + foodTotal + trafficTotal + ticketTotal + extraTotal + shopTotal;
+        
+        resHotel.innerText = hotelTotal;
+        resFood.innerText = foodTotal;
+        resTraffic.innerText = trafficTotal;
+        resTicket.innerText = ticketTotal;
+        resExtra.innerText = extraTotal;
+        resShop.innerText = shopTotal;
+        resultEl.innerText = `约 ${total} 元 / 人`;
     }
-    d.onchange = calc;
-    l.onchange = calc;
+    
+    dayEl.addEventListener('change', calc);
+    hotelEl.addEventListener('change', calc);
+    foodEl.addEventListener('change', calc);
+    trafficEl.addEventListener('change', calc);
+    ticketEl.addEventListener('change', calc);
+    extraEl.addEventListener('change', calc);
+    shopEl.addEventListener('change', calc);
     calc();
 }
+
 
 // 禁止右键（防小白查看源码）
 document.addEventListener('contextmenu', e => e.preventDefault());
