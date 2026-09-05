@@ -29,6 +29,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .tag.free{background:#e9f1fb;color:#2b6cb0}
 .card-detail{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:13px;color:#4a5568;line-height:1.7}
 .card-detail.open{max-height:2000px;padding-top:11px;margin-top:11px;border-top:1px dashed #e5e0d8}
+.info-table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0}
+.info-table th{background:#fef2f2;color:#c53030;padding:6px 8px;text-align:left;font-weight:600;border:1px solid #fed7d7}
+.info-table td{padding:6px 8px;border:1px solid #e2e8f0;vertical-align:top}
+.info-table tr:nth-child(even){background:#f7fafc}
+.app-grid{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.app-cat{font-size:12.5px;line-height:1.6;padding:5px 8px;background:#f7fafc;border-radius:6px;border-left:3px solid #c53030}
+.pitfall-group-title{font-size:14px;font-weight:700;color:#c53030;margin:16px 0 8px;padding-left:8px;border-left:4px solid #c53030}
+.emergency-card{background:linear-gradient(135deg,#fff5f5,#fff);border:1px solid #feb2b2;border-radius:10px;padding:12px;margin:8px 0}
+.emergency-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed #fed7d7;font-size:12.5px}
+.emergency-row:last-child{border-bottom:none}
+.emergency-num{font-weight:700;color:#c53030;font-family:monospace}
 .card-detail p{margin-bottom:7px;user-select:text;-webkit-user-select:text}
 .card-detail .copy-btn{display:inline-block;padding:2px 10px;font-size:11px;background:#f1f4f8;border:none;border-radius:6px;color:#2b6cb0;cursor:pointer;margin-left:8px;transition:background .2s}
 .card-detail .copy-btn:active{background:#e2e8f0}
@@ -127,7 +138,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <div class="step-num">3</div>
             <div class="step-content">
                 <h4>必备APP</h4>
-                *Google Maps*（兼做找店、看评分，可提前下载离线地图）；电车：*换乘案内*（Google Maps 自带路线也能用）；找美食：*小红书 / 大众点评*（中文评价）＋*食べログ Tabelog*（日本本地人评分，更准）；翻译：*Google 翻译*（支持拍照翻译、可下离线包）或*有道翻译官*。
+                <div class="app-grid">
+                    <div class="app-cat"><b>🧭 导航：</b>Google Maps（找店+评分+离线地图）、换乘案内（电车换乘最准）</div>
+                    <div class="app-cat"><b>🍜 美食：</b>小红书/大众点评（中文评价）＋食べログ Tabelog（本地人评分更准）</div>
+                    <div class="app-cat"><b>🌐 翻译：</b>Google 翻译（拍照翻译+离线包）、有道翻译官</div>
+                    <div class="app-cat"><b>💳 支付：</b>支付宝/微信（扫PayPay码）、Suica（iPhone钱包可加）</div>
+                </div>
             </div>
         </div>
         <div class="step-item">
@@ -148,14 +164,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <div class="step-num">6</div>
             <div class="step-content">
                 <h4>机场进市区（成田 / 羽田）</h4>
-                成田机场（国际航班主力）：① 京成 Skyliner 特急最快，外国游客优惠票 2310日元（116人民币）/ 约40-45分钟到上野·日暮里；② 成田特快 N'EX 3070-3330日元（154-167人民币）/ 约60分钟直达东京站、新宿、涩谷；③ 京成本线 1060日元（53人民币）最便宜但慢（约75-80分钟）；④ 利木津巴士 3100日元（155人民币）直达各大酒店（90-120分钟，免换乘）。羽田机场（离市区更近）：① 东京单轨电车 520日元（26人民币）/ 约13分钟到滨松町换乘 JR；② 京急线约 330日元（17人民币）/ 约12分钟到品川；③ 利木津巴士 1200-1300日元（60-65人民币）直达酒店。建议：能选羽田航班更好，进市区又快又便宜；坐成田则选 Skyliner 最省时。
+                <table class="info-table">
+                    <tr><th>成田机场</th><th>价格</th><th>时间</th><th>特点</th></tr>
+                    <tr><td>京成 Skyliner 特急</td><td>2310日元（116人民币）</td><td>40-45分钟</td><td>最快，到上野·日暮里，外国游客优惠票</td></tr>
+                    <tr><td>成田特快 N'EX</td><td>3070-3330日元（154-167人民币）</td><td>约60分钟</td><td>直达东京站/新宿/涩谷，免换乘</td></tr>
+                    <tr><td>京成本线</td><td>1060日元（53人民币）</td><td>75-80分钟</td><td>最便宜但慢</td></tr>
+                    <tr><td>利木津巴士</td><td>3100日元（155人民币）</td><td>90-120分钟</td><td>直达各大酒店，可能堵车</td></tr>
+                </table>
+                <table class="info-table">
+                    <tr><th>羽田机场</th><th>价格</th><th>时间</th><th>特点</th></tr>
+                    <tr><td>东京单轨电车</td><td>520日元（26人民币）</td><td>约13分钟</td><td>到滨松町换乘JR</td></tr>
+                    <tr><td>京急线</td><td>330日元（17人民币）</td><td>约12分钟</td><td>到品川，最便宜</td></tr>
+                    <tr><td>利木津巴士</td><td>1200-1300日元（60-65人民币）</td><td>约30-60分钟</td><td>直达酒店</td></tr>
+                </table>
+                <p style="font-size:12px;color:#718096;margin:4px 0">💡 能选羽田航班更好，进市区又快又便宜；坐成田则选 Skyliner 最省时。</p>
             </div>
         </div>
         <div class="step-item">
             <div class="step-num">7</div>
             <div class="step-content">
                 <h4>市内交通与一日券</h4>
-                Suica / Pasmo 卡通用所有地铁、JR、公交和便利店，充钱即刷。东京 Metro＋都营地铁通票「Tokyo Subway Ticket」：24小时 1000日元（50人民币）/ 48小时 1500日元（75人民币）/ 72小时 2000日元（100人民币），一天坐 6 次以上地铁就回本，机场、地铁站、线上都能买。JR 主要靠山手线环线（新宿、涩谷、上野、东京站、秋叶原一线直达）。要去镰仓、箱根、日光等周边，可考虑「东京广域周游券」3日 15180日元（759人民币），连续 3 天 JR 东日本区域无限乘。
+                <p style="font-size:12.5px;margin:4px 0">Suica / Pasmo 卡通用所有地铁、JR、公交和便利店，充钱即刷。iPhone 可直接在钱包添加手机 Suica。</p>
+                <table class="info-table">
+                    <tr><th>票种</th><th>价格</th><th>适用范围</th><th>回本条件</th></tr>
+                    <tr><td>Tokyo Subway 24h</td><td>1000日元（50人民币）</td><td>Metro+都营地铁</td><td>一天坐6次以上</td></tr>
+                    <tr><td>Tokyo Subway 48h</td><td>1500日元（75人民币）</td><td>Metro+都营地铁</td><td>两天坐10次以上</td></tr>
+                    <tr><td>Tokyo Subway 72h</td><td>2000日元（100人民币）</td><td>Metro+都营地铁</td><td>三天坐12次以上</td></tr>
+                    <tr><td>东京广域周游券3日</td><td>15180日元（759人民币）</td><td>JR东日本区域（含镰仓/箱根/日光）</td><td>去周边多次乘JR</td></tr>
+                </table>
+                <p style="font-size:12px;color:#718096;margin:4px 0">💡 JR 主要靠山手线环线（新宿/涩谷/上野/东京站/秋叶原一线直达）。地铁通票不含JR，换乘时注意出站再进站。</p>
             </div>
         </div>
     </div>
@@ -223,19 +260,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         </select>
     </div>
     <div id="routeList"></div>
-</div>
-
-<!-- 避坑指南 -->
-<div class="page" id="page-pitfall">
-    <div class="filter-bar">
-        <select class="filter-select" id="filterPitfall">
-            <option value="">全部分类</option>
-            <option value="food">餐饮避坑</option>
-            <option value="traffic">交通避坑</option>
-            <option value="shopping">购物避坑</option>
-            <option value="other">其他注意</option>
-        </select>
-    </div>
+    <div class="section-title" style="margin-top:20px">⚠️ 避坑指南（按类别整理）</div>
     <div id="pitfallList"></div>
 </div>
 
@@ -434,10 +459,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <div class="nav-item" data-page="route">
         <div class="nav-icon">📅</div>
         <div>路线</div>
-    </div>
-    <div class="nav-item" data-page="pitfall">
-        <div class="nav-icon">⚠️</div>
-        <div>避坑</div>
     </div>
     <div class="nav-item" data-page="hotel">
         <div class="nav-icon">🏨</div>
@@ -807,7 +828,7 @@ const PITFALLS = [
   { id:33, type:"other", title:"温泉/钱汤多数禁止纹身", content:"大部分温泉和钱汤禁止有纹身者入内，有纹身的提前查纹身可入的温泉，或用纹身贴遮盖。进温泉前先在淋浴区洗干净再泡，毛巾不能放进池子里，泡完不要冲澡（保留矿物质）。" },
   { id:34, type:"other", title:"旺季人暴多提前订", content:"樱花季（3月底-4月初）、红叶季（11月底-12月初）、黄金周（4月底-5月初）、盂兰盆节（8月中）是东京最旺季，景点排队、餐厅满座、酒店涨价30-50%，至少提前1-2个月订酒店和热门餐厅。" },
   { id:35, type:"other", title:"电压100V，插头两脚扁", content:"日本电压100V（国内220V），插头是A型两脚扁插。手机/电脑充电器大多支持100-240V宽压可直接用；但吹风机、卷发棒等大功率电器如果不支持宽压会烧坏，建议到日本再买或用酒店的。" },
-  { id:36, type:"other", title:"紧急电话记一下", content:"报警110，火警/急救119。东京观光咨询热线03-5321-5566（有中文服务）。遇到麻烦优先找车站工作人员或便利店店员，日本人普遍愿意帮忙，翻译软件提前下好。" },
+  { id:36, type:"other", title:"紧急联系方式（建议截图保存）", content:"<div class='emergency-card'><div class='emergency-row'><span>🚓 报警（盗抢/事故）</span><span class='emergency-num'>110</span></div><div class='emergency-row'><span>🚑 火警/急救</span><span class='emergency-num'>119</span></div><div class='emergency-row'><span>⚓ 海上保安</span><span class='emergency-num'>118</span></div><div class='emergency-row'><span>🇨🇳 中国驻日大使馆领事保护（24h）</span><span class='emergency-num'>03-3403-3380</span></div><div class='emergency-row'><span>🇨🇳 中国驻日大使馆总机</span><span class='emergency-num'>03-3403-3388</span></div><div class='emergency-row'><span>🌐 外交部全球领事保护</span><span class='emergency-num'>0086-10-12308</span></div><div class='emergency-row'><span>🗼 东京观光咨询（中文）</span><span class='emergency-num'>03-5321-5566</span></div><div class='emergency-row'><span>🗾 JNTO旅游热线（多语言）</span><span class='emergency-num'>050-3816-2787</span></div><div class='emergency-row'><span>👮 警视厅外语咨询</span><span class='emergency-num'>03-3501-0110</span></div></div><p style='font-size:11.5px;color:#718096;margin-top:6px'>📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。遇到麻烦优先找车站工作人员或便利店店员，翻译软件提前下好。</p>" },
   { id:37, type:"other", title:"周日部分小店关门", content:"东京很多独立小店、古着店、书店周日或周一定休（每家不同），大商场和连锁店照常营业。去特定小店前最好查一下官网或Google Maps的营业时间，避免白跑一趟。" }
 ];
 
@@ -1058,15 +1079,25 @@ function renderRouteList(day='', type='') {
 window.toggleRoute = id => document.getElementById('route-'+id).classList.toggle('open');
 
 // 渲染避坑
-function renderPitfallList(type='') {
-    const box = document.getElementById('pitfallList');
+function renderPitfallList() {
+    const list = document.getElementById('pitfallList');
+    if(!list) return;
+    const groups = [
+        {key:'traffic', icon:'🚇', label:'交通出行'},
+        {key:'food', icon:'🍜', label:'餐饮美食'},
+        {key:'shopping', icon:'🛍️', label:'购物消费'},
+        {key:'other', icon:'📌', label:'生活常识'},
+    ];
     let html = '';
-    const list = PITFALLS.filter(i => !type || i.type===type);
-    list.forEach(item => {
-        html += `<div class="card pitfall"><div class="card-title" onclick="togglePitfall(${item.id})"><span>⚠️ ${item.title}</span></div><div class="card-detail open" id="pitfall-${item.id}">${item.content}</div></div>`;
+    groups.forEach(g => {
+        const items = PITFALLS.filter(p=>p.type===g.key);
+        if(items.length===0) return;
+        html += `<div class="pitfall-group-title">${g.icon} ${g.label}（${items.length}条）</div>`;
+        items.forEach(item => {
+            html += `<div class="card pitfall"><div class="card-title" onclick="togglePitfall(${item.id})"><span>${item.title}</span></div><div class="card-detail open" id="pitfall-${item.id}">${item.content}</div></div>`;
+        });
     });
-    if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
-    box.innerHTML = html;
+    list.innerHTML = html;
 }
 window.togglePitfall = id => document.getElementById('pitfall-'+id).classList.toggle('open');
 
@@ -1160,14 +1191,12 @@ document.getElementById('filterType').onchange = updateArea;
 document.getElementById('filterTag').onchange = updateArea;
 document.getElementById('filterRouteDay').onchange = updateRoute;
 document.getElementById('filterRouteType').onchange = updateRoute;
-document.getElementById('filterPitfall').onchange = updatePitfall;
 document.getElementById('filterHotel').onchange = updateHotel;
 document.getElementById('filterHotelPrice').onchange = updateHotel;
 document.getElementById('filterReserve').onchange = updateReserve;
 document.getElementById('filterShopping').onchange = updateShopping;
 function updateArea(){renderAreaList(document.getElementById('filterArea').value, document.getElementById('filterType').value, document.getElementById('filterTag').value);}
 function updateRoute(){renderRouteList(document.getElementById('filterRouteDay').value, document.getElementById('filterRouteType').value);}
-function updatePitfall(){renderPitfallList(document.getElementById('filterPitfall').value);}
 function updateHotel(){renderHotelList(document.getElementById('filterHotel').value, document.getElementById('filterHotelPrice').value);}
 function updateReserve(){renderReserveList(document.getElementById('filterReserve').value);}
 function updateShopping(){renderShoppingList(document.getElementById('filterShopping').value);}
