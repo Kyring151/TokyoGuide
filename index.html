@@ -79,6 +79,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .route-tip{color:#718096;font-size:12px;margin-top:3px}
 .route-book{color:#c53030;font-size:12px;margin-top:3px}
 .film-tag{background:#eef2ff;color:#4f46e5;font-size:11px;border-radius:6px;padding:1px 6px;margin-left:6px;font-weight:500}
+.book-tag{background:#fed7d7;color:#c53030;font-size:11px;border-radius:6px;padding:1px 6px;margin-left:4px;font-weight:600}
+.shop-subtitle{font-weight:700;color:#1a202c;margin:14px 0 6px;padding-left:8px;border-left:3px solid #4f46e5;font-size:14px}
+.shop-subhead{font-weight:600;color:#4f46e5;margin:10px 0 4px;font-size:13px}
+.shop-subitem{font-size:13px;padding:3px 0;padding-left:4px;color:#3d4a5c}
 </style>
 </head>
 <body>
@@ -171,12 +175,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         <select class="filter-select" id="filterArea">
             <option value="">全部区域</option>
             <option value="浅草">浅草·晴空塔</option>
-            <option value="上野">上野·秋叶原</option>
+            <option value="上野">上野</option>
+            <option value="秋叶原">秋叶原·二次元</option>
             <option value="银座">银座·丸之内</option>
-            <option value="原宿">原宿·涩谷·表参道</option>
+            <option value="原宿">原宿·表参道</option>
+            <option value="涩谷">涩谷</option>
             <option value="新宿">新宿</option>
             <option value="中目黑">中目黑·代官山</option>
             <option value="台场">台场</option>
+            <option value="六本木">六本木·东京塔</option>
+            <option value="池袋">池袋</option>
+            <option value="吉祥寺">吉祥寺·三鹰</option>
             <option value="迪士尼">东京迪士尼</option>
             <option value="镰仓">镰仓</option>
         </select>
@@ -290,9 +299,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         <select class="filter-select" id="filterShopping">
             <option value="">全部分类</option>
             <option value="mall">购物商圈</option>
-            <option value="drug">药妆店</option>
+            <option value="drug">药妆（店+必买清单）</option>
             <option value="local">特色小店</option>
-            <option value="list">药妆必买清单</option>
         </select>
     </div>
     <div id="shoppingList"></div>
@@ -451,45 +459,66 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 <script>
 // ==================== 数据配置区 ====================
 const SPOTS_AND_FOOD = [
+    // ===== 浅草 =====
     { id:1, area:"浅草", type:"spot", name:"浅草寺", tags:["must"], desc:"东京最古老的寺庙，雷门是标志性打卡点。", address:"东京都台东区浅草2-3-1", traffic:"银座线浅草站1号出口步行5分钟", ticket:"免费", time:"6:00-17:00" },
-    { id:2, area:"浅草", type:"spot", name:"晴空塔", tags:["must"], desc:"世界第一高塔，俯瞰东京全景，傍晚日落最美。", address:"东京都墨田区押上1-1-2", traffic:"半藏门线押上站直达", ticket:"展望台2100日元", time:"10:00-21:00" },
-    { id:3, area:"浅草", type:"food", name:"浅草人形烧", tags:["local"], desc:"浅草名物，现烤现吃，红豆馅香甜不腻。", address:"浅草寺仲见世通商店街", traffic:"浅草站步行3分钟", price:"人均500日元", book:"不需要" },
-    { id:4, area:"浅草", type:"food", name:"大黑家天妇罗", tags:["must"], desc:"百年老店，天妇罗名店，炸虾酥脆鲜嫩。", address:"台东区浅草1-38-10", traffic:"浅草站步行8分钟", price:"人均3000日元", book:"建议预约" },
-    
-    { id:5, area:"上野", type:"spot", name:"上野公园", tags:["free","must"], desc:"东京赏樱第一名所，园内有多家博物馆。", address:"东京都台东区上野公园", traffic:"JR上野站不忍口出口", ticket:"免费", time:"全天开放" },
-    { id:6, area:"上野", type:"spot", name:"秋叶原电器街", tags:["must"], desc:"二次元与电器天堂，动漫周边、手办、游戏机应有尽有。", address:"东京都千代田区外神田", traffic:"JR秋叶原站电器街口", ticket:"免费", time:"店铺10:00-20:00" },
-    { id:7, area:"上野", type:"food", name:"一兰拉面 上野店", tags:["must"], desc:"博多豚骨拉面代表，单人隔间体验独特。", address:"台东区上野2-7-8", traffic:"上野站步行3分钟", price:"人均1200日元", book:"不需要，需排队" },
-    { id:8, area:"上野", type:"food", name:"秋叶原女仆咖啡厅", tags:["local"], desc:"秋叶原特色文化体验，萌系文化代表。", address:"千代田区外神田3-15-5", traffic:"秋叶原站步行5分钟", price:"人均2000日元", book:"不需要" },
-    
-    { id:9, area:"银座", type:"spot", name:"银座四丁目十字路口", tags:["free","must"], desc:"世界最繁华的商业区之一，高端购物天堂。", address:"东京都中央区银座", traffic:"银座线银座站", ticket:"免费", time:"全天" },
-    { id:10, area:"银座", type:"spot", name:"筑地市场", tags:["local"], desc:"东京的厨房，新鲜海鲜与市井美食聚集地。", address:"中央区筑地5-2-1", traffic:"日比谷线筑地站", ticket:"免费", time:"市场6:00-14:00" },
-    { id:11, area:"银座", type:"food", name:"筑地海鲜饭", tags:["must","local"], desc:"新鲜海胆、三文鱼、金枪鱼盖饭，性价比极高。", address:"筑地市场内", traffic:"筑地站步行2分钟", price:"人均2500日元", book:"不需要，早上去" },
-    { id:12, area:"银座", type:"food", name:"寿司大", tags:["must"], desc:"筑地名店，江户前寿司代表，食材顶级新鲜。", address:"中央区筑地5-2-1", traffic:"筑地站步行3分钟", price:"人均4000日元", book:"需要早起排队" },
-    
-    { id:13, area:"原宿", type:"spot", name:"涩谷十字路口", tags:["free","must"], desc:"世界最繁忙的十字路口，东京经典地标。", address:"东京都涩谷区涩谷", traffic:"JR涩谷站八公口", ticket:"免费", time:"全天" },
-    { id:14, area:"原宿", type:"spot", name:"明治神宫", tags:["free","must"], desc:"闹中取静的神圣神社，参天大树环绕。", address:"涩谷区代代木神园町1-1", traffic:"JR原宿站步行10分钟", ticket:"免费", time:"5:00-18:00" },
-    { id:15, area:"原宿", type:"food", name:"原宿可丽饼", tags:["local"], desc:"竹下通名物，各种口味奶油水果可丽饼。", address:"涩谷区神宫前1-7-1", traffic:"原宿站竹下通出口", price:"人均800日元", book:"不需要" },
-    { id:16, area:"原宿", type:"food", name:"一风堂 涩谷店", tags:["must"], desc:"博多拉面名店，浓郁白汤豚骨拉面。", address:"涩谷区宇田川町13-8", traffic:"涩谷站步行5分钟", price:"人均1300日元", book:"不需要" },
-    
-    { id:17, area:"新宿", type:"spot", name:"新宿御苑", tags:["free"], desc:"东京市中心的皇家园林，四季风景各异。", address:"新宿区新宿1-11-1", traffic:"丸之内线新宿御苑前站", ticket:"500日元", time:"9:00-16:30" },
-    { id:18, area:"新宿", type:"spot", name:"都厅展望台", tags:["free","local"], desc:"免费俯瞰东京夜景，比晴空塔性价比高。", address:"新宿区西新宿2-8-1", traffic:"JR新宿站西口步行10分钟", ticket:"免费", time:"9:30-22:00" },
-    { id:19, area:"新宿", type:"food", name:"思出横丁烧鸟", tags:["local"], desc:"新宿黄金街，日式居酒屋一条街。", address:"新宿区西新宿1-2", traffic:"新宿站西口步行3分钟", price:"人均3000日元", book:"不需要" },
-    { id:20, area:"新宿", type:"food", name:"叙々苑 新宿", tags:["must"], desc:"高端烧肉连锁，和牛品质极佳。", address:"新宿区歌舞伎町1-12-10", traffic:"新宿站东口步行5分钟", price:"人均8000日元", book:"建议预约" },
-    
-    { id:21, area:"中目黑", type:"spot", name:"目黑川", tags:["local"], desc:"樱花季绝美赏樱地，夜樱灯光璀璨。", address:"目黑区中目黑", traffic:"日比谷线中目黑站", ticket:"免费", time:"全天" },
-    { id:22, area:"中目黑", type:"spot", name:"代官山茑屋书店", tags:["local"], desc:"世界最美书店之一，文艺青年必去。", address:"目黑区青叶台2-12-18", traffic:"代官山站步行5分钟", ticket:"免费", time:"7:00-23:00" },
-    { id:23, area:"中目黑", type:"food", name:"中目黑咖啡店", tags:["local"], desc:"东京精品咖啡聚集地，多家世界名店。", address:"目黑区中目黑", traffic:"中目黑站周边", price:"人均1000日元", book:"不需要" },
-    
-    { id:24, area:"台场", type:"spot", name:"台场高达基地", tags:["must"], desc:"1:1等身高达立像，高达粉丝圣地。", address:"江东区青海1-1-10", traffic:"百合鸥线台场站", ticket:"免费", time:"10:00-21:00" },
-    { id:25, area:"台场", type:"spot", name:"彩虹大桥", tags:["free"], desc:"东京标志性夜景，台场海滨公园最佳观赏点。", address:"江东区台场海滨公园", traffic:"台场站步行10分钟", ticket:"免费", time:"全天" },
-    { id:26, area:"台场", type:"food", name:"台场海鲜餐厅", tags:["local"], desc:"临海景餐厅，边看彩虹大桥边用餐。", address:"江东区青海1-4", traffic:"台场站步行5分钟", price:"人均4000日元", book:"建议预约" },
-    
-    { id:27, area:"迪士尼", type:"spot", name:"东京迪士尼乐园", tags:["must"], desc:"经典迪士尼乐园，梦幻童话世界。", address:"千叶县浦安市舞滨1-1", traffic:"JR京叶线舞滨站", ticket:"一日券8900日元", time:"9:00-21:00（随季节变动）" },
-    { id:28, area:"迪士尼", type:"spot", name:"东京迪士尼海洋", tags:["must"], desc:"全球唯一迪士尼海洋，刺激项目更多。", address:"千叶县浦安市舞滨1-13", traffic:"JR舞滨站换乘迪士尼专线", ticket:"一日券8900日元", time:"9:00-21:00" },
-    
-    { id:29, area:"镰仓", type:"spot", name:"镰仓高校前站", tags:["must"], desc:"灌篮高手取景地，青春回忆打卡点。", address:"神奈川县镰仓市镰仓高校前", traffic:"江之电镰仓高校前站", ticket:"免费", time:"全天" },
-    { id:30, area:"镰仓", type:"spot", name:"镰仓大佛", tags:["must"], desc:"日本国宝，高德院镰仓大佛像。", address:"神奈川县镰仓市长谷4-2-28", traffic:"江之电极乐寺站步行10分钟", ticket:"200日元", time:"8:00-17:00" },
-    { id:31, area:"镰仓", type:"food", name:"镰仓小町通", tags:["local"], desc:"镰仓美食一条街，各种当地小吃。", address:"神奈川县镰仓市小町", traffic:"JR镰仓站步行2分钟", price:"人均1500日元", book:"不需要" },
+    { id:2, area:"浅草", type:"spot", name:"晴空塔", tags:["must","book"], desc:"世界第一高塔，俯瞰东京全景，傍晚日落最美。", address:"东京都墨田区押上1-1-2", traffic:"半藏门线押上站直达", ticket:"展望台¥2,100起", time:"8:00-22:00", book:"需提前预约：官网订指定时段票，提前1-3天，比窗口省¥500（详见「预约」栏）" },
+    { id:3, area:"浅草", type:"food", name:"浅草人形烧", tags:["local"], desc:"浅草名物，现烤现吃，红豆馅香甜不腻。", address:"浅草寺仲见世通商店街", traffic:"浅草站步行3分钟", price:"人均¥500" },
+    { id:4, area:"浅草", type:"food", name:"大黑家天妇罗", tags:["must"], desc:"百年老店，天妇罗名店，炸虾酥脆鲜嫩。", address:"台东区浅草1-38-10", traffic:"浅草站步行8分钟", price:"人均¥3,000" },
+    // ===== 上野 =====
+    { id:5, area:"上野", type:"spot", name:"上野公园", tags:["free","must"], desc:"东京赏樱第一名所，园内有多家博物馆。", address:"东京都台东区上野公园", traffic:"JR上野站不忍口出口", ticket:"免费" },
+    { id:6, area:"上野", type:"spot", name:"上野动物园", tags:["must"], desc:"日本最古老动物园，大熊猫人气爆棚。", address:"台东区上野公园9-83", traffic:"上野站步行5分钟", ticket:"成人¥600，中学生¥200（周一闭园）", time:"9:30-17:00" },
+    { id:7, area:"上野", type:"spot", name:"东京国立博物馆", tags:["local"], desc:"日本最大博物馆，国宝与浮世绘收藏丰富。", address:"台东区上野公园13-9", traffic:"上野站步行10分钟", ticket:"成人¥1,000", time:"9:30-17:00（周一闭馆）" },
+    { id:8, area:"上野", type:"food", name:"一兰拉面 上野店", tags:["must"], desc:"博多豚骨拉面代表，单人隔间体验独特。", address:"台东区上野2-7-8", traffic:"上野站步行3分钟", price:"人均¥1,200" },
+    { id:9, area:"上野", type:"food", name:"阿美横町", tags:["local"], desc:"平价零食、药妆、二手街，越晚越热闹。", address:"台东区上野6丁目", traffic:"上野站步行2分钟", price:"人均¥1,500" },
+    // ===== 秋叶原 =====
+    { id:10, area:"秋叶原", type:"spot", name:"秋叶原电器街", tags:["must"], desc:"二次元与电器天堂，动漫周边、手办、游戏机应有尽有。", address:"东京都千代田区外神田", traffic:"JR秋叶原站电器街口", ticket:"免费" },
+    { id:11, area:"秋叶原", type:"spot", name:"MANDARAKE 手办店", tags:["local"], desc:"中古手办与漫画宝库，淘货乐趣无穷。", address:"千代田区外神田3-11-12", traffic:"秋叶原站步行5分钟", ticket:"免费" },
+    { id:12, area:"秋叶原", type:"food", name:"秋叶原女仆咖啡厅", tags:["local"], desc:"秋叶原特色文化体验，萌系文化代表。", address:"千代田区外神田3-15-5", traffic:"秋叶原站步行5分钟", price:"人均¥2,000" },
+    // ===== 银座 =====
+    { id:13, area:"银座", type:"spot", name:"银座四丁目十字路口", tags:["free","must"], desc:"世界最繁华的商业区之一，高端购物天堂。", address:"东京都中央区银座", traffic:"银座线银座站", ticket:"免费" },
+    { id:14, area:"银座", type:"spot", name:"筑地市场", tags:["local"], desc:"东京的厨房，新鲜海鲜与市井美食聚集地。", address:"中央区筑地5-2-1", traffic:"日比谷线筑地站", ticket:"免费" },
+    { id:15, area:"银座", type:"food", name:"筑地海鲜饭", tags:["must","local"], desc:"新鲜海胆、三文鱼、金枪鱼盖饭，性价比极高。", address:"筑地市场内", traffic:"筑地站步行2分钟", price:"人均¥3,000" },
+    { id:16, area:"银座", type:"food", name:"寿司大", tags:["must","book"], desc:"筑地名店，江户前寿司代表，食材顶级新鲜。", address:"中央区筑地5-2-1", traffic:"筑地站步行3分钟", price:"人均¥4,000", book:"需早起排队：凌晨5-6点前到，否则要等2小时+（详见「预约」栏）" },
+    { id:17, area:"银座", type:"food", name:"资生堂Parlour", tags:["local"], desc:"百年甜品老铺，招牌圣代与银座老字号下午茶。", address:"中央区银座8-8-3", traffic:"银座站步行3分钟", price:"人均¥2,500" },
+    // ===== 原宿 =====
+    { id:18, area:"原宿", type:"spot", name:"明治神宫", tags:["free","must"], desc:"闹中取静的神圣神社，参天大树环绕。", address:"涩谷区代代木神园町1-1", traffic:"JR原宿站步行10分钟", ticket:"免费" },
+    { id:19, area:"原宿", type:"food", name:"原宿可丽饼", tags:["local"], desc:"竹下通名物，各种口味奶油水果可丽饼。", address:"涩谷区神宫前1-7-1", traffic:"原宿站竹下通出口", price:"人均¥800" },
+    // ===== 涩谷 =====
+    { id:20, area:"涩谷", type:"spot", name:"涩谷十字路口", tags:["free","must"], desc:"世界最繁忙的十字路口，东京经典地标。", address:"东京都涩谷区涩谷", traffic:"JR涩谷站八公口", ticket:"免费" },
+    { id:21, area:"涩谷", type:"spot", name:"忠犬八公像", tags:["free","must"], desc:"涩谷地标铜像，集合与打卡圣地。", address:"涩谷区道玄坂2-1", traffic:"涩谷站八公口出站即见", ticket:"免费" },
+    { id:22, area:"涩谷", type:"spot", name:"SHIBUYA SKY", tags:["must","book"], desc:"涩谷高空露天观景台，360°俯瞰东京，日落绝美。", address:"涩谷区涩谷2-24-12", traffic:"涩谷站直达 Scramble Square", ticket:"¥2,700起", book:"需提前预约：官网/Klook 购指定时段票，建议提前3-7天（详见「预约」栏）" },
+    { id:23, area:"涩谷", type:"food", name:"一风堂 涩谷店", tags:["must"], desc:"博多拉面名店，浓郁白汤豚骨拉面。", address:"涩谷区宇田川町13-8", traffic:"涩谷站步行5分钟", price:"人均¥1,300" },
+    // ===== 新宿 =====
+    { id:24, area:"新宿", type:"spot", name:"新宿御苑", tags:["free"], desc:"东京市中心的皇家园林，四季风景各异。", address:"新宿区新宿1-11-1", traffic:"丸之内线新宿御苑前站", ticket:"¥500", time:"9:00-17:30（周一闭园）" },
+    { id:25, area:"新宿", type:"spot", name:"都厅展望台", tags:["free","local"], desc:"免费俯瞰东京夜景，比晴空塔性价比高。", address:"新宿区西新宿2-8-1", traffic:"JR新宿站西口步行10分钟", ticket:"免费" },
+    { id:26, area:"新宿", type:"food", name:"思出横丁烧鸟", tags:["local"], desc:"新宿黄金街，日式居酒屋一条街。", address:"新宿区西新宿1-2", traffic:"新宿站西口步行3分钟", price:"人均¥3,000" },
+    { id:27, area:"新宿", type:"food", name:"叙々苑 新宿", tags:["must","book"], desc:"高端烧肉连锁，和牛品质极佳。", address:"新宿区歌舞伎町1-12-10", traffic:"新宿站东口步行5分钟", price:"人均¥8,000", book:"建议提前预约：官网可中文订位，提前1-2周（详见「预约」栏）" },
+    // ===== 中目黑 =====
+    { id:28, area:"中目黑", type:"spot", name:"目黑川", tags:["local"], desc:"樱花季绝美赏樱地，夜樱灯光璀璨。", address:"目黑区中目黑", traffic:"日比谷线中目黑站", ticket:"免费", time:"全天" },
+    { id:29, area:"中目黑", type:"spot", name:"代官山茑屋书店", tags:["local"], desc:"世界最美书店之一，文艺青年必去。", address:"目黑区青叶台2-12-18", traffic:"代官山站步行5分钟", ticket:"免费" },
+    { id:30, area:"中目黑", type:"food", name:"中目黑咖啡店", tags:["local"], desc:"东京精品咖啡聚集地，多家世界名店。", address:"目黑区中目黑", traffic:"中目黑站周边", price:"人均¥1,000" },
+    // ===== 台场 =====
+    { id:31, area:"台场", type:"spot", name:"台场高达基地", tags:["must"], desc:"1:1等身高达立像，高达粉丝圣地。", address:"江东区青海1-1-10", traffic:"百合鸥线台场站", ticket:"免费" },
+    { id:32, area:"台场", type:"spot", name:"彩虹大桥", tags:["free"], desc:"东京标志性夜景，台场海滨公园最佳观赏点。", address:"江东区台场海滨公园", traffic:"台场站步行10分钟", ticket:"免费" },
+    { id:33, area:"台场", type:"food", name:"台场海鲜餐厅", tags:["local"], desc:"临海景餐厅，边看彩虹大桥边用餐。", address:"江东区青海1-4", traffic:"台场站步行5分钟", price:"人均¥4,000" },
+    // ===== 六本木/东京塔 =====
+    { id:34, area:"六本木", type:"spot", name:"东京塔", tags:["must","book"], desc:"东京象征，红色铁塔夜景经典机位。", address:"港区芝公园4-2-8", traffic:"大江户线赤羽桥站步行5分钟", ticket:"主塔¥1,200起", book:"主塔可现场购票；最顶层 TOP DECK 需提前购指定时段票（详见「预约」栏）" },
+    { id:35, area:"六本木", type:"spot", name:"六本木之丘 森大厦展望台", tags:["local"], desc:"东京City View，看东京塔夜景最佳位置之一。", address:"港区六本木6-10-1", traffic:"日比谷线六本木站步行", ticket:"成人¥2,000（含森美术馆）" },
+    { id:36, area:"六本木", type:"spot", name:"国立新美术馆", tags:["local"], desc:"黑川纪章设计的地标建筑，常设展览免费。", address:"港区六本木7-22-2", traffic:"乃木坂站直达", ticket:"常设展免费，特展另购" },
+    // ===== 池袋 =====
+    { id:37, area:"池袋", type:"spot", name:"Sunshine City 展望台", tags:["local"], desc:"池袋地标，60层高空俯瞰东京，水族馆也在楼内。", address:"丰岛区东池袋3-1", traffic:"池袋站步行8分钟", ticket:"展望台¥1,200" },
+    { id:38, area:"池袋", type:"spot", name:"Animate 池袋总店", tags:["local"], desc:"日本最大动漫周边连锁旗舰，二次元圣地。", address:"丰岛区东池袋1-20-7", traffic:"池袋站东口步行3分钟", ticket:"免费" },
+    // ===== 吉祥寺/三鹰 =====
+    { id:39, area:"吉祥寺", type:"spot", name:"三鹰之森吉卜力美术馆", tags:["must","book"], desc:"宫崎骏的动画世界，《龙猫》主题建筑超治愈。", address:"三鹰市下连雀1-1-83", traffic:"三鹰站南口步行15分钟", ticket:"成人¥1,000", book:"完全预约制：每月10日10:00放次月票，官网/Lawson购，开售约2小时抢空（详见「预约」栏）" },
+    { id:40, area:"吉祥寺", type:"spot", name:"井之头公园", tags:["free","local"], desc:"湖上划船+樱花名所，吉卜力美术馆旁。", address:"武藏野市御殿山1-18-31", traffic:"吉祥寺站步行5分钟", ticket:"免费" },
+    { id:41, area:"吉祥寺", type:"food", name:"吉祥寺 口琴横丁", tags:["local"], desc:"下町美食小巷，烧鸟、炸物、小吃云集。", address:"武藏野市吉祥寺本町1", traffic:"吉祥寺站北口步行2分钟", price:"人均¥1,500" },
+    // ===== 迪士尼 =====
+    { id:42, area:"迪士尼", type:"spot", name:"东京迪士尼乐园", tags:["must","book"], desc:"经典迪士尼乐园，梦幻童话世界。", address:"千叶县浦安市舞滨1-1", traffic:"JR京叶线舞滨站", ticket:"一日券¥8,900起", book:"需提前购票：每天14:00放2个月后同日票，售完即止（详见「预约」栏）" },
+    { id:43, area:"迪士尼", type:"spot", name:"东京迪士尼海洋", tags:["must","book"], desc:"全球唯一迪士尼海洋，刺激项目更多。", address:"千叶县浦安市舞滨1-13", traffic:"JR舞滨站换乘迪士尼专线", ticket:"一日券¥8,900起", book:"需提前购票：每天14:00放2个月后同日票，售完即止（详见「预约」栏）" },
+    // ===== 镰仓 =====
+    { id:44, area:"镰仓", type:"spot", name:"镰仓高校前站", tags:["must"], desc:"《灌篮高手》取景地，青春回忆打卡点。", address:"神奈川县镰仓市镰仓高校前", traffic:"江之电镰仓高校前站", ticket:"免费" },
+    { id:45, area:"镰仓", type:"spot", name:"镰仓大佛", tags:["must"], desc:"日本国宝，高德院镰仓大佛像。", address:"神奈川县镰仓市长谷4-2-28", traffic:"江之电极乐寺站步行10分钟", ticket:"¥200" },
+    { id:46, area:"镰仓", type:"food", name:"镰仓小町通", tags:["local"], desc:"镰仓美食一条街，各种当地小吃。", address:"神奈川县镰仓市小町", traffic:"JR镰仓站步行2分钟", price:"人均¥1,500" }
 ];
 
 const ROUTES = [
@@ -889,39 +918,56 @@ const RESERVATIONS = [
 // ==================== 购物数据（2026-09 核实） ====================
 const SHOPPING = [
   // ===== 购物商圈 =====
-  { id:1, cat:"mall", name:"银座", addr:"中央区银座", feat:"东京最高端商圈：三越、松屋、GINZA SIX、爱马仕旗舰店、老铺百货与免税店云集", tip:"主通周末步行者天国；11月起改机场退税后，店内仍可享免税的流程以商家为准", ref:"百货退税/满¥5000免税" },
-  { id:2, cat:"mall", name:"涩谷", addr:"涩谷站周边", feat:"年轻人潮流中心：SHIBUYA109少女装、涩谷PARCO、涩谷HIKARIE，忠犬八公打卡后开逛", tip:"109 主打辣妹/少女风，PARCO 潮流买手店多", ref:"服饰/箱包/美妆" },
-  { id:3, cat:"mall", name:"新宿", addr:"新宿站周边", feat:"最全面的商圈：伊势丹百货、LUMINE、BicCamera、唐吉诃德、药妆一条街，吃喝玩乐全包", tip:"伊势丹地下食品馆值得逛；BicCamera 电器+药妆一站买", ref:"综合购物/电器/药妆" },
-  { id:4, cat:"mall", name:"原宿·表参道", addr:"原宿/表参道站", feat:"竹下通平价少女装+可丽饼，表参道大牌旗舰店一条街，风格混搭", tip:"竹下通淘小饰品/袜子，表参道买大牌", ref:"服饰/饰品" },
-  { id:5, cat:"mall", name:"池袋", addr:"池袋站周边", feat:"Sunshine City、PARCO、西武百货，二次元圣地+综合购物，池袋东口乙女路女性向周边街", tip:"Sunshine City 有可丽饼、水族馆；乙女路逛同人周边", ref:"综合/二次元/女性向" },
-  { id:6, cat:"mall", name:"秋叶原", addr:"秋叶原站", feat:"电器+二次元：无线电会馆、骏河屋中古手办、MANDARAKE、女仆咖啡，游戏/手办天堂", tip:"中古手办便宜，可讲价空间小但可淘", ref:"手办/中古/电器" },
-  { id:7, cat:"mall", name:"台场 DiverCity/Aqua City", addr:"台场站", feat:"海滨商场：DiverCity 有 1:1 高达、奥特莱斯折扣店，Aqua City 看海景购物", tip:"DiverCity 五楼有免税柜台；看彩虹大桥晚餐绝佳", ref:"奥特莱斯/伴手礼" },
-  { id:8, cat:"mall", name:"上野·阿美横町", addr:"上野站旁", feat:"平价杂货天堂：药妆、零食、运动鞋、二手表一条街，价格比商圈便宜", tip:"零食药妆集中比价再买；靠近车站门口商户较贵", ref:"零食/药妆/杂货" },
+  { id:1, cat:"mall", name:"银座", addr:"中央区银座", feat:"东京最高端商圈，百货、老铺、旗舰店与免税店云集", tip:"主通周末步行者天国；满¥5000免税（11月前）", ref:"高端购物/伴手礼",
+    shops:[ {name:"三越百货本店",desc:"东京老牌百货，化妆品层全东京最全"}, {name:"松屋银座",desc:"高端百货，退税柜台服务好"}, {name:"GINZA SIX",desc:"现代商业综合体，艺术与购物结合"}, {name:"和光百货",desc:"银座地标钟楼，精品腕表与首饰"}, {name:"伊东屋",desc:"百年文具店，手账爱好者必逛"}, {name:"LOFT",desc:"生活杂货文具，伴手礼灵感库"}, {name:"优衣库银座旗舰店",desc:"12层旗舰店，款式最全"} ],
+    drugs:[ {name:"松本清 银座店",desc:"游客多，中文导购齐全"}, {name:"ココカラファイン 银座",desc:"中高端药妆，环境安静"} ] },
+  { id:2, cat:"mall", name:"涩谷", addr:"涩谷站周边", feat:"年轻人潮流中心，少女装、买手店、动漫旗舰混搭", tip:"109主打辣妹风，PARCO潮流买手店多", ref:"服饰/箱包/美妆",
+    shops:[ {name:"SHIBUYA109",desc:"少女系服饰圣地，日系穿搭灵感"}, {name:"涩谷PARCO",desc:"潮流买手店+任天堂官方旗舰店"}, {name:"涩谷HIKARIE",desc:"综合商业，演出剧场在楼上"}, {name:"涩谷Scramble Square",desc:"SHIBUYA SKY 所在，顶层观景"}, {name:"MEGA唐吉诃德 涩谷本店",desc:"24小时综合店，深夜补货"}, {name:"西武涩谷店",desc:"百货公司，品牌齐全"} ],
+    drugs:[ {name:"松本清 涩谷店",desc:"站前大店，客流大"}, {name:"大国药妆 涩谷店",desc:"价格实惠，热门单品常断货"} ] },
+  { id:3, cat:"mall", name:"新宿", addr:"新宿站周边", feat:"最全面的商圈：百货、电器、药妆、美食一条龙", tip:"伊势丹地下食品馆必逛；BicCamera 一站买齐", ref:"综合购物/电器/药妆",
+    shops:[ {name:"伊势丹本店",desc:"东京顶级百货，地下食品馆超有名"}, {name:"LUMINE",desc:"日系女装品牌集合"}, {name:"BicCamera 新宿东口店",desc:"电器+药妆一站式"}, {name:"唐吉诃德 新宿歌舞伎町店",desc:"24小时，深夜也能逛"}, {name:"高岛屋时代广场",desc:"综合百货，餐饮层选择多"}, {name:"新宿MYLORD",desc:"年轻向商场"} ],
+    drugs:[ {name:"松本清 新宿三丁目店",desc:"24小时营业，游客必逛"}, {name:"大国药妆 新宿店",desc:"促销多，可对比松本清"} ] },
+  { id:4, cat:"mall", name:"原宿·表参道", addr:"原宿/表参道站", feat:"竹下通平价少女装+表参道大牌旗舰店，风格混搭", tip:"竹下通淘小饰品，表参道买大牌", ref:"服饰/饰品/玩具",
+    shops:[ {name:"表参道Hills",desc:"建筑大师作品，精品店铺"}, {name:"Laforet 原宿",desc:"潮流买手店圣地"}, {name:"竹下通",desc:"平价服饰、饰品、可丽饼一条街"}, {name:"KIDDY LAND",desc:"玩具与动漫周边，卡通迷必去"}, {name:"东急Plaza 表参道",desc:"设计感商场，入口万花筒出名"} ],
+    drugs:[ {name:"松本清 原宿店",desc:"表参道沿线，游客方便"} ] },
+  { id:5, cat:"mall", name:"池袋", addr:"池袋站周边", feat:"Sunshine City、PARCO、西武百货，二次元圣地+综合购物", tip:"Sunshine City 有水族馆和展望台；乙女路逛女性向周边", ref:"综合/二次元/女性向",
+    shops:[ {name:"Sunshine City ALPA",desc:"购物+水族馆+60层展望台"}, {name:"PARCO 池袋",desc:"潮流百货"}, {name:"西武池袋本店",desc:"大型百货，品牌超全"}, {name:"Animate 池袋总店",desc:"日本最大动漫周边旗舰"}, {name:"唐吉诃德 池袋店",desc:"24小时"} ],
+    drugs:[ {name:"松本清 池袋店",desc:"站前便利"}, {name:"大国药妆 池袋店",desc:"价格实惠"} ] },
+  { id:6, cat:"mall", name:"秋叶原", addr:"秋叶原站", feat:"电器+二次元：手办、中古、女仆咖啡，御宅族天堂", tip:"中古手办便宜，多比价", ref:"手办/中古/电器",
+    shops:[ {name:"无线电会馆",desc:"手办电器老楼，一层层淘"}, {name:"MANDARAKE",desc:"中古手办漫画宝库"}, {name:"骏河屋",desc:"中古游戏手办连锁"}, {name:"Yodobashi Akiba",desc:"大型电器城"}, {name:"唐吉诃德 秋叶原店",desc:"24小时"} ],
+    drugs:[ {name:"松本清 秋叶原店",desc:"电器街口，游客多"} ] },
+  { id:7, cat:"mall", name:"台场", addr:"台场站", feat:"海滨商场：高达、奥特莱斯、海景餐厅，看彩虹大桥", tip:"DiverCity 有 1:1 高达；海边晚餐看夜景", ref:"奥特莱斯/伴手礼",
+    shops:[ {name:"DiverCity Tokyo Plaza",desc:"1:1高达立像+奥特莱斯"}, {name:"Aqua City",desc:"海景商场，餐厅多"}, {name:"Decks Tokyo Beach",desc:"台场老牌商场"}, {name:"Gundam Base",desc:"高达模型旗舰基地"} ],
+    drugs:[ {name:"MEGA唐吉诃德 台场店",desc:"大型综合店"} ] },
+  { id:8, cat:"mall", name:"上野·阿美横町", addr:"上野站旁", feat:"平价杂货天堂：药妆、零食、运动鞋、二手表一条街", tip:"零食药妆集中比价；门口商户较贵", ref:"零食/药妆/杂货",
+    shops:[ {name:"阿美横商店街",desc:"药妆零食二手，越晚越热闹"}, {name:"上野丸井",desc:"百货公司"}, {name:"Yodobashi多媒体 上野",desc:"大型电器"} ],
+    drugs:[ {name:"松本清 上野店",desc:"阿美横町旁，人流量大"}, {name:"大国药妆 上野店",desc:"性价比高"} ] },
   // ===== 药妆店 =====
-  { id:9, cat:"drug", name:"松本清（最大连锁）", addr:"东京都内多分店", feat:"日本最大药妆连锁，商品最全，新宿/涩谷/银座都有大店", tip:"游客店常配中文导购；「松本清」免税柜台流程成熟", ref:"综合药妆" },
+  { id:9, cat:"drug", name:"松本清（最大连锁）", addr:"东京都内多分店", feat:"日本最大药妆连锁，商品最全，新宿/涩谷/银座都有大店", tip:"游客店常配中文导购；免税柜台流程成熟", ref:"综合药妆" },
   { id:10, cat:"drug", name:"大国药妆", addr:"新宿/涩谷/浅草等", feat:"主打实惠价格，促销多，游客最常逛的性价比药妆", tip:"大国部分商品标价低，热门单品常断货；多店比价", ref:"综合药妆/零食" },
-  { id:11, cat:"drug", name:"唐吉诃德（24小时）", addr:"新宿/涩谷/秋叶原等", feat:"24小时营业，药妆+零食+杂货+奢侈品中古全都有，深夜也能逛", tip:"「惊安殿堂」标的便宜货，适合临行前补货", ref:"药妆/零食/杂货/中古" },
-  { id:12, cat:"drug", name:"ココカラファイン", addr:"涩谷/银座等", feat:"中高端药妆，进口美妆与处方药柜台齐全，环境较安静", tip:"部分门店支持多语言机器结账", ref:"美妆/保健品" },
+  { id:11, cat:"drug", name:"唐吉诃德（24小时）", addr:"新宿/涩谷/秋叶原等", feat:"24小时营业，药妆+零食+杂货+奢侈品中古全都有", tip:"「惊安殿堂」标的便宜货，适合临行前补货", ref:"药妆/零食/杂货/中古" },
+  { id:12, cat:"drug", name:"ココカラファイン", addr:"涩谷/银座等", feat:"中高端药妆，进口美妆与处方药柜台齐全", tip:"部分门店支持多语言机器结账", ref:"美妆/保健品" },
   // ===== 特色小店 =====
-  { id:13, cat:"local", name:"中野百老汇", addr:"中野站北口", feat:"二手动漫/古着/玩具圣地，四层楼淘到爽，比秋叶原更「懂行」", tip:"周日人最多；现金为主部分可刷卡", ref:"中古手办/古着" },
-  { id:14, cat:"local", name:"合羽桥道具街", addr:"浅草/上野间", feat:"厨具一条街：刀具、锅具、餐具、食品样品模型（食べ物サンプル）", tip:"食品样品模型当伴手礼超有梗；可退税店铺多", ref:"厨具/样品模型" },
-  { id:15, cat:"local", name:"谷中银座", addr:"日暮里站附近", feat:"下町老街：猫店、小吃、手作杂货，昭和风情", tip:"傍晚商店街最有味道；猫猫元素伴手礼多", ref:"手作/小吃" },
-  { id:16, cat:"local", name:"下北泽", addr:"下北泽站", feat:"古着圣地：二手衣店密度全东京第一，原宿更潮、下北泽更「淘」", tip:"周四/周日跳蚤市场；古着店集中在北口", ref:"古着" },
-  { id:17, cat:"local", name:"神保町", addr:"神保町站", feat:"世界最大旧书街：130多家书店，古书、写真集、漫画、版画", tip:"村上春树等文人的淘书地，书香气十足", ref:"旧书/写真集" },
-  { id:18, cat:"local", name:"巢鸭地藏通", addr:"巢鸭站", feat:"「妈妈的银座」：平价服饰、药妆、糖果、护身符，适合带长辈逛", tip:"红色服饰店是特色，地藏通商店街很长", ref:"平价服饰/杂货" },
+  { id:13, cat:"local", name:"中野百老汇", addr:"中野站北口", feat:"二手动漫/古着/玩具圣地，四层楼淘到爽", tip:"周日人最多；现金为主部分可刷卡", ref:"中古手办/古着" },
+  { id:14, cat:"local", name:"合羽桥道具街", addr:"浅草/上野间", feat:"厨具一条街：刀具、锅具、餐具、食品样品模型", tip:"食品样品模型当伴手礼超有梗；可退税店铺多", ref:"厨具/样品模型" },
+  { id:15, cat:"local", name:"谷中银座", addr:"日暮里站附近", feat:"下町老街：猫店、小吃、手作杂货，昭和风情", tip:"傍晚商店街最有味道", ref:"手作/小吃" },
+  { id:16, cat:"local", name:"下北泽", addr:"下北泽站", feat:"古着圣地：二手衣店密度全东京第一", tip:"周四/周日有跳蚤市场", ref:"古着" },
+  { id:17, cat:"local", name:"神保町", addr:"神保町站", feat:"世界最大旧书街：130多家书店，古书、写真集、漫画", tip:"村上春树等文人的淘书地", ref:"旧书/写真集" },
+  { id:18, cat:"local", name:"巢鸭地藏通", addr:"巢鸭站", feat:"「妈妈的银座」：平价服饰、药妆、糖果、护身符", tip:"适合带长辈逛", ref:"平价服饰/杂货" },
   // ===== 药妆必买清单 =====
-  { id:19, cat:"list", name:"安耐晒 金瓶防晒", price:"约¥3,000-3,500", feat:"防晒界顶流，户外必备，日本版和国内版配方不同，买日版", note:"药妆店常有买2件打折" },
-  { id:20, cat:"list", name:"SK-II 神仙水", price:"约¥22,000-25,000（330ml）", feat:"护肤界明星，免税店/百货比药妆店便宜，机场免税更划算", note:"注意区分日本版与国际版（价格差异大）" },
-  { id:21, cat:"list", name:"乐敦 肌研极润化妆水", price:"约¥1,000-1,500", feat:"高保湿平价化妆水，学生党最爱，多规格可选", note:"常与同系列乳液搭售更划算" },
-  { id:22, cat:"list", name:"狮王 White&White 美白牙膏", price:"约¥300-500", feat:"美白牙膏，性价比高，一人一管送人首选", note:"多买可凑免税门槛" },
-  { id:23, cat:"list", name:"参天 FX 眼药水（金瓶/银瓶）", price:"约¥400-700", feat:"清凉提神眼药水，熬夜党/戴隐形的福音，便利店药妆都有", note:"隐形眼镜专用版是另款，别买错" },
-  { id:24, cat:"list", name:"大正感冒药", price:"约¥1,500-2,500", feat:"日本家庭常备感冒药，疗效口碑好，送礼长辈很实用", note:"颗粒/胶囊/液剂都有，注意用量说明" },
-  { id:25, cat:"list", name:"龙角散", price:"约¥400-800", feat:"润喉散剂/糖，喉咙不适时含服，粉剂最经典", note:"薄荷/水蜜桃多种口味" },
-  { id:26, cat:"list", name:"小林制药 退热贴", price:"约¥500-800", feat:"物理降温贴，大人小孩规格齐全，带娃家庭必备", note:"小孩款有可爱图案" },
-  { id:27, cat:"list", name:"无比滴", price:"约¥500-700", feat:"蚊虫叮咬止痒神器，夏天必备，刷头涂抹方便", note:"海绵头用久会变脏，注意卫生" },
-  { id:28, cat:"list", name:"花王 蒸汽眼罩", price:"约¥1,000-1,500", feat:"发热眼罩缓解眼疲劳，自用送人都好，薰衣草/无香经典", note:"买「40片大包装」单价比小包便宜" },
-  { id:29, cat:"list", name:"KitKat 抹茶/限定口味", price:"约¥300-600/盒", feat:"日本限定口味多（抹茶、樱花、红豆），伴手礼经典", note:"机场免税区和便利店都有，东京车站伴手礼街款式最全" },
-  { id:30, cat:"list", name:"资生堂 尿素护手霜", price:"约¥500-800", feat:"尿素保湿，秋冬护手神器，红瓶经典", note:"药妆店/免税店均有" }
+  { id:19, cat:"list", name:"安耐晒 金瓶防晒", price:"约¥3,000-3,500", where:"松本清/大国/唐吉诃德均有，机场免税更便宜", feat:"防晒界顶流，日版和国内版配方不同，买日版", note:"药妆店常有买2件打折" },
+  { id:20, cat:"list", name:"SK-II 神仙水", price:"约¥22,000-25,000（330ml）", where:"百货免税/机场免税比药妆店便宜", feat:"护肤界明星，330ml 大瓶最划算", note:"注意区分日本版与国际版（价格差异大）" },
+  { id:21, cat:"list", name:"乐敦 肌研极润化妆水", price:"约¥1,000-1,500", where:"药妆店/便利店均有", feat:"高保湿平价化妆水，学生党最爱", note:"常与同系列乳液搭售更划算" },
+  { id:22, cat:"list", name:"狮王 White&White 美白牙膏", price:"约¥300-500", where:"药妆店/超市均有", feat:"美白牙膏，性价比高，送人首选", note:"多买可凑免税门槛" },
+  { id:23, cat:"list", name:"参天 FX 眼药水（金瓶/银瓶）", price:"约¥400-700", where:"便利店/药妆店均有", feat:"清凉提神眼药水，熬夜党福音", note:"隐形眼镜专用版是另款，别买错" },
+  { id:24, cat:"list", name:"大正感冒药", price:"约¥1,500-2,500", where:"药妆店/唐吉诃德均有", feat:"日本家庭常备感冒药，送礼长辈很实用", note:"颗粒/胶囊/液剂都有" },
+  { id:25, cat:"list", name:"龙角散", price:"约¥400-800", where:"药妆店/便利店/机场均有", feat:"润喉散剂/糖，喉咙不适时含服", note:"薄荷/水蜜桃多种口味" },
+  { id:26, cat:"list", name:"小林制药 退热贴", price:"约¥500-800", where:"药妆店均有", feat:"物理降温贴，带娃家庭必备", note:"小孩款有可爱图案" },
+  { id:27, cat:"list", name:"无比滴", price:"约¥500-700", where:"药妆店均有", feat:"蚊虫叮咬止痒神器，夏天必备", note:"海绵头用久会变脏" },
+  { id:28, cat:"list", name:"花王 蒸汽眼罩", price:"约¥1,000-1,500", where:"药妆店/唐吉诃德均有", feat:"发热眼罩缓解眼疲劳，自用送人都好", note:"买「40片大包装」单价比小包便宜" },
+  { id:29, cat:"list", name:"KitKat 抹茶/限定口味", price:"约¥300-600/盒", where:"机场免税/便利店/车站伴手礼街均有", feat:"日本限定口味多，伴手礼经典", note:"东京站伴手礼街款式最全" },
+  { id:30, cat:"list", name:"资生堂 尿素护手霜", price:"约¥500-800", where:"药妆店/免税店均有", feat:"尿素保湿，秋冬护手神器", note:"红瓶经典" }
+
 ];
 
 let favorites = JSON.parse(localStorage.getItem('tokyo_favs') || '[]');
@@ -953,8 +999,9 @@ function renderAreaList(area='', type='', tag='') {
     list.forEach(item => {
         const tc = item.tags.includes('must')?'must':item.tags.includes('local')?'local':item.tags.includes('free')?'free':'';
         const tt = item.tags.includes('must')?'必去':item.tags.includes('local')?'本地人推':item.tags.includes('free')?'免费':'';
+        const bk = item.tags.includes('book');
         const fav = favorites.includes(item.id);
-        html += `<div class="card"><div class="card-title" onclick="toggleDetail(${item.id})"><span>${item.name} <span class="tag ${tc}">${tt}</span></span><span class="fav-btn ${fav?'active':''}" onclick="event.stopPropagation();toggleFav(${item.id})">${fav?'❤️':'🤍'}</span></div><div class="card-detail" id="detail-${item.id}"><p><b>📍 地址：</b>${item.address} <button class="copy-btn" onclick="copyText('${item.address}')">复制</button></p><p><b>🚃 交通：</b>${item.traffic}</p><p><b>💰 ${item.type==='spot'?'门票':'人均'}：</b>${item.ticket||item.price}</p><p><b>⏰ 开放时间：</b>${item.time||'详见店内'}</p><p style="margin-top:8px;">${item.desc}</p>${item.book?`<p style="color:#c53030;margin-top:6px;">⚠️ ${item.book}</p>`:''}</div></div>`;
+        html += `<div class="card"><div class="card-title" onclick="toggleDetail(${item.id})"><span>${item.name} <span class="tag ${tc}">${tt}</span>${bk?` <span class="tag book-tag">需预约</span>`:''}</span><span class="fav-btn ${fav?'active':''}" onclick="event.stopPropagation();toggleFav(${item.id})">${fav?'❤️':'🤍'}</span></div><div class="card-detail" id="detail-${item.id}"><p><b>📍 地址：</b>${item.address} <button class="copy-btn" onclick="copyText('${item.address}')">复制</button></p><p><b>🚃 交通：</b>${item.traffic}</p><p><b>💰 ${item.type==='spot'?'门票':'人均'}：</b>${item.ticket||item.price}</p><p><b>⏰ 开放时间：</b>${item.time||'详见店内'}</p><p style="margin-top:8px;">${item.desc}</p>${item.book?`<p style="color:#c53030;margin-top:6px;">⚠️ ${item.book}</p>`:''}</div></div>`;
     });
     if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
     box.innerHTML = html;
@@ -1043,19 +1090,41 @@ function renderReserveList(cat='') {
 window.toggleReserve = id => document.getElementById('reserve-'+id).classList.toggle('open');
 
 // 渲染购物
+function mallCard(item){
+    let sh = '';
+    (item.shops||[]).forEach(s => { sh += `<div class="shop-subitem">🏬 <b>${s.name}</b>：${s.desc}</div>`; });
+    let dh = '';
+    (item.drugs||[]).forEach(d => { dh += `<div class="shop-subitem">💊 <b>${d.name}</b>：${d.desc}</div>`; });
+    return `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">购物商圈</span></div><div class="card-detail" id="shop-${item.id}"><p><b>📍 位置：</b>${item.addr}</p><p><b>✨ 特色：</b>${item.feat}</p><div class="shop-subhead">🏬 圈内商场 / 商店</div>${sh}<div class="shop-subhead">💊 圈内药妆店</div>${dh}${item.tip?`<p style="color:#718096;margin-top:6px;">💡 ${item.tip}</p>`:''}${item.ref?`<p style="color:#4f46e5;font-size:12px;margin-top:4px;">🎯 推荐：${item.ref}</p>`:''}</div></div>`;
+}
+function drugCard(item){
+    return `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">药妆店</span></div><div class="card-detail" id="shop-${item.id}"><p><b>📍 位置：</b>${item.addr}</p><p><b>✨ 特色：</b>${item.feat}</p>${item.tip?`<p style="color:#718096;margin-top:6px;">💡 ${item.tip}</p>`:''}${item.ref?`<p style="color:#4f46e5;font-size:12px;margin-top:4px;">🎯 推荐：${item.ref}</p>`:''}</div></div>`;
+}
+function listCard(item){
+    return `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">必买清单</span></div><div class="card-detail" id="shop-${item.id}"><p><b>💰 参考价：</b>${item.price}</p><p><b>🛒 在哪买：</b>${item.where}</p><p><b>✨ 说明：</b>${item.feat}</p><p style="color:#718096;margin-top:6px;">💡 ${item.note}</p></div></div>`;
+}
 function renderShoppingList(cat='') {
     const box = document.getElementById('shoppingList');
     let html = '';
-    const catNames = {mall:'购物商圈', drug:'药妆店', local:'特色小店', list:'必买清单'};
-    const list = SHOPPING.filter(i => !cat || i.cat===cat);
-    list.forEach(item => {
-        if(item.cat==='list'){
-            html += `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">${catNames[item.cat]}</span></div><div class="card-detail" id="shop-${item.id}"><p><b>💰 参考价：</b>${item.price}</p><p><b>✨ 说明：</b>${item.feat}</p><p style="color:#718096;margin-top:6px;">💡 ${item.note}</p></div></div>`;
-        } else {
-            html += `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">${catNames[item.cat]}</span></div><div class="card-detail" id="shop-${item.id}"><p><b>📍 位置：</b>${item.addr}</p><p><b>✨ 特色：</b>${item.feat}</p>${item.tip?`<p style="color:#718096;margin-top:6px;">💡 ${item.tip}</p>`:''}${item.ref?`<p style="color:#4f46e5;font-size:12px;margin-top:4px;">🎯 推荐：${item.ref}</p>`:''}</div></div>`;
-        }
-    });
-    if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
+    if(cat==='drug'){
+        html += '<div class="shop-subtitle">💊 药妆店推荐</div>';
+        SHOPPING.filter(i=>i.cat==='drug').forEach(i => html += drugCard(i));
+        html += '<div class="shop-subtitle">🧾 药妆必买清单</div>';
+        SHOPPING.filter(i=>i.cat==='list').forEach(i => html += listCard(i));
+    } else if(cat==='mall'){
+        SHOPPING.filter(i=>i.cat==='mall').forEach(i => html += mallCard(i));
+    } else if(cat==='local'){
+        SHOPPING.filter(i=>i.cat==='local').forEach(i => html += drugCard(i));
+    } else {
+        html += '<div class="shop-subtitle">🏬 购物商圈</div>';
+        SHOPPING.filter(i=>i.cat==='mall').forEach(i => html += mallCard(i));
+        html += '<div class="shop-subtitle">💊 药妆店</div>';
+        SHOPPING.filter(i=>i.cat==='drug').forEach(i => html += drugCard(i));
+        html += '<div class="shop-subtitle">🧾 药妆必买清单</div>';
+        SHOPPING.filter(i=>i.cat==='list').forEach(i => html += listCard(i));
+        html += '<div class="shop-subtitle">🏘 特色小店</div>';
+        SHOPPING.filter(i=>i.cat==='local').forEach(i => html += drugCard(i));
+    }
     box.innerHTML = html;
 }
 window.toggleShopping = id => document.getElementById('shop-'+id).classList.toggle('open');
