@@ -35,7 +35,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .info-table tr:nth-child(even){background:#f7fafc}
 .app-grid{display:flex;flex-direction:column;gap:6px;margin-top:4px}
 .app-cat{font-size:12.5px;line-height:1.6;padding:5px 8px;background:#f7fafc;border-radius:6px;border-left:3px solid #c53030}
-.pitfall-group-title{font-size:14px;font-weight:700;color:#c53030;margin:16px 0 8px;padding-left:8px;border-left:4px solid #c53030}
+.pitfall-group-title{font-size:16px;font-weight:700;color:#c53030;margin:20px 0 10px;padding:8px 12px;background:#fef2f2;border-radius:8px;border-left:4px solid #c53030}
 .emergency-card{background:linear-gradient(135deg,#fff5f5,#fff);border:1px solid #feb2b2;border-radius:10px;padding:12px;margin:8px 0}
 .emergency-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed #fed7d7;font-size:12.5px}
 .emergency-row:last-child{border-bottom:none}
@@ -260,7 +260,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         </select>
     </div>
     <div id="routeList"></div>
-    <div class="section-title" style="margin-top:20px">⚠️ 避坑指南（按类别整理）</div>
+    <div class="section-title" style="margin-top:24px;font-size:18px;font-weight:700;">⚠️ 避坑指南</div>
     <div id="pitfallList"></div>
 </div>
 
@@ -434,14 +434,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <div class="section-title">高频日语短句（点击复制）</div>
     <div class="card" id="japanList"></div>
 
-    <div class="section-title">紧急联系方式</div>
-    <div class="card">
-        <p style="font-size:13px; margin-bottom:6px;">🚨 报警电话：<b>110</b></p>
-        <p style="font-size:13px; margin-bottom:6px;">🚑 急救/消防：<b>119</b></p>
-        <p style="font-size:13px; margin-bottom:6px;">🏥 东京急救热线：<b>#7119</b></p>
-        <p style="font-size:13px; margin-bottom:6px;">🇨🇳 中国驻日使馆：<b>03-3403-3388</b></p>
-        <p style="font-size:13px; color:#718096; margin-top:8px;">提示：日本紧急电话接通后可说 "Chinese" 安排中文翻译</p>
+    <div class="section-title" style="font-size:18px;font-weight:700;">🚨 紧急联系方式（建议截图保存）</div>
+    <div class="emergency-card">
+        <div class="emergency-row"><span>🚓 报警（盗抢/事故）</span><span class="emergency-num">110</span></div>
+        <div class="emergency-row"><span>🚑 火警/急救</span><span class="emergency-num">119</span></div>
+        <div class="emergency-row"><span>⚓ 海上保安</span><span class="emergency-num">118</span></div>
+        <div class="emergency-row"><span>🇨🇳 中国驻日大使馆领事保护（24h）</span><span class="emergency-num">03-3403-3380</span></div>
+        <div class="emergency-row"><span>🇨🇳 中国驻日大使馆总机</span><span class="emergency-num">03-3403-3388</span></div>
+        <div class="emergency-row"><span>🌐 外交部全球领事保护</span><span class="emergency-num">0086-10-12308</span></div>
+        <div class="emergency-row"><span>🗼 东京观光咨询（中文）</span><span class="emergency-num">03-5321-5566</span></div>
+        <div class="emergency-row"><span>🗾 JNTO旅游热线（多语言）</span><span class="emergency-num">050-3816-2787</span></div>
+        <div class="emergency-row"><span>👮 警视厅外语咨询</span><span class="emergency-num">03-3501-0110</span></div>
     </div>
+    <p style="font-size:11.5px;color:#718096;margin:6px 0 0;padding:0 4px;">📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。日本紧急电话接通后可说 "Chinese" 安排中文翻译。</p>
 
     <div class="copyright">© 东京自由行实操手册 · 交互版 v1.0.0· 最后更新：2026-09-04</div>
 </div>
@@ -828,7 +833,6 @@ const PITFALLS = [
   { id:33, type:"other", title:"温泉/钱汤多数禁止纹身", content:"大部分温泉和钱汤禁止有纹身者入内，有纹身的提前查纹身可入的温泉，或用纹身贴遮盖。进温泉前先在淋浴区洗干净再泡，毛巾不能放进池子里，泡完不要冲澡（保留矿物质）。" },
   { id:34, type:"other", title:"旺季人暴多提前订", content:"樱花季（3月底-4月初）、红叶季（11月底-12月初）、黄金周（4月底-5月初）、盂兰盆节（8月中）是东京最旺季，景点排队、餐厅满座、酒店涨价30-50%，至少提前1-2个月订酒店和热门餐厅。" },
   { id:35, type:"other", title:"电压100V，插头两脚扁", content:"日本电压100V（国内220V），插头是A型两脚扁插。手机/电脑充电器大多支持100-240V宽压可直接用；但吹风机、卷发棒等大功率电器如果不支持宽压会烧坏，建议到日本再买或用酒店的。" },
-  { id:36, type:"other", title:"紧急联系方式（建议截图保存）", content:"<div class='emergency-card'><div class='emergency-row'><span>🚓 报警（盗抢/事故）</span><span class='emergency-num'>110</span></div><div class='emergency-row'><span>🚑 火警/急救</span><span class='emergency-num'>119</span></div><div class='emergency-row'><span>⚓ 海上保安</span><span class='emergency-num'>118</span></div><div class='emergency-row'><span>🇨🇳 中国驻日大使馆领事保护（24h）</span><span class='emergency-num'>03-3403-3380</span></div><div class='emergency-row'><span>🇨🇳 中国驻日大使馆总机</span><span class='emergency-num'>03-3403-3388</span></div><div class='emergency-row'><span>🌐 外交部全球领事保护</span><span class='emergency-num'>0086-10-12308</span></div><div class='emergency-row'><span>🗼 东京观光咨询（中文）</span><span class='emergency-num'>03-5321-5566</span></div><div class='emergency-row'><span>🗾 JNTO旅游热线（多语言）</span><span class='emergency-num'>050-3816-2787</span></div><div class='emergency-row'><span>👮 警视厅外语咨询</span><span class='emergency-num'>03-3501-0110</span></div></div><p style='font-size:11.5px;color:#718096;margin-top:6px'>📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。遇到麻烦优先找车站工作人员或便利店店员，翻译软件提前下好。</p>" },
   { id:37, type:"other", title:"周日部分小店关门", content:"东京很多独立小店、古着店、书店周日或周一定休（每家不同），大商场和连锁店照常营业。去特定小店前最好查一下官网或Google Maps的营业时间，避免白跑一趟。" }
 ];
 
