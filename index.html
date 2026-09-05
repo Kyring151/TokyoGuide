@@ -135,6 +135,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
                  电车上手机静音、不打电话、不大声交谈；扶梯在"东京站左侧"（大阪等关西地区相反，站右侧），且官方现在提倡扶梯上站定扶好、不要跑动；快餐店、美食广场、部分连锁拉面店吃完需"自行把餐盘送回返却口"，居酒屋和正餐餐馆则由店员收拾，直接离席即可。
             </div>
         </div>
+        <div class="step-item">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <h4>机场进市区（成田 / 羽田）</h4>
+                成田机场（国际航班主力）：① 京成 Skyliner 特急最快，外国游客优惠票 ¥2,310 / 约40-45分钟到上野·日暮里；② 成田特快 N'EX ¥3,070-3,330 / 约60分钟直达东京站、新宿、涩谷；③ 京成本线 ¥1,060 最便宜但慢（约75-80分钟）；④ 利木津巴士 ¥3,100 直达各大酒店（90-120分钟，免换乘）。羽田机场（离市区更近）：① 东京单轨电车 ¥520 / 约13分钟到滨松町换乘 JR；② 京急线约 ¥330 / 约12分钟到品川；③ 利木津巴士 ¥1,200-1,300 直达酒店。建议：能选羽田航班更好，进市区又快又便宜；坐成田则选 Skyliner 最省时。
+            </div>
+        </div>
+        <div class="step-item">
+            <div class="step-num">7</div>
+            <div class="step-content">
+                <h4>市内交通与一日券</h4>
+                Suica / Pasmo 卡通用所有地铁、JR、公交和便利店，充钱即刷。东京 Metro＋都营地铁通票「Tokyo Subway Ticket」：24小时 ¥1,000 / 48小时 ¥1,500 / 72小时 ¥2,000，一天坐 6 次以上地铁就回本，机场、地铁站、线上都能买。JR 主要靠山手线环线（新宿、涩谷、上野、东京站、秋叶原一线直达）。要去镰仓、箱根、日光等周边，可考虑「东京广域周游券」3日 ¥15,180，连续 3 天 JR 东日本区域无限乘。
+            </div>
+        </div>
     </div>
 
     <div class="section-title">手册使用说明</div>
@@ -209,6 +223,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         </select>
     </div>
     <div id="pitfallList"></div>
+</div>
+
+<!-- 住宿推荐 -->
+<div class="page" id="page-hotel">
+    <div class="section-title">🏨 东京住宿推荐（按区域 × 价位）</div>
+    <div class="filter-bar">
+        <select class="filter-select" id="filterHotel">
+            <option value="">全部区域</option>
+            <option value="新宿">新宿</option>
+            <option value="涩谷">涩谷</option>
+            <option value="银座">银座</option>
+            <option value="浅草">浅草</option>
+            <option value="上野">上野</option>
+            <option value="东京站">东京站</option>
+            <option value="台场">台场</option>
+            <option value="品川">品川</option>
+        </select>
+        <select class="filter-select" id="filterHotelPrice">
+            <option value="">全部价位</option>
+            <option value="capsule">青旅/胶囊</option>
+            <option value="economy">经济型</option>
+            <option value="mid">中端舒适</option>
+            <option value="high">高端</option>
+        </select>
+    </div>
+    <div id="hotelList"></div>
+    <div class="card" style="margin-top:10px;">
+        <p style="font-size:12px;color:#718096;">价格为 2026-09 核实的人民币参考区间，随日期、节假日、早鸟/协议价浮动，实际以预订平台为准。选酒店思路：追求交通便利住新宿/东京站；追求购物住银座/涩谷；预算有限住浅草/上野；看海景住台场。</p>
+    </div>
+</div>
+
+<!-- 预约攻略 -->
+<div class="page" id="page-reserve">
+    <div class="section-title">📋 预约攻略（热门景点 × 餐厅）</div>
+    <div class="filter-bar">
+        <select class="filter-select" id="filterReserve">
+            <option value="">全部分类</option>
+            <option value="spot">热门景点</option>
+            <option value="restaurant">热门餐厅</option>
+        </select>
+    </div>
+    <div id="reserveList"></div>
+    <div class="card" style="margin-top:10px;">
+        <p style="font-size:12px;color:#718096;">⚠️ 预约规则、票价与放票时间会随官方调整（均标注核实日期），出发前请以官网为准。东京多数热门景点已改为「指定日期时间入场」，提前预约既能确保有位，部分还更便宜。</p>
+    </div>
 </div>
 
 <!-- 实用工具 -->
@@ -339,6 +398,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <div class="nav-item" data-page="pitfall">
         <div class="nav-icon">⚠️</div>
         <div>避坑指南</div>
+    </div>
+    <div class="nav-item" data-page="hotel">
+        <div class="nav-icon">🏨</div>
+        <div>住宿</div>
+    </div>
+    <div class="nav-item" data-page="reserve">
+        <div class="nav-icon">📋</div>
+        <div>预约</div>
     </div>
     <div class="nav-item" data-page="tool">
         <div class="nav-icon">🛠️</div>
@@ -472,7 +539,11 @@ const PITFALLS = [
     { id:16, type:"other", title:"小费文化", content:"日本没有小费文化，不用给小费。给了反而会让对方困扰。" },
     { id:17, type:"other", title:"神社参拜礼仪", content:"神社参拜：先鞠躬，投币，摇铃，二鞠躬二拍手一鞠躬。不要踩门槛，那是神的领域。" },
     { id:18, type:"other", title:"地震应对", content:"东京地震多发，酒店房间有避难路线图。遇到地震不要慌，先躲在桌子底下。" },
-    { id:19, type:"other", title:"WiFi覆盖有限", content:"街头免费WiFi很少且不稳定，建议提前买eSIM或随身WiFi。" }
+    { id:19, type:"other", title:"WiFi覆盖有限", content:"街头免费WiFi很少且不稳定，建议提前买eSIM或随身WiFi。" },
+  { id:20, type:"shopping", title:"免税门槛与店头免税（11月前）", content:"2026年10月31日前：同一店铺单日消费满¥5,000（不含税）即可在店内直接免税，结账时出示护照即可，无需再到机场办理。药妆、电器、百货基本都支持。" },
+  { id:21, type:"shopping", title:"2026年11月起改为机场退税", content:"11月1日起日本改为「事后退税制」：购物按含税价付款→拿带QR码的收据→在J-TaxRefund平台绑定护照与退款账户→出境当天、托运行李前到机场KIOSK刷护照核验→自动退款。流程变长，务必留出时间。" },
+  { id:22, type:"shopping", title:"免税品必须本人随身携带", content:"2025年4月起已废除邮寄免税。免税商品必须本人携带出境供海关检查，未携带、被拆封或丢失可能被要求补缴消费税。" },
+  { id:23, type:"shopping", title:"机场免税区直接免消费税", content:"过安检后的机场免税店（duty free）商品直接是不含税价，出示护照+登机牌即可购买，无需再办退税，适合登机前最后扫货。" }
 ];
 
 const JAPAN_PHRASES = [
@@ -495,6 +566,55 @@ const JAPAN_PHRASES = [
     { jp:"ちょっと待ってください", cn:"请稍等" },
     { jp:"わかりません", cn:"我不明白" },
     { jp:"さようなら", cn:"再见" }
+];
+
+// ==================== 住宿数据（2026-09 核实） ====================
+const HOTELS = [
+  // 新宿
+  { id:1, area:"新宿", type:"capsule", name:"9h nine hours 新宿", price:"约¥150-330/晚", features:"设计感胶囊旅馆，公共卫浴，适合背包客/独行游客", traffic:"JR新宿站北口步行约5分钟", note:"胶囊隔音一般，怕吵建议带耳塞" },
+  { id:2, area:"新宿", type:"economy", name:"APA 新宿系列酒店", price:"约¥280-650/晚", features:"连锁商务酒店，房间小但干净，独立卫浴", traffic:"新宿站周边多分店", note:"周末/旺季价格上浮明显，提前订" },
+  { id:3, area:"新宿", type:"economy", name:"东横INN 新宿歌舞伎町", price:"约¥500-600/晚", features:"含免费早餐，位置便利，房间整洁", traffic:"新宿站东口步行可达", note:"热门时期房源紧张" },
+  { id:4, area:"新宿", type:"mid", name:"新宿王子大饭店", price:"约¥1000起/晚", features:"高层景观好，近歌舞伎町", traffic:"新宿站东口步行", note:"协议价常见约¥1000/晚" },
+  { id:5, area:"新宿", type:"high", name:"新宿京王广场大酒店", price:"约¥1400起/晚", features:"老牌五星，对面东京都厅，夜景绝佳", traffic:"新宿站西口/都厅前站", note:"早鸟价更划算" },
+  // 涩谷
+  { id:6, area:"涩谷", type:"capsule", name:"The Millennials 涩谷", price:"约¥250-400/晚", features:"智能胶囊舱，含早餐，公共区免费咖啡", traffic:"涩谷站步行约5分钟", note:"潮流年轻人聚集地" },
+  { id:7, area:"涩谷", type:"economy", name:"涩谷东急STAY", price:"约¥630-1000/晚", features:"公寓式酒店带小厨房，适合长住/亲子", traffic:"涩谷站新南口旁", note:"带洗衣设施" },
+  { id:8, area:"涩谷", type:"high", name:"涩谷英迪格酒店", price:"约¥1800起/晚", features:"设计型精品酒店，涩谷高空景观", traffic:"涩谷站旁", note:"协议价约¥1800/晚" },
+  // 银座
+  { id:9, area:"银座", type:"economy", name:"相铁FRESA INN 银座", price:"约¥400-700/晚", features:"连锁商务酒店，离筑地市场近", traffic:"银座/筑地站步行", note:"性价比高" },
+  { id:10, area:"银座", type:"mid", name:"名铁银座大酒店", price:"约¥700-1200/晚", features:"四星级，银座购物区核心", traffic:"银座站步行", note:"逛街购物方便" },
+  { id:11, area:"银座", type:"high", name:"东京银座agora酒店", price:"约¥1000-1200/晚", features:"精品设计酒店，步行可达筑地市场", traffic:"银座/筑地站", note:"协议价约¥1068-1128/晚" },
+  { id:12, area:"银座", type:"high", name:"东京帝国饭店", price:"约¥2000起/晚", features:"日本顶级老牌酒店，皇居旁", traffic:"日比谷站/银座站", note:"预算充足首选" },
+  // 浅草
+  { id:13, area:"浅草", type:"capsule", name:"考山路酒店 浅草", price:"约¥140-180/晚", features:"国际青旅，性价比极高", traffic:"浅草寺步行可达", note:"背包客聚集，氛围好" },
+  { id:14, area:"浅草", type:"economy", name:"APA 浅草田原町", price:"约¥300-500/晚", features:"连锁商务，近浅草/上野", traffic:"浅草/田原町站", note:"干净整洁" },
+  { id:15, area:"浅草", type:"mid", name:"超级酒店 浅草", price:"约¥400-700/晚", features:"含免费早餐+天然温泉浴场", traffic:"浅草站步行", note:"带温泉很加分" },
+  // 上野
+  { id:16, area:"上野", type:"economy", name:"东横INN 上野田原町", price:"约¥400-650/晚", features:"含免费早餐，交通便利", traffic:"上野/田原町站", note:"去东北新干线方便" },
+  { id:17, area:"上野", type:"mid", name:"Dormy Inn 上野御徒町", price:"约¥800-1500/晚", features:"带天然温泉+免费夜宵拉面，超值", traffic:"上野御徒町站", note:"泡汤解乏，强烈推荐" },
+  { id:18, area:"上野", type:"mid", name:"三井花园 上野", price:"约¥700-1200/晚", features:"日式设计感，近上野公园", traffic:"上野站", note:"含早餐可选" },
+  // 东京站
+  { id:19, area:"东京站", type:"mid", name:"超级酒店Premier 东京站八重洲", price:"约¥600-900/晚", features:"含天然温泉大浴场（八重樱之汤）+早餐", traffic:"东京站八重洲口步行", note:"交通枢纽之王，去哪儿都方便" },
+  { id:20, area:"东京站", type:"mid", name:"Nesthotel 东京八重洲", price:"约¥500-800/晚", features:"2024年新开业，设计感强", traffic:"东京站八重洲口", note:"新酒店设施好" },
+  // 台场
+  { id:21, area:"台场", type:"mid", name:"东京湾喜来登大酒店", price:"约¥1000起/晚", features:"海景+亲子友好，迪士尼接驳方便", traffic:"台场/舞滨站", note:"协议价约¥1000/晚" },
+  { id:22, area:"台场", type:"high", name:"台场希尔顿酒店", price:"约¥1200起/晚", features:"直面彩虹大桥海景", traffic:"台场站/百合鸥线", note:"协议价约¥1200/晚，夜景一绝" },
+  // 品川（交通枢纽）
+  { id:23, area:"品川", type:"economy", name:"品川王子大饭店", price:"约¥950-1100/晚", features:"机场交通枢纽，成田/羽田都直达", traffic:"品川站旁", note:"进出机场最方便的中转站" }
+];
+
+// ==================== 预约攻略数据（2026-09 核实） ====================
+const RESERVATIONS = [
+  { id:1, cat:"spot", name:"三鹰之森吉卜力美术馆", need:"必须提前预约", how:"官网→Lawson Ticket 英文站（l-tike.com/ghibli）购票，姓名须与护照一致", lead:"每月10日10:00（日本时间）发售次月门票，热门时段5分钟-2小时售罄", price:"成人¥1,000 / 13-18岁¥700 / 7-12岁¥400 / 4-6岁¥100", time:"每日4个入场时段", note:"现场不售票；建议提前注册会员+设好闹钟", verified:"2026-09核实" },
+  { id:2, cat:"spot", name:"teamLab Planets TOKYO（丰洲）", need:"建议提前预约", how:"官网票务（DMM）teamlabplanets.dmm.com 选日期时间购票", lead:"周末/节假日时段建议提前3周，平日可临近订", price:"成人平日¥3,800/周末¥4,200；中高生¥2,800；4-12岁¥1,500；3岁以下免费；尊享票¥12,000", time:"分时段入场，每30分钟一时段", note:"动态定价，越热门越贵/易售罄", verified:"2026-09核实" },
+  { id:3, cat:"spot", name:"东京迪士尼乐园/海洋", need:"必须提前购票", how:"官网 tokyodisneyresort.jp 每日14:00发售2个月后同日门票，或官方App购票", lead:"每天14:00放票，售完即止，建议尽早", price:"一日护照成人¥8,900起/高峰¥9,900；Junior（12-17岁）¥7,400；儿童（4-11岁）¥5,300；3岁以下免费", time:"约9:00-21:00（随季节变动）", note:"浮动票价，节假日更贵；门票有限售完即止", verified:"2026-09核实" },
+  { id:4, cat:"spot", name:"SHIBUYA SKY（涩谷）", need:"建议提前预约", how:"官网 shibuya-scramble-square.com，或Klook/KKday（使用前14天开售）购指定时段票", lead:"官网可订约1个月前；建议提前3-7天，周末/日落时段抢手", price:"预售成人¥2,700（14:59前入）/¥3,400（15:00后入）；窗口¥3,000/¥3,700；小学生¥1,200；6岁以下免费", time:"10:00-22:30，最迟入场21:20，每20分钟一时段", note:"想看日落建议订日落前60分钟的时段", verified:"2026-09核实" },
+  { id:5, cat:"spot", name:"东京晴空塔展望台", need:"建议提前预约", how:"官网 tokyo-skytree.jp 在线购指定时段票", lead:"提前1-3天即可；周末/日落/节假日易售罄", price:"天望甲板350m成人¥2,100起（节假日¥2,300）；450m追加¥1,000-1,100；组合票¥3,100-3,400；5岁以下免费", time:"分时段入场，约8:00-22:00", note:"网上提前订比窗口便宜¥500/张", verified:"2026-09核实" },
+  { id:6, cat:"restaurant", name:"叙々苑（烧肉·新宿等）", need:"晚餐建议预约", how:"官网 jojoen.co.jp 可中文预约，或电话", lead:"热门分店建议提前1-2周", price:"午市套餐约¥15,000起/人，晚市更高", time:"11:30-深夜（分店不同）", note:"高端烧肉连锁，和牛品质稳定", verified:"2026-09核实" },
+  { id:7, cat:"restaurant", name:"数寄屋桥次郎（寿司·银座）", need:"极难预约", how:"仅10座，提前1个月抽签；几乎无法自行订到，多靠酒店礼宾/代订平台", lead:"提前1个月抽签，中签率约5%", price:"人均参考¥40,000起（以商家为准）", time:"午/晚市，每天仅两轮", note:"米其林三星《寿司之神》；订不到可考虑其他一星寿司名店", verified:"2026-09核实" },
+  { id:8, cat:"restaurant", name:"天妇罗近藤（银座）", need:"完全预约制", how:"电话预约 03-5568-0923；官网 tempura-kondo.com", lead:"建议提前1周-1个月", price:"午餐约¥15,000起；晚餐¥20,000-30,000（参考）", time:"午餐12:00-15:30；周日休", note:"米其林星级天妇罗，季节性食材", verified:"2026-09核实" },
+  { id:9, cat:"restaurant", name:"寿司大（筑地）", need:"不需预约但需早起排队", how:"现场排队，建议凌晨5点前到", lead:"当天一早（6点前）到", price:"套餐约¥4,000-5,000", time:"凌晨开市，卖完收摊", note:"网红店排队2小时+；旁边大和寿司/寿司善口味接近人更少", verified:"2026-09核实" },
+  { id:10, cat:"restaurant", name:"怀石/寿司/割烹 通用预约法", need:"名店建议提前1个月", how:"渠道：官网/App、TableCheck、OMAKASE、Tabelog，或让酒店礼宾代订", lead:"很多名店每月1日开下月订位，准时开抢", price:"视店铺而定", time:"以店家为准", note:"取消政策严格（部分提前2天取消收全款）；订位确认人数/过敏", verified:"2026-09核实" }
 ];
 
 // ==================== 交互逻辑 ====================
@@ -577,6 +697,38 @@ function renderPitfallList(type='') {
 }
 window.togglePitfall = id => document.getElementById('pitfall-'+id).classList.toggle('open');
 
+// 渲染住宿
+function renderHotelList(area='', price='') {
+    const box = document.getElementById('hotelList');
+    let html = '';
+    const priceNames = {capsule:'青旅/胶囊', economy:'经济型', mid:'中端舒适', high:'高端'};
+    const list = HOTELS.filter(i => {
+        if(area && i.area!==area) return false;
+        if(price && i.type!==price) return false;
+        return true;
+    });
+    list.forEach(item => {
+        html += `<div class="card"><div class="card-title" onclick="toggleHotel(${item.id})"><span>${item.name}</span><span class="tag">${priceNames[item.type]||item.type}</span></div><div class="card-detail" id="hotel-${item.id}"><p><b>📍 区域：</b>${item.area}</p><p><b>💰 价格：</b>${item.price}</p><p><b>✨ 特点：</b>${item.features}</p><p><b>🚃 交通：</b>${item.traffic}</p>${item.note?`<p style="color:#718096;margin-top:6px;">💡 ${item.note}</p>`:''}</div></div>`;
+    });
+    if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的住宿</div>';
+    box.innerHTML = html;
+}
+window.toggleHotel = id => document.getElementById('hotel-'+id).classList.toggle('open');
+
+// 渲染预约
+function renderReserveList(cat='') {
+    const box = document.getElementById('reserveList');
+    let html = '';
+    const catNames = {spot:'热门景点', restaurant:'热门餐厅'};
+    const list = RESERVATIONS.filter(i => !cat || i.cat===cat);
+    list.forEach(item => {
+        html += `<div class="card"><div class="card-title" onclick="toggleReserve(${item.id})"><span>${item.name}</span><span class="tag">${catNames[item.cat]||item.cat}</span></div><div class="card-detail" id="reserve-${item.id}"><p><b>🔖 预约：</b>${item.need}</p><p><b>🔗 渠道：</b>${item.how}</p><p><b>⏱ 提前：</b>${item.lead}</p><p><b>💰 价格：</b>${item.price}</p>${item.time?`<p><b>🕒 时间：</b>${item.time}</p>`:''}<p style="color:#c53030;margin-top:6px;">⚠️ ${item.note}</p><p style="color:#718096;font-size:12px;margin-top:4px;">📅 ${item.verified}</p></div></div>`;
+    });
+    if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
+    box.innerHTML = html;
+}
+window.toggleReserve = id => document.getElementById('reserve-'+id).classList.toggle('open');
+
 // 渲染日语短句
 function renderJapanList() {
     const box = document.getElementById('japanList');
@@ -594,9 +746,14 @@ document.getElementById('filterTag').onchange = updateArea;
 document.getElementById('filterRouteDay').onchange = updateRoute;
 document.getElementById('filterRouteType').onchange = updateRoute;
 document.getElementById('filterPitfall').onchange = updatePitfall;
+document.getElementById('filterHotel').onchange = updateHotel;
+document.getElementById('filterHotelPrice').onchange = updateHotel;
+document.getElementById('filterReserve').onchange = updateReserve;
 function updateArea(){renderAreaList(document.getElementById('filterArea').value, document.getElementById('filterType').value, document.getElementById('filterTag').value);}
 function updateRoute(){renderRouteList(document.getElementById('filterRouteDay').value, document.getElementById('filterRouteType').value);}
 function updatePitfall(){renderPitfallList(document.getElementById('filterPitfall').value);}
+function updateHotel(){renderHotelList(document.getElementById('filterHotel').value, document.getElementById('filterHotelPrice').value);}
+function updateReserve(){renderReserveList(document.getElementById('filterReserve').value);}
 
 // 复制功能
 window.copyText = function(text) {
@@ -770,6 +927,8 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 renderAreaList();
 renderRouteList();
 renderPitfallList();
+renderHotelList();
+renderReserveList();
 renderJapanList();
 initSearch();
 initBudget();
