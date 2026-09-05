@@ -75,6 +75,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .highlight{background:#fdf3c8;padding:1px 3px;border-radius:3px}
 .copyright{text-align:center;font-size:11px;color:#a39e96;padding:22px 0 12px;letter-spacing:.5px}
 .watermark{position:fixed;bottom:65px;right:10px;font-size:10px;color:rgba(0,0,0,.04);pointer-events:none;transform:rotate(-30deg);z-index:1}
+.route-time{display:inline-block;background:#eef2ff;color:#4f46e5;font-size:12px;font-weight:600;border-radius:6px;padding:1px 7px;margin-right:7px;vertical-align:middle}
+.route-tip{color:#718096;font-size:12px;margin-top:3px}
+.route-book{color:#c53030;font-size:12px;margin-top:3px}
+.film-tag{background:#eef2ff;color:#4f46e5;font-size:11px;border-radius:6px;padding:1px 6px;margin-left:6px;font-weight:500}
 </style>
 </head>
 <body>
@@ -154,7 +158,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <div class="section-title">手册使用说明</div>
     <div class="card">
         <p style="font-size:13px; color:#4a5568;">
-          本手册分为「分区攻略」「路线规划」「避坑指南」「实用工具」四大模块，所有内容均可点击展开查看详情，地址支持一键复制。建议出行前通读一遍，旅途中配合底部导航快速查询。 
+          本手册分为「分区」「路线」「避坑」「住宿」「预约」「购物」「工具」七大模块，所有内容均可点击展开查看详情，地址支持一键复制。建议出行前通读一遍，旅途中配合底部导航快速查询。 
         </p>
     </div>
 
@@ -239,6 +243,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <option value="东京站">东京站</option>
             <option value="台场">台场</option>
             <option value="品川">品川</option>
+            <option value="池袋">池袋</option>
+            <option value="秋叶原">秋叶原</option>
+            <option value="吉祥寺/三鹰">吉祥寺/三鹰</option>
+            <option value="押上">押上</option>
+            <option value="六本木/赤坂">六本木/赤坂</option>
+            <option value="新桥/滨松町">新桥/滨松町</option>
         </select>
         <select class="filter-select" id="filterHotelPrice">
             <option value="">全部价位</option>
@@ -246,6 +256,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <option value="economy">经济型</option>
             <option value="mid">中端舒适</option>
             <option value="high">高端</option>
+            <option value="home">民宿/公寓</option>
         </select>
     </div>
     <div id="hotelList"></div>
@@ -262,11 +273,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <option value="">全部分类</option>
             <option value="spot">热门景点</option>
             <option value="restaurant">热门餐厅</option>
+            <option value="budget">平价餐厅</option>
+            <option value="experience">体验项目</option>
         </select>
     </div>
     <div id="reserveList"></div>
     <div class="card" style="margin-top:10px;">
-        <p style="font-size:12px;color:#718096;">⚠️ 预约规则、票价与放票时间会随官方调整（均标注核实日期），出发前请以官网为准。东京多数热门景点已改为「指定日期时间入场」，提前预约既能确保有位，部分还更便宜。</p>
+        <p style="font-size:12px;color:#718096;">🎬 热门景点与餐厅已标注关联的影视/动漫作品，详情页有作品简介。⚠️ 预约规则、票价与放票时间会随官方调整（均标注核实日期），出发前请以官网为准。东京多数热门景点已改为「指定日期时间入场」，提前预约既能确保有位，部分还更便宜。</p>
+    </div>
+</div>
+
+<!-- 购物地图 -->
+<div class="page" id="page-shopping">
+    <div class="section-title">🛍️ 东京购物地图（商圈 × 药妆 × 必买清单）</div>
+    <div class="filter-bar">
+        <select class="filter-select" id="filterShopping">
+            <option value="">全部分类</option>
+            <option value="mall">购物商圈</option>
+            <option value="drug">药妆店</option>
+            <option value="local">特色小店</option>
+            <option value="list">药妆必买清单</option>
+        </select>
+    </div>
+    <div id="shoppingList"></div>
+    <div class="card" style="margin-top:10px;">
+        <p style="font-size:12px;color:#718096;">💡 购物提示：单店单日满 ¥5,000（不含税）可免税（2026年11月前店头即买即免；11月起改为机场退税，详见「避坑指南」购物篇）。药妆清单价格为参考价，随店铺/促销浮动，多店比价再买。⚠️ 2026年11月前免税须本人携带出境，不要拆封。</p>
     </div>
 </div>
 
@@ -389,15 +420,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     </div>
     <div class="nav-item" data-page="area">
         <div class="nav-icon">🗺️</div>
-        <div>分区攻略</div>
+        <div>分区</div>
     </div>
     <div class="nav-item" data-page="route">
         <div class="nav-icon">📅</div>
-        <div>路线规划</div>
+        <div>路线</div>
     </div>
     <div class="nav-item" data-page="pitfall">
         <div class="nav-icon">⚠️</div>
-        <div>避坑指南</div>
+        <div>避坑</div>
     </div>
     <div class="nav-item" data-page="hotel">
         <div class="nav-icon">🏨</div>
@@ -407,9 +438,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         <div class="nav-icon">📋</div>
         <div>预约</div>
     </div>
+    <div class="nav-item" data-page="shopping">
+        <div class="nav-icon">🛍️</div>
+        <div>购物</div>
+    </div>
     <div class="nav-item" data-page="tool">
         <div class="nav-icon">🛠️</div>
-        <div>实用工具</div>
+        <div>工具</div>
     </div>
 </div>
 
@@ -461,61 +496,247 @@ const ROUTES = [
     {
         id:1, name:"3天精华经典路线", days:3, type:"classic",
         days_detail: [
-            { day:"Day1 浅草·上野线", items:["上午：浅草寺参拜，仲见世通逛街","中午：浅草吃天妇罗/人形烧","下午：上野公园散步，秋叶原电器街","晚上：秋叶原晚餐，体验二次元文化"] },
-            { day:"Day2 原宿·涩谷·新宿", items:["上午：明治神宫，原宿竹下通","中午：原宿可丽饼+拉面","下午：涩谷十字路口，表参道逛街","晚上：新宿歌舞伎町，居酒屋体验"] },
-            { day:"Day3 银座·台场", items:["上午：筑地市场海鲜早餐","中午：银座逛街购物","下午：台场高达，海滨公园","晚上：彩虹大桥夜景"] }
+            { day:"Day1 浅草·上野线",
+              items:[
+                {time:"08:30", text:"雷门·浅草寺参拜，仲见世通逛街", tip:"9点前到避开旅行团，清晨人少好拍照", book:""},
+                {time:"11:30", text:"午餐：大黑家天妇罗或浅草本地食堂", tip:"大黑家常年排队，11点前到可少等", book:""},
+                {time:"13:30", text:"上野公园散步，可入东京国立博物馆", tip:"博物馆周一闭馆，周五周六开放到20点", book:""},
+                {time:"16:00", text:"山手线（约5分钟）转战秋叶原电器街", tip:"秋叶原晚上霓虹更好看，手办店集中", book:""},
+                {time:"19:00", text:"秋叶原晚餐：女仆咖啡厅或拉面/居酒屋", tip:"", book:""}
+              ] },
+            { day:"Day2 原宿·涩谷·新宿",
+              items:[
+                {time:"09:00", text:"明治神宫参拜，森林步道漫步", tip:"早上去最清静，正午前鸟居光最美", book:""},
+                {time:"10:30", text:"原宿竹下通逛街，打卡可丽饼", tip:"竹下通商店10点后陆续开门，可先逛神宫", book:""},
+                {time:"12:30", text:"午餐：原宿/涩谷拉面或咖喱", tip:"", book:""},
+                {time:"14:00", text:"涩谷十字路口·忠犬八公像打卡", tip:"绿灯全放行时是拍照最佳瞬间", book:"SHIBUYA SKY 建议提前3-7天订日落前1小时时段"},
+                {time:"16:00", text:"表参道/涩谷逛街购物", tip:"表参道大牌旗舰店、涩谷109少女装", book:""},
+                {time:"18:30", text:"新宿思出横丁居酒屋/歌舞伎町晚餐", tip:"思出横丁巷子小但最有氛围，建议提前订位", book:""}
+              ] },
+            { day:"Day3 银座·台场",
+              items:[
+                {time:"08:30", text:"筑地场外市场海鲜早餐", tip:"想排「寿司大」需6点前到，平替可选大和寿司", book:""},
+                {time:"10:30", text:"银座逛街：百货、老铺、免税购物", tip:"单店满¥5000可店头免税（2026年11月前）", book:""},
+                {time:"14:00", text:"百合鸥线前往台场，看实物大高达", tip:"百合鸥线无人驾驶，第一排视野最好", book:""},
+                {time:"16:00", text:"台场海滨公园·自由女神像·teamLab（可选）", tip:"", book:"teamLab 建议提前1-2周订票"},
+                {time:"18:30", text:"彩虹大桥夜景，返回市区", tip:"日落前后桥灯光最美", book:""}
+              ] }
         ]
     },
     {
         id:2, name:"5天深度体验路线", days:5, type:"classic",
         days_detail: [
-            { day:"Day1 浅草·晴空塔", items:["上午：浅草寺周边深度逛","中午：大黑家天妇罗","下午：晴空塔展望台","晚上：墨田川夜景"] },
-            { day:"Day2 上野·秋叶原", items:["上午：上野公园+东京国立博物馆","中午：上野一兰拉面","下午：秋叶原动漫街深度逛","晚上：女仆咖啡厅体验"] },
-            { day:"Day3 原宿·涩谷·中目黑", items:["上午：明治神宫，表参道","中午：原宿美食","下午：涩谷逛街，忠犬八公像","晚上：中目黑夜樱/咖啡"] },
-            { day:"Day4 新宿·银座", items:["上午：新宿御苑，都厅展望台","中午：新宿烧肉","下午：银座购物，筑地市场","晚上：银座夜景"] },
-            { day:"Day5 台场·自由活动", items:["上午：台场高达基地","中午：台场海景餐厅","下午：teamLab美术馆/购物","晚上：彩虹大桥夜景"] }
+            { day:"Day1 浅草·晴空塔",
+              items:[
+                {time:"09:00", text:"浅草寺+仲见世通深度逛", tip:"雷门拍照可早起避开人流", book:""},
+                {time:"11:30", text:"午餐：大黑家天妇罗", tip:"天妇罗名店，建议11点前到", book:""},
+                {time:"13:30", text:"晴空塔展望台350m/450m", tip:"网上提前订比窗口便宜¥500/张", book:"提前1-3天订票，日落时段最抢手"},
+                {time:"16:00", text:"晴空塔城Solamachi逛街", tip:"内有大量伴手礼店、墨田水族馆", book:""},
+                {time:"18:30", text:"墨田川畔·隅田公园看晴空塔夜景", tip:"河面倒影机位绝佳", book:""}
+              ] },
+            { day:"Day2 上野·秋叶原",
+              items:[
+                {time:"09:00", text:"上野公园+东京国立博物馆", tip:"博物馆周一闭馆，本馆看日本史", book:""},
+                {time:"12:00", text:"午餐：上野一兰拉面", tip:"游客友好、点单简单", book:""},
+                {time:"13:30", text:"秋叶原动漫街深度逛", tip:"中央通两侧电玩店、女仆咖啡集中", book:""},
+                {time:"16:00", text:"手办店·游戏厅·中古店", tip:"MANDARAKE、骏河屋最好逛", book:""},
+                {time:"19:00", text:"女仆咖啡厅体验", tip:"多为套餐制，注意最低消费", book:""}
+              ] },
+            { day:"Day3 原宿·涩谷·中目黑",
+              items:[
+                {time:"09:00", text:"明治神宫+表参道", tip:"正午前光最好", book:""},
+                {time:"11:30", text:"原宿竹下通可丽饼", tip:"可丽饼店多，选排队多的准没错", book:""},
+                {time:"13:00", text:"涩谷十字路口·忠犬八公像", tip:"", book:"可加 SHIBUYA SKY，提前3-7天订票"},
+                {time:"15:30", text:"中目黑星巴克臻选（网红门店）", tip:"或沿目黑川散步，春天是赏樱名所", book:""},
+                {time:"18:00", text:"中目黑晚餐", tip:"沿目黑川小馆子氛围好", book:""}
+              ] },
+            { day:"Day4 新宿·银座",
+              items:[
+                {time:"09:00", text:"新宿御苑", tip:"周一闭园！平日9:00开门，樱花季要早去", book:""},
+                {time:"11:00", text:"东京都厅展望台（免费）", tip:"45层免费展望，晴空塔/富士山可见", book:""},
+                {time:"12:30", text:"午餐：新宿烧肉", tip:"", book:"叙々苑建议提前1-2周官网订位"},
+                {time:"14:30", text:"银座购物：百货、免税店", tip:"三越、松屋、GINZA SIX都好逛", book:""},
+                {time:"18:00", text:"银座夜景+晚餐", tip:"银座夜晚橱窗灯光非常漂亮", book:""}
+              ] },
+            { day:"Day5 台场·自由活动",
+              items:[
+                {time:"09:30", text:"台场高达基地（1:1实物高达）", tip:"DiverCity 商场前", book:""},
+                {time:"12:00", text:"台场海景餐厅午餐", tip:"海滨公园沿线选择多", book:""},
+                {time:"14:00", text:"teamLab Planets 或海滨购物", tip:"", book:"teamLab 建议提前1-2周订票，周末更早"},
+                {time:"18:30", text:"彩虹大桥夜景，返程", tip:"", book:""}
+              ] }
         ]
     },
     {
         id:3, name:"7天全景东京+镰仓", days:7, type:"classic",
         days_detail: [
-            { day:"Day1 入境·新宿", items:["机场到市区，入住新宿酒店","下午：新宿熟悉环境","晚上：思出横丁居酒屋"] },
-            { day:"Day2 浅草·上野", items:["浅草寺+晴空塔+上野+秋叶原"] },
-            { day:"Day3 原宿·涩谷", items:["明治神宫+表参道+涩谷+中目黑"] },
-            { day:"Day4 银座·筑地·台场", items:["筑地早餐+银座购物+台场高达"] },
-            { day:"Day5 镰仓一日游", items:["上午：镰仓大佛，长谷寺","中午：小町通吃美食","下午：镰仓高校前，湘南海岸","晚上：返回东京"] },
-            { day:"Day6 迪士尼一日游", items:["全天迪士尼乐园/海洋","建议买快速通行券","晚上看烟花表演"] },
-            { day:"Day7 购物·返程", items:["上午：最后补货购物","下午：前往机场","晚上：返程"] }
+            { day:"Day1 入境·新宿",
+              items:[
+                {time:"15:00", text:"机场进市区，入住新宿酒店", tip:"成田选Skyliner最快，羽田选单轨/京急", book:""},
+                {time:"16:30", text:"新宿熟悉环境、踩点", tip:"先认地铁口，晚上回来不迷路", book:""},
+                {time:"19:00", text:"思出横丁居酒屋晚餐", tip:"周末爆满，尽量早去或提前订", book:""}
+              ] },
+            { day:"Day2 浅草·上野",
+              items:[
+                {time:"09:00", text:"浅草寺参拜+仲见世通", tip:"雷门-浅草寺步行可达", book:""},
+                {time:"11:00", text:"晴空塔展望台", tip:"", book:"提前1-3天订票省¥500"},
+                {time:"14:00", text:"上野公园散步", tip:"浅草-上野地铁一站/步行20分钟", book:""},
+                {time:"17:00", text:"秋叶原电器街（顺路）", tip:"上野-秋叶原山手线5分钟", book:""}
+              ] },
+            { day:"Day3 原宿·涩谷",
+              items:[
+                {time:"09:00", text:"明治神宫", tip:"上午清静", book:""},
+                {time:"11:00", text:"原宿竹下通", tip:"", book:""},
+                {time:"13:00", text:"涩谷十字路口·八公像", tip:"", book:"SHIBUYA SKY 提前3-7天订日落时段"},
+                {time:"16:00", text:"表参道/中目黑逛街", tip:"中目黑或代官山更好逛", book:""},
+                {time:"19:00", text:"新宿晚餐", tip:"", book:""}
+              ] },
+            { day:"Day4 银座·筑地·台场",
+              items:[
+                {time:"08:00", text:"筑地场外市场早餐", tip:"6点前排寿司大，9点后各家收摊", book:""},
+                {time:"10:00", text:"银座购物", tip:"", book:""},
+                {time:"14:00", text:"台场·高达基地", tip:"百合鸥线到台场", book:""},
+                {time:"17:00", text:"台场海滨公园", tip:"", book:""},
+                {time:"19:00", text:"彩虹大桥夜景", tip:"", book:""}
+              ] },
+            { day:"Day5 镰仓一日游",
+              items:[
+                {time:"08:30", text:"新宿出发（小田急/横须贺线）", tip:"小田急浪漫号需另购特急券", book:""},
+                {time:"09:30", text:"镰仓大佛·长谷寺", tip:"长谷寺绣球花季（6月）绝美", book:""},
+                {time:"12:00", text:"小町通吃午餐", tip:"镰仓经典小吃：可乐饼、抹茶", book:""},
+                {time:"14:00", text:"镰仓高校前站（《灌篮高手》取景地）+湘南海岸", tip:"江之电沿线，经典闸口机位", book:""},
+                {time:"17:00", text:"江之岛散步", tip:"晴天可远眺富士山", book:""},
+                {time:"19:00", text:"返回东京", tip:"留意末班电车时间", book:""}
+              ] },
+            { day:"Day6 迪士尼一日游",
+              items:[
+                {time:"08:00", text:"开园前到迪士尼乐园/海洋", tip:"提前下载官方App，入园绑定门票抽快速通", book:"每天14:00放2个月后同日票，务必提前购票"},
+                {time:"12:00", text:"园区内午餐", tip:"热门餐厅中午排队，可错峰", book:""},
+                {time:"15:00", text:"经典项目+游行", tip:"太空山、巨雷山（乐园）；地心探险（海洋）", book:""},
+                {time:"20:00", text:"夜光花车/烟花表演", tip:"烟花视天气，雨天可能取消", book:""}
+              ] },
+            { day:"Day7 购物·返程",
+              items:[
+                {time:"09:00", text:"最后补货：药妆/伴手礼", tip:"集中一两家买齐，单店满¥5000免税（11月前）", book:""},
+                {time:"12:00", text:"午餐+退房", tip:"行李可寄存在酒店/车站寄存柜", book:""},
+                {time:"14:00", text:"前往机场", tip:"国际航班提前3小时到机场，机场免税区还能扫货", book:""}
+              ] }
         ]
     },
     {
         id:4, name:"亲子友好5日路线", days:5, type:"family",
         days_detail: [
-            { day:"Day1 上野·浅草", items:["上午：上野动物园（孩子最爱）","中午：上野美食","下午：浅草寺，体验传统文化","晚上：晴空塔看夜景"] },
-            { day:"Day2 台场科学日", items:["上午：日本科学未来馆","中午：台场美食","下午：高达基地+乐高乐园","晚上：彩虹大桥"] },
-            { day:"Day3 迪士尼乐园", items:["全天迪士尼乐园，经典项目","推荐：太空山、巨雷山","晚上烟花表演"] },
-            { day:"Day4 三丽鸥彩虹乐园", items:["全天三丽鸥乐园，Hello Kitty主题","适合低龄儿童","下午返回市区"] },
-            { day:"Day5 轻松购物返程", items:["上午：母婴用品购物","中午：儿童友好餐厅","下午：前往机场"] }
+            { day:"Day1 上野·浅草",
+              items:[
+                {time:"09:00", text:"上野动物园（孩子最爱）", tip:"周一大熊猫馆排队最久，建议开园就到", book:""},
+                {time:"12:00", text:"上野公园午餐", tip:"公园内或阿美横町选择多", book:""},
+                {time:"14:00", text:"浅草寺+人力车体验", tip:"人力车适合带娃，车夫会讲解", book:""},
+                {time:"17:00", text:"晴空塔看夜景", tip:"", book:"提前1-3天订票"}
+              ] },
+            { day:"Day2 台场科学日",
+              items:[
+                {time:"09:30", text:"日本科学未来馆", tip:"球幕影院需另购票，周一闭馆", book:""},
+                {time:"12:00", text:"台场美食午餐", tip:"Aqua City/DiverCity选择多", book:""},
+                {time:"14:00", text:"高达基地+乐高乐园Discovery Center", tip:"乐高乐园适合3-10岁", book:""},
+                {time:"17:30", text:"台场海滨公园玩耍", tip:"沙滩可玩水（夏季）", book:""}
+              ] },
+            { day:"Day3 迪士尼乐园",
+              items:[
+                {time:"08:00", text:"全天迪士尼乐园，经典项目", tip:"小小世界、太空山、巨雷山", book:"提前购票，每天14:00放2个月后票"},
+                {time:"12:00", text:"园区午餐", tip:"", book:""},
+                {time:"20:00", text:"夜光表演", tip:"视天气", book:""}
+              ] },
+            { day:"Day4 三丽鸥彩虹乐园",
+              items:[
+                {time:"09:30", text:"全天三丽鸥彩虹乐园（Hello Kitty）", tip:"京王线到多摩中心，适合低龄儿童", book:"建议提前购票"},
+                {time:"12:00", text:"乐园内午餐", tip:"凯蒂猫主题餐点孩子超爱", book:""},
+                {time:"15:00", text:"演出+游行后返回市区", tip:"", book:""}
+              ] },
+            { day:"Day5 轻松购物返程",
+              items:[
+                {time:"09:00", text:"母婴用品/药妆补货", tip:"阿卡将（母婴连锁）、松本清", book:""},
+                {time:"12:00", text:"儿童友好餐厅午餐", tip:"", book:""},
+                {time:"14:00", text:"前往机场", tip:"提前3小时到机场", book:""}
+              ] }
         ]
     },
     {
         id:5, name:"美食探店5日路线", days:5, type:"food",
         days_detail: [
-            { day:"Day1 筑地·银座", items:["早餐：筑地市场海鲜饭","午餐：寿司大/大和寿司","下午：银座咖啡甜品","晚餐：银座高端怀石料理"] },
-            { day:"Day2 浅草·上野", items:["早餐：浅草人形烧","午餐：大黑家天妇罗","下午：上野小吃","晚餐：一兰拉面"] },
-            { day:"Day3 新宿·涩谷", items:["午餐：涩谷一风堂拉面","下午：原宿可丽饼甜品","晚餐：新宿叙々苑烧肉"] },
-            { day:"Day4 中目黑·代官山", items:["上午：精品咖啡探店","午餐：意式餐厅","下午：甜品下午茶","晚餐：日式居酒屋"] },
-            { day:"Day5 镰仓美食", items:["上午：镰仓海鲜","中午：小町通小吃","下午：湘南海岸咖啡","晚上：返回东京"] }
+            { day:"Day1 筑地·银座",
+              items:[
+                {time:"07:30", text:"筑地场外市场早餐", tip:"「寿司大」6点前排队，平替「大和寿司」", book:""},
+                {time:"10:00", text:"银座咖啡甜品", tip:"银座资生堂Parlour、HIGASHIYA", book:""},
+                {time:"12:00", text:"银座午餐", tip:"", book:""},
+                {time:"18:00", text:"银座高端怀石料理", tip:"", book:"名店建议提前1个月订位"}
+              ] },
+            { day:"Day2 浅草·上野",
+              items:[
+                {time:"09:00", text:"浅草人形烧·团子", tip:"仲见世通沿途小吃不停", book:""},
+                {time:"12:00", text:"大黑家天妇罗", tip:"11点前到少排队", book:""},
+                {time:"15:00", text:"上野阿美横町小吃", tip:"立食寿司、章鱼烧", book:""},
+                {time:"19:00", text:"一兰拉面晚餐", tip:"游客友好、可加面", book:""}
+              ] },
+            { day:"Day3 新宿·涩谷",
+              items:[
+                {time:"12:00", text:"涩谷一风堂/afuri拉面", tip:"afuri柚子盐拉面清爽", book:""},
+                {time:"15:00", text:"原宿可丽饼·松饼", tip:"", book:""},
+                {time:"19:00", text:"新宿叙々苑烧肉", tip:"", book:"官网可中文订位，建议提前1-2周"}
+              ] },
+            { day:"Day4 中目黑·代官山",
+              items:[
+                {time:"10:00", text:"精品咖啡探店", tip:"星巴克臻选、Onibus Coffee", book:""},
+                {time:"12:30", text:"意式餐厅午餐", tip:"代官山一带意大利菜水准高", book:""},
+                {time:"15:00", text:"下午茶甜品", tip:"", book:""},
+                {time:"19:00", text:"日式居酒屋晚餐", tip:"", book:""}
+              ] },
+            { day:"Day5 镰仓美食",
+              items:[
+                {time:"09:00", text:"镰仓海鲜盖饭", tip:"江之岛方向沿岸海鲜食堂", book:""},
+                {time:"12:00", text:"小町通小吃", tip:"可乐饼、抹茶冰淇淋", book:""},
+                {time:"15:00", text:"湘南海岸咖啡", tip:"看海发呆绝佳", book:""},
+                {time:"18:00", text:"返回东京晚餐", tip:"", book:""}
+              ] }
         ]
     },
     {
         id:6, name:"二次元动漫5日路线", days:5, type:"anime",
         days_detail: [
-            { day:"Day1 秋叶原深度", items:["上午：秋叶原电器街","中午：动漫主题餐厅","下午：手办店、游戏厅","晚上：女仆咖啡厅"] },
-            { day:"Day2 台场·池袋", items:["上午：台场高达基地","中午：台场美食","下午：池袋Animate总店","晚上：池袋夜景"] },
-            { day:"Day3 三鹰之森吉卜力", items:["上午：三鹰吉卜力美术馆（需提前预约）","下午：吉祥寺逛街","晚上：返回市区"] },
-            { day:"Day4 镰仓圣地巡礼", items:["上午：镰仓高校前站（灌篮高手）","中午：镰仓美食","下午：湘南海岸","晚上：江之岛夜景"] },
-            { day:"Day5 购物·主题咖啡厅", items:["上午：最后补货周边","下午：动漫主题咖啡厅","晚上：返程"] }
+            { day:"Day1 秋叶原深度",
+              items:[
+                {time:"10:00", text:"秋叶原电器街（《命运石之门》圣地）", tip:"广播会馆旧址等巡礼点可打卡", book:""},
+                {time:"12:00", text:"动漫主题餐厅午餐", tip:"", book:""},
+                {time:"14:00", text:"手办店·游戏厅", tip:"无线电会馆、骏河屋、MANDARAKE", book:""},
+                {time:"19:00", text:"女仆咖啡厅体验", tip:"注意最低消费", book:""}
+              ] },
+            { day:"Day2 台场·池袋",
+              items:[
+                {time:"09:30", text:"台场高达基地", tip:"1:1实物高达打卡", book:""},
+                {time:"13:00", text:"池袋Animate总店（《命运石之门》相关）", tip:"二次元圣地，8层逛到腿软", book:""},
+                {time:"16:00", text:"池袋乙女路（女性向周边街）", tip:"少女漫周边、同人店集中", book:""},
+                {time:"19:00", text:"池袋夜景", tip:"Sunshine City展望台可看", book:""}
+              ] },
+            { day:"Day3 三鹰·吉卜力",
+              items:[
+                {time:"09:00", text:"前往三鹰（中央线约20分钟）", tip:"", book:"吉卜力需提前1个月预约，每月10日10:00放次月票"},
+                {time:"10:00", text:"三鹰之森吉卜力美术馆", tip:"《千与千寻》《龙猫》等吉卜力世界", book:"官网/Lawson Ticket购票，约2小时抢空"},
+                {time:"13:00", text:"吉祥寺逛街", tip:"太宰治墓在三鹰禅林寺（文学圣地），井之头公园顺路", book:""},
+                {time:"17:00", text:"返回市区", tip:"", book:""}
+              ] },
+            { day:"Day4 镰仓圣地巡礼",
+              items:[
+                {time:"09:30", text:"镰仓高校前站（《灌篮高手》闸口）", tip:"江之电「镰仓高校前」下车即到", book:""},
+                {time:"11:00", text:"镰仓大佛·长谷寺", tip:"", book:""},
+                {time:"12:30", text:"小町通午餐", tip:"", book:""},
+                {time:"14:00", text:"湘南海岸（《海街日记》场景）", tip:"极乐寺站一带也是取景地", book:""},
+                {time:"17:00", text:"江之岛夜景", tip:"", book:""}
+              ] },
+            { day:"Day5 购物·主题咖啡厅",
+              items:[
+                {time:"10:00", text:"秋叶原补货周边", tip:"最后扫货日", book:""},
+                {time:"14:00", text:"动漫主题咖啡厅", tip:"", book:""},
+                {time:"17:00", text:"返程", tip:"", book:""}
+              ] }
         ]
     }
 ];
@@ -600,24 +821,109 @@ const HOTELS = [
   { id:21, area:"台场", type:"mid", name:"东京湾喜来登大酒店", price:"约¥1000起/晚", features:"海景+亲子友好，迪士尼接驳方便", traffic:"台场/舞滨站", note:"协议价约¥1000/晚" },
   { id:22, area:"台场", type:"high", name:"台场希尔顿酒店", price:"约¥1200起/晚", features:"直面彩虹大桥海景", traffic:"台场站/百合鸥线", note:"协议价约¥1200/晚，夜景一绝" },
   // 品川（交通枢纽）
-  { id:23, area:"品川", type:"economy", name:"品川王子大饭店", price:"约¥950-1100/晚", features:"机场交通枢纽，成田/羽田都直达", traffic:"品川站旁", note:"进出机场最方便的中转站" }
+  { id:23, area:"品川", type:"economy", name:"品川王子大饭店", price:"约¥950-1100/晚", features:"机场交通枢纽，成田/羽田都直达", traffic:"品川站旁", note:"进出机场最方便的中转站" },
+  // 池袋
+  { id:24, area:"池袋", type:"mid", name:"池袋大都会饭店", price:"约¥900-1300/晚", features:"Sunshine City 旁，高层景观好，购物交通都方便", traffic:"池袋站东口步行", note:"去阳光城看夜景超近" },
+  { id:25, area:"池袋", type:"economy", name:"超级酒店 池袋", price:"约¥450-700/晚", features:"含免费早餐+人工温泉浴场", traffic:"池袋站北口步行", note:"性价比之王，旺季也要提前订" },
+  { id:26, area:"池袋", type:"capsule", name:"考山路 池袋", price:"约¥150-250/晚", features:"国际青旅连锁，公共区氛围好", traffic:"池袋站步行", note:"背包客/一人旅友好" },
+  // 秋叶原
+  { id:27, area:"秋叶原", type:"economy", name:"秋叶原华盛顿酒店", price:"约¥500-800/晚", features:"老牌商务，秋叶原中央通旁，二次元逛街方便", traffic:"秋叶原站步行", note:"晚上附近女仆咖啡/居酒屋多" },
+  { id:28, area:"秋叶原", type:"economy", name:"京急EX INN 秋叶原", price:"约¥400-700/晚", features:"连锁商务，干净整洁", traffic:"秋叶原站步行", note:"周末价格上浮" },
+  // 吉祥寺/三鹰
+  { id:29, area:"吉祥寺/三鹰", type:"economy", name:"东横INN 吉祥寺", price:"约¥450-650/晚", features:"吉祥寺站旁，搭配吉卜力美术馆行程最佳", traffic:"吉祥寺站步行", note:"含免费早餐" },
+  { id:30, area:"吉祥寺/三鹰", type:"economy", name:"相铁FRESA INN 三鹰", price:"约¥400-650/晚", features:"三鹰站旁，吉卜力美术馆/太宰治墓都在这一带", traffic:"三鹰站步行", note:"文学+动漫圣地，住一晚逛周边很值" },
+  // 押上（晴空塔）
+  { id:31, area:"押上", type:"mid", name:"京成里士满 押上", price:"约¥600-900/晚", features:"晴空塔脚下，高层房间直接看塔", traffic:"押上站步行", note:"晚上看晴空塔灯光秀超方便" },
+  // 六本木/赤坂
+  { id:32, area:"六本木/赤坂", type:"mid", name:"赤坂东急STAY", price:"约¥700-1100/晚", features:"公寓式酒店带小厨房，赤坂美食多", traffic:"赤坂站步行", note:"适合长住/出差" },
+  { id:33, area:"六本木/赤坂", type:"economy", name:"相铁FRESA INN 六本木", price:"约¥600-900/晚", features:"六本木夜生活中心，看夜景、逛美术馆方便", traffic:"六本木站步行", note:"晚上热闹，独行注意安全" },
+  // 新桥/滨松町
+  { id:34, area:"新桥/滨松町", type:"economy", name:"东横INN 新桥", price:"约¥400-600/晚", features:"商务区酒店，含免费早餐", traffic:"新桥站步行", note:"离羽田机场交通方便" },
+  { id:35, area:"新桥/滨松町", type:"economy", name:"京急EX INN 滨松町", price:"约¥400-600/晚", features:"滨松町站旁，单轨直达羽田", traffic:"滨松町站步行", note:"早班机/夜班机首选" },
+  // 上野/东京站 补充中端
+  { id:36, area:"上野", type:"mid", name:"大和ROYNET 上野", price:"约¥600-1000/晚", features:"连锁中端，房间比商务酒店大", traffic:"上野站步行", note:"去博物馆/动物园方便" },
+  { id:37, area:"东京站", type:"mid", name:"大和ROYNET 东京八重洲", price:"约¥700-1100/晚", features:"八重洲口商务中端，新干线/机场枢纽", traffic:"东京站八重洲口步行", note:"去成田/东北新干线方便" },
+  // 新宿/涩谷 补充
+  { id:38, area:"新宿", type:"economy", name:"京王PRESSO 新宿", price:"约¥500-800/晚", features:"京王旗下商务酒店，干净舒适", traffic:"新宿站西口步行", note:"含简式早餐可选" },
+  { id:39, area:"新宿", type:"mid", name:"新宿格拉斯丽酒店（哥斯拉楼）", price:"约¥700-1200/晚", features:"楼顶有哥斯拉雕塑的网红酒店，《哥斯拉》影迷打卡地", traffic:"新宿站步行", note:"顶楼酒吧看夜景超棒" },
+  { id:40, area:"涩谷", type:"economy", name:"涩谷东急REI", price:"约¥500-800/晚", features:"涩谷商圈老牌商务，位置好", traffic:"涩谷站步行", note:"周末游客多，提前订" },
+  // 民宿/公寓（平台预订）
+  { id:41, area:"浅草", type:"home", name:"浅草 民宿/公寓（Airbnb等平台）", price:"约¥400-1000/晚", features:"整租房源多，带厨房，适合家庭/多人拼房", traffic:"浅草/田原町站步行", note:"比酒店便宜且能做饭；注意平台清洁费、退订政策" },
+  { id:42, area:"涩谷", type:"home", name:"涩谷/代官山 民宿/公寓", price:"约¥500-1200/晚", features:"公寓式民宿，装修有设计感，适合情侣/闺蜜", traffic:"涩谷/代官山站步行", note:"热门区域房源紧张，提前1-2个月订" },
+  { id:43, area:"银座", type:"home", name:"银座/东京站 民宿/公寓", price:"约¥600-1400/晚", features:"市中心整租房源，购物出行两不误", traffic:"银座/东京站步行", note:"价格偏高但位置无敌" }
 ];
 
 // ==================== 预约攻略数据（2026-09 核实） ====================
 const RESERVATIONS = [
-  { id:1, cat:"spot", name:"三鹰之森吉卜力美术馆", need:"必须提前预约", how:"官网→Lawson Ticket 英文站（l-tike.com/ghibli）购票，姓名须与护照一致", lead:"每月10日10:00（日本时间）发售次月门票，热门时段5分钟-2小时售罄", price:"成人¥1,000 / 13-18岁¥700 / 7-12岁¥400 / 4-6岁¥100", time:"每日4个入场时段", note:"现场不售票；建议提前注册会员+设好闹钟", verified:"2026-09核实" },
-  { id:2, cat:"spot", name:"teamLab Planets TOKYO（丰洲）", need:"建议提前预约", how:"官网票务（DMM）teamlabplanets.dmm.com 选日期时间购票", lead:"周末/节假日时段建议提前3周，平日可临近订", price:"成人平日¥3,800/周末¥4,200；中高生¥2,800；4-12岁¥1,500；3岁以下免费；尊享票¥12,000", time:"分时段入场，每30分钟一时段", note:"动态定价，越热门越贵/易售罄", verified:"2026-09核实" },
-  { id:3, cat:"spot", name:"东京迪士尼乐园/海洋", need:"必须提前购票", how:"官网 tokyodisneyresort.jp 每日14:00发售2个月后同日门票，或官方App购票", lead:"每天14:00放票，售完即止，建议尽早", price:"一日护照成人¥8,900起/高峰¥9,900；Junior（12-17岁）¥7,400；儿童（4-11岁）¥5,300；3岁以下免费", time:"约9:00-21:00（随季节变动）", note:"浮动票价，节假日更贵；门票有限售完即止", verified:"2026-09核实" },
-  { id:4, cat:"spot", name:"SHIBUYA SKY（涩谷）", need:"建议提前预约", how:"官网 shibuya-scramble-square.com，或Klook/KKday（使用前14天开售）购指定时段票", lead:"官网可订约1个月前；建议提前3-7天，周末/日落时段抢手", price:"预售成人¥2,700（14:59前入）/¥3,400（15:00后入）；窗口¥3,000/¥3,700；小学生¥1,200；6岁以下免费", time:"10:00-22:30，最迟入场21:20，每20分钟一时段", note:"想看日落建议订日落前60分钟的时段", verified:"2026-09核实" },
-  { id:5, cat:"spot", name:"东京晴空塔展望台", need:"建议提前预约", how:"官网 tokyo-skytree.jp 在线购指定时段票", lead:"提前1-3天即可；周末/日落/节假日易售罄", price:"天望甲板350m成人¥2,100起（节假日¥2,300）；450m追加¥1,000-1,100；组合票¥3,100-3,400；5岁以下免费", time:"分时段入场，约8:00-22:00", note:"网上提前订比窗口便宜¥500/张", verified:"2026-09核实" },
-  { id:6, cat:"restaurant", name:"叙々苑（烧肉·新宿等）", need:"晚餐建议预约", how:"官网 jojoen.co.jp 可中文预约，或电话", lead:"热门分店建议提前1-2周", price:"午市套餐约¥15,000起/人，晚市更高", time:"11:30-深夜（分店不同）", note:"高端烧肉连锁，和牛品质稳定", verified:"2026-09核实" },
-  { id:7, cat:"restaurant", name:"数寄屋桥次郎（寿司·银座）", need:"极难预约", how:"仅10座，提前1个月抽签；几乎无法自行订到，多靠酒店礼宾/代订平台", lead:"提前1个月抽签，中签率约5%", price:"人均参考¥40,000起（以商家为准）", time:"午/晚市，每天仅两轮", note:"米其林三星《寿司之神》；订不到可考虑其他一星寿司名店", verified:"2026-09核实" },
-  { id:8, cat:"restaurant", name:"天妇罗近藤（银座）", need:"完全预约制", how:"电话预约 03-5568-0923；官网 tempura-kondo.com", lead:"建议提前1周-1个月", price:"午餐约¥15,000起；晚餐¥20,000-30,000（参考）", time:"午餐12:00-15:30；周日休", note:"米其林星级天妇罗，季节性食材", verified:"2026-09核实" },
-  { id:9, cat:"restaurant", name:"寿司大（筑地）", need:"不需预约但需早起排队", how:"现场排队，建议凌晨5点前到", lead:"当天一早（6点前）到", price:"套餐约¥4,000-5,000", time:"凌晨开市，卖完收摊", note:"网红店排队2小时+；旁边大和寿司/寿司善口味接近人更少", verified:"2026-09核实" },
-  { id:10, cat:"restaurant", name:"怀石/寿司/割烹 通用预约法", need:"名店建议提前1个月", how:"渠道：官网/App、TableCheck、OMAKASE、Tabelog，或让酒店礼宾代订", lead:"很多名店每月1日开下月订位，准时开抢", price:"视店铺而定", time:"以店家为准", note:"取消政策严格（部分提前2天取消收全款）；订位确认人数/过敏", verified:"2026-09核实" }
+  // ===== 热门景点 =====
+  { id:1, cat:"spot", name:"三鹰之森吉卜力美术馆", film:"🎬吉卜力工作室", film_desc:"《千与千寻》《龙猫》《哈尔的移动城堡》——宫崎骏与吉卜力工作室作品的世界。美术馆内还原动画场景，三鹰正是宫崎骏本人的工作室所在地。", need:"必须提前预约", how:"官网→Lawson Ticket 英文站（l-tike.com/ghibli）购票，姓名须与护照一致", lead:"每月10日10:00（日本时间）发售次月门票，热门时段5分钟-2小时售罄", price:"成人¥1,000 / 13-18岁¥700 / 7-12岁¥400 / 4-6岁¥100", time:"每日4个入场时段", note:"现场不售票；建议提前注册会员+设好闹钟", verified:"2026-09核实" },
+  { id:2, cat:"spot", name:"teamLab Planets TOKYO（丰洲）", film:"", film_desc:"", need:"建议提前预约", how:"官网票务（DMM）teamlabplanets.dmm.com 选日期时间购票", lead:"周末/节假日时段建议提前3周，平日可临近订", price:"成人平日¥3,800/周末¥4,200；中高生¥2,800；4-12岁¥1,500；3岁以下免费；尊享票¥12,000", time:"分时段入场，每30分钟一时段", note:"动态定价，越热门越贵/易售罄", verified:"2026-09核实" },
+  { id:3, cat:"spot", name:"东京迪士尼乐园/海洋", film:"🎬迪士尼动画", film_desc:"迪士尼动画的官方主题乐园。城堡、花车游行、烟花秀，《米奇幻想曲》等经典项目都是动画世界的延伸。", need:"必须提前购票", how:"官网 tokyodisneyresort.jp 每日14:00发售2个月后同日门票，或官方App购票", lead:"每天14:00放票，售完即止，建议尽早", price:"一日护照成人¥8,900起/高峰¥9,900；Junior（12-17岁）¥7,400；儿童（4-11岁）¥5,300；3岁以下免费", time:"约9:00-21:00（随季节变动）", note:"浮动票价，节假日更贵；门票有限售完即止", verified:"2026-09核实" },
+  { id:4, cat:"spot", name:"SHIBUYA SKY（涩谷）", film:"🎬涩谷十字路口", film_desc:"《咒术回战》涩谷事变篇、《你的名字。》等大量作品都出现过涩谷十字路口这个名场面；顶层露天观景台是俯瞰它的最佳机位。", need:"建议提前预约", how:"官网 shibuya-scramble-square.com，或Klook/KKday（使用前14天开售）购指定时段票", lead:"官网可订约1个月前；建议提前3-7天，周末/日落时段抢手", price:"预售成人¥2,700（14:59前入）/¥3,400（15:00后入）；窗口¥3,000/¥3,700；小学生¥1,200；6岁以下免费", time:"10:00-22:30，最迟入场21:20，每20分钟一时段", note:"想看日落建议订日落前60分钟的时段", verified:"2026-09核实" },
+  { id:5, cat:"spot", name:"东京晴空塔展望台", film:"🎬东京地标", film_desc:"晴空塔在多部动画与日剧中作为东京地标反复出镜，东京都内视野最开阔的观景地。", need:"建议提前预约", how:"官网 tokyo-skytree.jp 在线购指定时段票", lead:"提前1-3天即可；周末/日落/节假日易售罄", price:"天望甲板350m成人¥2,100起（节假日¥2,300）；450m追加¥1,000-1,100；组合票¥3,100-3,400；5岁以下免费", time:"分时段入场，约8:00-22:00", note:"网上提前订比窗口便宜¥500/张", verified:"2026-09核实" },
+  // ===== 热门餐厅（高端/需预约） =====
+  { id:6, cat:"restaurant", name:"叙々苑（烧肉·新宿等）", film:"", film_desc:"", need:"晚餐建议预约", how:"官网 jojoen.co.jp 可中文预约，或电话", lead:"热门分店建议提前1-2周", price:"午市套餐约¥15,000起/人，晚市更高", time:"11:30-深夜（分店不同）", note:"高端烧肉连锁，和牛品质稳定", verified:"2026-09核实" },
+  { id:7, cat:"restaurant", name:"数寄屋桥次郎（寿司·银座）", film:"🎬《寿司之神》", film_desc:"纪录片《寿司之神》主角小野二郎的店，全球最难订的寿司名店之一。", need:"极难预约", how:"仅10座，提前1个月抽签；几乎无法自行订到，多靠酒店礼宾/代订平台", lead:"提前1个月抽签，中签率约5%", price:"人均参考¥40,000起（以商家为准）", time:"午/晚市，每天仅两轮", note:"米其林三星《寿司之神》；订不到可考虑其他一星寿司名店", verified:"2026-09核实" },
+  { id:8, cat:"restaurant", name:"天妇罗近藤（银座）", film:"", film_desc:"", need:"完全预约制", how:"电话预约 03-5568-0923；官网 tempura-kondo.com", lead:"建议提前1周-1个月", price:"午餐约¥15,000起；晚餐¥20,000-30,000（参考）", time:"午餐12:00-15:30；周日休", note:"米其林星级天妇罗，季节性食材", verified:"2026-09核实" },
+  { id:9, cat:"restaurant", name:"寿司大（筑地）", film:"", film_desc:"", need:"不需预约但需早起排队", how:"现场排队，建议凌晨5点前到", lead:"当天一早（6点前）到", price:"套餐约¥4,000-5,000", time:"凌晨开市，卖完收摊", note:"网红店排队2小时+；旁边大和寿司/寿司善口味接近人更少", verified:"2026-09核实" },
+  { id:10, cat:"restaurant", name:"怀石/寿司/割烹 通用预约法", film:"", film_desc:"", need:"名店建议提前1个月", how:"渠道：官网/App、TableCheck、OMAKASE、Tabelog，或让酒店礼宾代订", lead:"很多名店每月1日开下月订位，准时开抢", price:"视店铺而定", time:"以店家为准", note:"取消政策严格（部分提前2天取消收全款）；订位确认人数/过敏", verified:"2026-09核实" },
+  // ===== 平价餐厅（无需预约，现场排队） =====
+  { id:11, cat:"budget", name:"一兰拉面（连锁）", film:"", film_desc:"", need:"无需预约，现场排队", how:"直接到店排队；多分店可错峰（避开午/晚高峰）", lead:"饭点排队20-40分钟", price:"经典豚骨拉面约¥980-1,200", time:"多为24小时或至深夜", note:"一人一格座位，游客友好、点单简单，可加面", verified:"2026-09核实" },
+  { id:12, cat:"budget", name:"無敵家（池袋拉面）", film:"", film_desc:"", need:"无需预约，现场排队", how:"池袋东口排队名店，错开饭点少等", lead:"饭点排队30-60分钟", price:"拉面约¥900-1,100", time:"10:30-次日4:00（参考）", note:"浓厚豚骨汤头，加半熟蛋是标配", verified:"2026-09核实" },
+  { id:13, cat:"budget", name:"肉の大山（吉祥寺）", film:"", film_desc:"", need:"无需预约，现场排队", how:"吉祥寺站南口附近，避开饭点", lead:"饭点排队20-40分钟", price:"和牛汉堡/牛肉饭约¥1,200-2,500", time:"11:00-21:00左右（参考）", note:"和牛汉堡排老铺，肉食爱好者的天堂", verified:"2026-09核实" },
+  { id:14, cat:"budget", name:"ローストビーフ大野（原宿/表参道）", film:"", film_desc:"", need:"无需预约，现场排队", how:"表参道站步行可达，错峰前往", lead:"饭点排队30-50分钟", price:"烤牛肉盖饭约¥1,500-2,500", time:"11:00-22:00左右（参考）", note:"网红烤牛肉盖饭，牛肉山堆得满满", verified:"2026-09核实" },
+  { id:15, cat:"budget", name:"梅丘寿司の美登利（涩谷·浅草等）", film:"", film_desc:"", need:"无需预约，现场排队", how:"回转寿司名店，多家分店可错峰", lead:"饭点排队20-60分钟", price:"人均约¥2,500-4,000", time:"11:00-21:30左右（参考）", note:"性价比极高的回转寿司，点单用平板很方便", verified:"2026-09核实" },
+  { id:16, cat:"budget", name:"大和寿司（筑地）", film:"", film_desc:"", need:"无需预约，早到排队", how:"筑地场外市场，凌晨5点开始排队", lead:"6:30前到，通常等1小时+", price:"套餐约¥4,000-5,000", time:"5:30开市（参考）", note:"「寿司大」的平替，寿司师傅现捏，水准在线", verified:"2026-09核实" },
+  { id:17, cat:"budget", name:"天丼てんや（连锁）", film:"", film_desc:"", need:"无需预约", how:"连锁店直接进店，车站附近多分店", lead:"无需等待（饭点稍等）", price:"天妇罗丼约¥700-1,200", time:"多为10:00-22:00", note:"平价天妇罗丼连锁，刚炸出锅超满足，适合当午饭", verified:"2026-09核实" },
+  { id:18, cat:"budget", name:"丸亀製麺（连锁乌冬）", film:"", film_desc:"", need:"无需预约", how:"自助点餐制，取餐方便快捷", lead:"无需等待", price:"乌冬约¥400-800", time:"多为10:00-22:00", note:"自助选配天妇罗，便宜大碗，日本国民快餐", verified:"2026-09核实" },
+  // ===== 体验项目 =====
+  { id:19, cat:"experience", name:"和服体验（浅草）", film:"🎬和风氛围", film_desc:"穿和服漫步浅草寺（《鬼灭之刃》第一话场景地），是女性游客最出片的体验。", need:"建议提前预约", how:"浅草多家和服租赁店（如 江户和装きもの工房 えり 等），官网/平台预约", lead:"旺季（樱花季/红叶季）提前1-2周", price:"含着付け（穿和服）约¥3,000-5,000，发型另加约¥1,500", time:"多为9:00-17:00归还", note:"建议约最早时段，穿完玩一整天；夏季可选浴衣更轻便", verified:"2026-09核实" },
+  { id:20, cat:"experience", name:"人力车（浅草·雷门）", film:"", film_desc:"", need:"现场排队或提前预约", how:"雷门附近多家车夫公司，现场挑选或平台预约", lead:"旺季现场等10-30分钟", price:"约¥5,000起/30分钟（参考）", time:"10:00-17:00左右", note:"车夫会讲解浅草历史，适合亲子与情侣，可要求中文车夫", verified:"2026-09核实" },
+  { id:21, cat:"experience", name:"天空巴士 Sky Bus（露天双层巴士）", film:"", film_desc:"", need:"建议提前预约", how:"官网 skybus.jp 或东京站丸之内口现场购票，选座推荐露天顶层", lead:"提前1-2天", price:"东京塔/皇居等路线约¥1,600-3,000", time:"10:00-17:00多个班次", note:"露天顶层风大注意保暖，晴天视野最佳", verified:"2026-09核实" },
+  { id:22, cat:"experience", name:"屋形船（东京湾夜游）", film:"", film_desc:"", need:"必须提前预约", how:"各大屋形船会社官网/平台预约（如 ふなせん等），含餐套餐更受欢迎", lead:"提前1周-1个月（旺季）", price:"纯乘船约¥8,000起；含餐约¥12,000-15,000", time:"多为17:00-21:00夜间班次", note:"绕台场/彩虹大桥夜游，船上可看夜景，适合纪念日", verified:"2026-09核实" },
+  { id:23, cat:"experience", name:"温泉·钱汤（スパ ラクーア 池袋）", film:"", film_desc:"", need:"无需预约", how:"池袋阳光城旁，直接到店购票", lead:"无需等待", price:"入馆约¥1,500-3,000，岩盘浴另计", time:"10:00-23:00左右", note:"东京都内少见的天然温泉，泡完还能逛池袋", verified:"2026-09核实" },
+  { id:24, cat:"experience", name:"相扑观赛（两国国技馆）", film:"🎬《相扑》文化", film_desc:"日本国技相扑的现场观赛，1/5/9月是相扑大赛赛季，气氛震撼。", need:"大赛期间需提前购票", how:"官网/购票平台（如 チケットぴあ）购买指定日票", lead:"比赛期间（1/5/9月）提前2-4周", price:"座席约¥4,000-15,000（参考）", time:"比赛日上午11点左右开始", note:"普通座席可在当日购买「升席」便当，体验原汁原味", verified:"2026-09核实" },
+  { id:25, cat:"experience", name:"teamLab Borderless（麻布台hills）", film:"", film_desc:"", need:"建议提前预约", how:"官网 borderless.teamlab.art 购指定时段票", lead:"周末/节假日提前2周", price:"成人约¥3,800-4,200（动态）", time:"分时段入场", note:"2025年重开的沉浸式数字美术馆，与丰洲 Planets 风格不同", verified:"2026-09核实" },
+  { id:26, cat:"experience", name:"旅拍写真（浅草/涩谷）", film:"", film_desc:"", need:"必须提前预约", how:"小红书/ins 摄影师或旅拍平台预约，确认套餐与底片数量", lead:"旺季提前1-3周", price:"约¥15,000-30,000/小时（参考）", time:"按约定时段", note:"确认精修张数与交付时间；和服+浅草是经典组合", verified:"2026-09核实" }
+  ];
+// ==================== 购物数据（2026-09 核实） ====================
+const SHOPPING = [
+  // ===== 购物商圈 =====
+  { id:1, cat:"mall", name:"银座", addr:"中央区银座", feat:"东京最高端商圈：三越、松屋、GINZA SIX、爱马仕旗舰店、老铺百货与免税店云集", tip:"主通周末步行者天国；11月起改机场退税后，店内仍可享免税的流程以商家为准", ref:"百货退税/满¥5000免税" },
+  { id:2, cat:"mall", name:"涩谷", addr:"涩谷站周边", feat:"年轻人潮流中心：SHIBUYA109少女装、涩谷PARCO、涩谷HIKARIE，忠犬八公打卡后开逛", tip:"109 主打辣妹/少女风，PARCO 潮流买手店多", ref:"服饰/箱包/美妆" },
+  { id:3, cat:"mall", name:"新宿", addr:"新宿站周边", feat:"最全面的商圈：伊势丹百货、LUMINE、BicCamera、唐吉诃德、药妆一条街，吃喝玩乐全包", tip:"伊势丹地下食品馆值得逛；BicCamera 电器+药妆一站买", ref:"综合购物/电器/药妆" },
+  { id:4, cat:"mall", name:"原宿·表参道", addr:"原宿/表参道站", feat:"竹下通平价少女装+可丽饼，表参道大牌旗舰店一条街，风格混搭", tip:"竹下通淘小饰品/袜子，表参道买大牌", ref:"服饰/饰品" },
+  { id:5, cat:"mall", name:"池袋", addr:"池袋站周边", feat:"Sunshine City、PARCO、西武百货，二次元圣地+综合购物，池袋东口乙女路女性向周边街", tip:"Sunshine City 有可丽饼、水族馆；乙女路逛同人周边", ref:"综合/二次元/女性向" },
+  { id:6, cat:"mall", name:"秋叶原", addr:"秋叶原站", feat:"电器+二次元：无线电会馆、骏河屋中古手办、MANDARAKE、女仆咖啡，游戏/手办天堂", tip:"中古手办便宜，可讲价空间小但可淘", ref:"手办/中古/电器" },
+  { id:7, cat:"mall", name:"台场 DiverCity/Aqua City", addr:"台场站", feat:"海滨商场：DiverCity 有 1:1 高达、奥特莱斯折扣店，Aqua City 看海景购物", tip:"DiverCity 五楼有免税柜台；看彩虹大桥晚餐绝佳", ref:"奥特莱斯/伴手礼" },
+  { id:8, cat:"mall", name:"上野·阿美横町", addr:"上野站旁", feat:"平价杂货天堂：药妆、零食、运动鞋、二手表一条街，价格比商圈便宜", tip:"零食药妆集中比价再买；靠近车站门口商户较贵", ref:"零食/药妆/杂货" },
+  // ===== 药妆店 =====
+  { id:9, cat:"drug", name:"松本清（最大连锁）", addr:"东京都内多分店", feat:"日本最大药妆连锁，商品最全，新宿/涩谷/银座都有大店", tip:"游客店常配中文导购；「松本清」免税柜台流程成熟", ref:"综合药妆" },
+  { id:10, cat:"drug", name:"大国药妆", addr:"新宿/涩谷/浅草等", feat:"主打实惠价格，促销多，游客最常逛的性价比药妆", tip:"大国部分商品标价低，热门单品常断货；多店比价", ref:"综合药妆/零食" },
+  { id:11, cat:"drug", name:"唐吉诃德（24小时）", addr:"新宿/涩谷/秋叶原等", feat:"24小时营业，药妆+零食+杂货+奢侈品中古全都有，深夜也能逛", tip:"「惊安殿堂」标的便宜货，适合临行前补货", ref:"药妆/零食/杂货/中古" },
+  { id:12, cat:"drug", name:"ココカラファイン", addr:"涩谷/银座等", feat:"中高端药妆，进口美妆与处方药柜台齐全，环境较安静", tip:"部分门店支持多语言机器结账", ref:"美妆/保健品" },
+  // ===== 特色小店 =====
+  { id:13, cat:"local", name:"中野百老汇", addr:"中野站北口", feat:"二手动漫/古着/玩具圣地，四层楼淘到爽，比秋叶原更「懂行」", tip:"周日人最多；现金为主部分可刷卡", ref:"中古手办/古着" },
+  { id:14, cat:"local", name:"合羽桥道具街", addr:"浅草/上野间", feat:"厨具一条街：刀具、锅具、餐具、食品样品模型（食べ物サンプル）", tip:"食品样品模型当伴手礼超有梗；可退税店铺多", ref:"厨具/样品模型" },
+  { id:15, cat:"local", name:"谷中银座", addr:"日暮里站附近", feat:"下町老街：猫店、小吃、手作杂货，昭和风情", tip:"傍晚商店街最有味道；猫猫元素伴手礼多", ref:"手作/小吃" },
+  { id:16, cat:"local", name:"下北泽", addr:"下北泽站", feat:"古着圣地：二手衣店密度全东京第一，原宿更潮、下北泽更「淘」", tip:"周四/周日跳蚤市场；古着店集中在北口", ref:"古着" },
+  { id:17, cat:"local", name:"神保町", addr:"神保町站", feat:"世界最大旧书街：130多家书店，古书、写真集、漫画、版画", tip:"村上春树等文人的淘书地，书香气十足", ref:"旧书/写真集" },
+  { id:18, cat:"local", name:"巢鸭地藏通", addr:"巢鸭站", feat:"「妈妈的银座」：平价服饰、药妆、糖果、护身符，适合带长辈逛", tip:"红色服饰店是特色，地藏通商店街很长", ref:"平价服饰/杂货" },
+  // ===== 药妆必买清单 =====
+  { id:19, cat:"list", name:"安耐晒 金瓶防晒", price:"约¥3,000-3,500", feat:"防晒界顶流，户外必备，日本版和国内版配方不同，买日版", note:"药妆店常有买2件打折" },
+  { id:20, cat:"list", name:"SK-II 神仙水", price:"约¥22,000-25,000（330ml）", feat:"护肤界明星，免税店/百货比药妆店便宜，机场免税更划算", note:"注意区分日本版与国际版（价格差异大）" },
+  { id:21, cat:"list", name:"乐敦 肌研极润化妆水", price:"约¥1,000-1,500", feat:"高保湿平价化妆水，学生党最爱，多规格可选", note:"常与同系列乳液搭售更划算" },
+  { id:22, cat:"list", name:"狮王 White&White 美白牙膏", price:"约¥300-500", feat:"美白牙膏，性价比高，一人一管送人首选", note:"多买可凑免税门槛" },
+  { id:23, cat:"list", name:"参天 FX 眼药水（金瓶/银瓶）", price:"约¥400-700", feat:"清凉提神眼药水，熬夜党/戴隐形的福音，便利店药妆都有", note:"隐形眼镜专用版是另款，别买错" },
+  { id:24, cat:"list", name:"大正感冒药", price:"约¥1,500-2,500", feat:"日本家庭常备感冒药，疗效口碑好，送礼长辈很实用", note:"颗粒/胶囊/液剂都有，注意用量说明" },
+  { id:25, cat:"list", name:"龙角散", price:"约¥400-800", feat:"润喉散剂/糖，喉咙不适时含服，粉剂最经典", note:"薄荷/水蜜桃多种口味" },
+  { id:26, cat:"list", name:"小林制药 退热贴", price:"约¥500-800", feat:"物理降温贴，大人小孩规格齐全，带娃家庭必备", note:"小孩款有可爱图案" },
+  { id:27, cat:"list", name:"无比滴", price:"约¥500-700", feat:"蚊虫叮咬止痒神器，夏天必备，刷头涂抹方便", note:"海绵头用久会变脏，注意卫生" },
+  { id:28, cat:"list", name:"花王 蒸汽眼罩", price:"约¥1,000-1,500", feat:"发热眼罩缓解眼疲劳，自用送人都好，薰衣草/无香经典", note:"买「40片大包装」单价比小包便宜" },
+  { id:29, cat:"list", name:"KitKat 抹茶/限定口味", price:"约¥300-600/盒", feat:"日本限定口味多（抹茶、樱花、红豆），伴手礼经典", note:"机场免税区和便利店都有，东京车站伴手礼街款式最全" },
+  { id:30, cat:"list", name:"资生堂 尿素护手霜", price:"约¥500-800", feat:"尿素保湿，秋冬护手神器，红瓶经典", note:"药妆店/免税店均有" }
 ];
 
-// ==================== 交互逻辑 ====================
 let favorites = JSON.parse(localStorage.getItem('tokyo_favs') || '[]');
 
 // 底部导航切换
@@ -674,7 +980,12 @@ function renderRouteList(day='', type='') {
         let dh = '';
         route.days_detail.forEach(d => {
             let ih = '';
-            d.items.forEach(i => ih += `<div class="route-item">${i}</div>`);
+            d.items.forEach(i => {
+                const t = i.time?`<span class="route-time">${i.time}</span>`:'';
+                const bk = i.book?`<div class="route-book">🔖 ${i.book}</div>`:'';
+                const tp = i.tip?`<div class="route-tip">💡 ${i.tip}</div>`:'';
+                ih += `<div class="route-item">${t}${i.text}${bk}${tp}</div>`;
+            });
             dh += `<div class="route-day">${d.day}</div>${ih}`;
         });
         html += `<div class="card"><div class="card-title" onclick="toggleRoute(${route.id})"><span>${route.name}</span><span class="tag">${route.days}天</span></div><div class="card-detail" id="route-${route.id}">${dh}</div></div>`;
@@ -701,7 +1012,7 @@ window.togglePitfall = id => document.getElementById('pitfall-'+id).classList.to
 function renderHotelList(area='', price='') {
     const box = document.getElementById('hotelList');
     let html = '';
-    const priceNames = {capsule:'青旅/胶囊', economy:'经济型', mid:'中端舒适', high:'高端'};
+    const priceNames = {capsule:'青旅/胶囊', economy:'经济型', mid:'中端舒适', high:'高端', home:'民宿/公寓'};
     const list = HOTELS.filter(i => {
         if(area && i.area!==area) return false;
         if(price && i.type!==price) return false;
@@ -719,15 +1030,35 @@ window.toggleHotel = id => document.getElementById('hotel-'+id).classList.toggle
 function renderReserveList(cat='') {
     const box = document.getElementById('reserveList');
     let html = '';
-    const catNames = {spot:'热门景点', restaurant:'热门餐厅'};
+    const catNames = {spot:'热门景点', restaurant:'热门餐厅', budget:'平价餐厅', experience:'体验项目'};
     const list = RESERVATIONS.filter(i => !cat || i.cat===cat);
     list.forEach(item => {
-        html += `<div class="card"><div class="card-title" onclick="toggleReserve(${item.id})"><span>${item.name}</span><span class="tag">${catNames[item.cat]||item.cat}</span></div><div class="card-detail" id="reserve-${item.id}"><p><b>🔖 预约：</b>${item.need}</p><p><b>🔗 渠道：</b>${item.how}</p><p><b>⏱ 提前：</b>${item.lead}</p><p><b>💰 价格：</b>${item.price}</p>${item.time?`<p><b>🕒 时间：</b>${item.time}</p>`:''}<p style="color:#c53030;margin-top:6px;">⚠️ ${item.note}</p><p style="color:#718096;font-size:12px;margin-top:4px;">📅 ${item.verified}</p></div></div>`;
+        const fg = item.film?` <span class="tag film-tag">${item.film}</span>`:'';
+        const fd = item.film_desc?`<p style="color:#4f46e5;margin-top:6px;">🎬 ${item.film_desc}</p>`:'';
+        html += `<div class="card"><div class="card-title" onclick="toggleReserve(${item.id})"><span>${item.name}${fg}</span><span class="tag">${catNames[item.cat]||item.cat}</span></div><div class="card-detail" id="reserve-${item.id}"><p><b>🔖 预约：</b>${item.need}</p><p><b>🔗 渠道：</b>${item.how}</p><p><b>⏱ 提前：</b>${item.lead}</p><p><b>💰 价格：</b>${item.price}</p>${item.time?`<p><b>🕒 时间：</b>${item.time}</p>`:''}<p style="color:#c53030;margin-top:6px;">⚠️ ${item.note}</p><p style="color:#718096;font-size:12px;margin-top:4px;">📅 ${item.verified}</p>${fd}</div></div>`;
     });
     if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
     box.innerHTML = html;
 }
 window.toggleReserve = id => document.getElementById('reserve-'+id).classList.toggle('open');
+
+// 渲染购物
+function renderShoppingList(cat='') {
+    const box = document.getElementById('shoppingList');
+    let html = '';
+    const catNames = {mall:'购物商圈', drug:'药妆店', local:'特色小店', list:'必买清单'};
+    const list = SHOPPING.filter(i => !cat || i.cat===cat);
+    list.forEach(item => {
+        if(item.cat==='list'){
+            html += `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">${catNames[item.cat]}</span></div><div class="card-detail" id="shop-${item.id}"><p><b>💰 参考价：</b>${item.price}</p><p><b>✨ 说明：</b>${item.feat}</p><p style="color:#718096;margin-top:6px;">💡 ${item.note}</p></div></div>`;
+        } else {
+            html += `<div class="card"><div class="card-title" onclick="toggleShopping(${item.id})"><span>${item.name}</span><span class="tag">${catNames[item.cat]}</span></div><div class="card-detail" id="shop-${item.id}"><p><b>📍 位置：</b>${item.addr}</p><p><b>✨ 特色：</b>${item.feat}</p>${item.tip?`<p style="color:#718096;margin-top:6px;">💡 ${item.tip}</p>`:''}${item.ref?`<p style="color:#4f46e5;font-size:12px;margin-top:4px;">🎯 推荐：${item.ref}</p>`:''}</div></div>`;
+        }
+    });
+    if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
+    box.innerHTML = html;
+}
+window.toggleShopping = id => document.getElementById('shop-'+id).classList.toggle('open');
 
 // 渲染日语短句
 function renderJapanList() {
@@ -749,11 +1080,13 @@ document.getElementById('filterPitfall').onchange = updatePitfall;
 document.getElementById('filterHotel').onchange = updateHotel;
 document.getElementById('filterHotelPrice').onchange = updateHotel;
 document.getElementById('filterReserve').onchange = updateReserve;
+document.getElementById('filterShopping').onchange = updateShopping;
 function updateArea(){renderAreaList(document.getElementById('filterArea').value, document.getElementById('filterType').value, document.getElementById('filterTag').value);}
 function updateRoute(){renderRouteList(document.getElementById('filterRouteDay').value, document.getElementById('filterRouteType').value);}
 function updatePitfall(){renderPitfallList(document.getElementById('filterPitfall').value);}
 function updateHotel(){renderHotelList(document.getElementById('filterHotel').value, document.getElementById('filterHotelPrice').value);}
 function updateReserve(){renderReserveList(document.getElementById('filterReserve').value);}
+function updateShopping(){renderShoppingList(document.getElementById('filterShopping').value);}
 
 // 复制功能
 window.copyText = function(text) {
@@ -929,6 +1262,7 @@ renderRouteList();
 renderPitfallList();
 renderHotelList();
 renderReserveList();
+renderShoppingList();
 renderJapanList();
 initSearch();
 initBudget();
