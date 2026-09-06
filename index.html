@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>东京自由行攻略手册</title>
-<meta name="version" content="1.0.0">
+<meta name="version" content="1.2.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#faf8f5;color:#2d3748;line-height:1.65;padding-bottom:72px;padding-top:50px;-webkit-font-smoothing:antialiased}
@@ -124,6 +124,86 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .shop-subtitle{font-weight:700;color:#1a202c;margin:14px 0 6px;padding-left:8px;border-left:3px solid #4f46e5;font-size:14px}
 .shop-subhead{font-weight:600;color:#4f46e5;margin:10px 0 4px;font-size:13px}
 .shop-subitem{font-size:13px;padding:3px 0;padding-left:4px;color:#3d4a5c}
+
+/* ===== M1 工具箱 ===== */
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 16px}
+.tool-entry{background:#fff;border-radius:14px;padding:16px 8px;text-align:center;box-shadow:0 1px 2px rgba(28,39,60,.04),0 4px 12px rgba(28,39,60,.06);border:1px solid rgba(28,39,60,.05);cursor:pointer;transition:transform .15s}
+.tool-entry:active{transform:scale(.95)}
+.tool-entry .te-ic{font-size:25px;display:block;margin-bottom:6px}
+.tool-entry .te-tx{font-size:12px;font-weight:700;color:#1a2b45}
+.tool-entry .te-sub{font-size:10px;color:#a0aec0;margin-top:2px}
+.tool-pane{display:none}.tool-pane.active{display:block}
+.tool-back{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:#2b6cb0;background:#e9f1fb;border:none;border-radius:16px;padding:6px 14px;margin-bottom:12px;cursor:pointer;font-weight:600}
+.tool-pane-title{font-size:15px;font-weight:700;color:#16294a;margin:2px 0 10px}
+/* 日语速查 */
+.phrase-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pf-chip{font-size:11.5px;padding:5px 11px;border-radius:16px;background:#fff;border:1px solid #e4e1db;color:#5a6b7d;font-weight:600;cursor:pointer}
+.pf-chip.on{background:#c53030;color:#fff;border-color:#c53030}
+.phrase-card{background:#fff;border-radius:12px;padding:11px 14px;margin-bottom:9px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 3px 10px rgba(28,39,60,.05)}
+.phrase-card.em{border-left:4px solid #c53030;background:#fff9f7}
+.phrase-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.phrase-jp{font-size:16px;font-weight:700;color:#1a2b45;user-select:text;-webkit-user-select:text}
+.phrase-roma{font-size:11.5px;color:#8a95a5;font-style:italic;margin:2px 0 3px;user-select:text;-webkit-user-select:text}
+.phrase-cn{font-size:12.5px;color:#4a5568}
+.phrase-btns{display:flex;gap:6px;flex-shrink:0}
+.pbtn{border:none;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer;font-weight:600}
+.pbtn.speak{background:#eef2ff;color:#4f46e5}
+.pbtn.copy{background:#f1f4f8;color:#2b6cb0}
+/* 清单通用 */
+.pack-progress{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 3px 10px rgba(28,39,60,.05);font-size:12.5px;color:#46614f;font-weight:600}
+.pack-bar{height:10px;background:#edf2f7;border-radius:6px;overflow:hidden;margin-top:8px}
+.pack-fill{height:100%;background:linear-gradient(90deg,#38a169,#68d391);border-radius:6px;transition:width .35s;width:0}
+.pack-group{font-size:13.5px;font-weight:700;color:#1a2b45;margin:15px 0 7px;padding-left:9px;border-left:3px solid #38a169}
+.pack-item{display:flex;align-items:center;gap:9px;background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:6px;font-size:13px;color:#3d4a5c;cursor:pointer;user-select:none;-webkit-user-select:none}
+.pack-item .box{width:19px;height:19px;border-radius:6px;border:2px solid #cbd5e0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.pack-item.checked .box{background:#38a169;border-color:#38a169}
+.pack-item.checked .ptxt{text-decoration:line-through;color:#a0aec0}
+.pack-item.del-item .ptxt{text-decoration:line-through;color:#c53030}
+.pack-add{display:flex;gap:8px;margin-top:10px}
+.pack-add input{flex:1;height:38px;border:1px solid #e3ddd3;border-radius:9px;padding:0 11px;font-size:13px;outline:none}
+.pack-add button{background:#38a169;color:#fff;border:none;border-radius:9px;padding:0 16px;font-size:12.5px;font-weight:700;cursor:pointer}
+.pack-reset{background:#f1f4f8;color:#5a6b7d;border:none;border-radius:8px;padding:8px 15px;font-size:12px;margin-top:12px;cursor:pointer}
+/* 打卡清单 */
+.visit-hero{background:linear-gradient(135deg,#152746,#274a78);color:#fff;border-radius:12px;padding:15px;text-align:center;margin-bottom:12px}
+.visit-hero .vh-num{font-size:23px;font-weight:800}
+.visit-hero .vh-sub{font-size:11.5px;opacity:.85;margin-top:3px}
+.check-item{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:9px 12px;margin-bottom:6px;font-size:13px}
+.ci-name{color:#1a2b45;font-weight:600}
+.ci-meta{font-size:10.5px;color:#a0aec0;font-weight:400;margin-top:1px}
+.check-item.checked .ci-name{color:#a0aec0;text-decoration:line-through}
+.ci-btns{display:flex;gap:6px;flex-shrink:0}
+.mini-btn{border:none;background:#f7f5f1;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer}
+.mini-btn.fav.on{background:#fde8e8}
+.mini-btn.vis.on{background:#e8f6ee}
+.visit-btn{font-size:17px;cursor:pointer;user-select:none;color:#d8dee6;margin-left:6px;transition:transform .15s}
+.visit-btn.active{color:#38a169}
+.visit-btn:active{transform:scale(1.2)}
+/* 首页更新日志折叠卡 */
+.cl-card{background:#fff;border-radius:14px;margin-bottom:16px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 4px 14px rgba(28,39,60,.06);border:1px solid rgba(28,39,60,.05);overflow:hidden}
+.cl-head{padding:13px 15px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.cl-ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#152746,#274a78);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.cl-t1{font-size:14px;font-weight:800;color:#1a2b45}
+.cl-t2{font-size:11px;color:#a0aec0;margin-top:1px}
+.cl-arrow{margin-left:auto;font-size:12px;color:#a0aec0;transition:transform .25s}
+.cl-card.open .cl-arrow{transform:rotate(180deg)}
+.cl-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.cl-card.open .cl-body{max-height:3200px}
+.cl-inner{padding:0 15px 14px;border-top:1px dashed #eee8df}
+.cl-filters{display:flex;gap:7px;padding:10px 0;flex-wrap:wrap}
+.clf{font-size:11.5px;padding:5px 11px;border-radius:16px;background:#f7f5f1;border:1px solid #e4e1db;color:#5a6b7d;font-weight:600;cursor:pointer}
+.clf.on{background:#152746;color:#fff;border-color:#152746}
+.cl-timeline{position:relative;padding-left:22px;margin-top:8px}
+.cl-timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(#d9d4cb,#ece8e1)}
+.cl-rel{position:relative;margin-bottom:12px}
+.cl-dot{position:absolute;left:-20px;top:13px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid #c53030}
+.cl-v{font-size:13.5px;font-weight:800;color:#1a2b45}
+.cl-vb{font-size:10px;background:#fdecea;color:#c53030;border-radius:6px;padding:2px 7px;font-weight:700;margin-left:6px}
+.cl-d{font-size:10.5px;color:#a0aec0;margin:1px 0 6px}
+.cl-log{display:flex;gap:8px;padding:6px 0;font-size:12px;color:#3d4a5c;align-items:flex-start;border-bottom:1px solid #f6f3ee}
+.cl-log:last-child{border-bottom:none}
+.cl-log .lic{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px}
+.lt-add .lic{background:#e8f6ee}.lt-up .lic{background:#e9f1fb}.lt-fix .lic{background:#fff4e8}.lt-data .lic{background:#f3effa}
+.cl-log b{color:#1a2b45}
 </style>
 </head>
 <body>
@@ -141,10 +221,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         <h2>东京深度自由行攻略手册</h2>
         <p>2026 最新版 · 本地人实测 · 全程避坑</p>
         <div class="badges">
-            <span class="badge">最后更新：2026-09-04</span>
+            <span class="badge">最后更新：2026-09-06</span>
             <span class="badge">零广告纯干货</span>
             <span class="badge">拿过来就能用</span>
         </div>
+    </div>
+
+    <div class="cl-card" id="changelogCard">
+      <div class="cl-head" onclick="document.getElementById('changelogCard').classList.toggle('open')">
+        <div class="cl-ic">📖</div>
+        <div><div class="cl-t1">更新日志</div><div class="cl-t2">持续核实修订 · 买一次免费更新</div></div>
+        <div class="cl-arrow">▼</div>
+      </div>
+      <div class="cl-body"><div class="cl-inner">
+        <div class="cl-filters" id="clFilters"></div>
+        <div class="cl-timeline" id="clTimeline"></div>
+      </div></div>
     </div>
 
     <div class="section-title">第一次去东京必看</div>
@@ -233,7 +325,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         </p>
     </div>
 
-    <div class="copyright">© 东京自由行攻略手册 · 交互版 v1.0.0· 最后更新：2026-09-04</div>
+    <div class="copyright">© 东京自由行攻略手册 · 交互版 v1.2.0 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 分区攻略 -->
@@ -366,7 +458,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 
 <!-- 实用工具 -->
 <div class="page" id="page-tool">
-    <div class="section-title">预算计算器</div>
+    <div class="tool-pane active" id="pane-home">
+      <div class="section-title">🧰 实用工具箱</div>
+      <div class="tool-grid">
+        <div class="tool-entry" onclick="showTool('calc')"><span class="te-ic">🧮</span><div class="te-tx">预算计算器</div><div class="te-sub">算清花多少</div></div>
+        <div class="tool-entry" onclick="showTool('phrase')"><span class="te-ic">🗣️</span><div class="te-tx">日语速查</div><div class="te-sub">50句·可朗读</div></div>
+        <div class="tool-entry" onclick="showTool('pack')"><span class="te-ic">🎒</span><div class="te-tx">行李清单</div><div class="te-sub">逐项打勾</div></div>
+        <div class="tool-entry" onclick="showTool('visit')"><span class="te-ic">✅</span><div class="te-tx">打卡清单</div><div class="te-sub">足迹进度</div></div>
+        <div class="tool-entry" onclick="showTool('emergency')"><span class="te-ic">🚨</span><div class="te-tx">紧急联系</div><div class="te-sub">建议截图</div></div>
+      </div>
+      <div class="card"><p style="font-size:12.5px;color:#4a5568;">所有勾选与记录都保存在你自己的手机上，退出再进来不会丢。</p></div>
+    </div>
+    <div class="tool-pane" id="pane-calc">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">🧮 预算计算器</div>
     <div class="budget-calc">
         <div class="calc-row">
             <label>出行天数</label>
@@ -489,10 +594,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         <p class="calc-note">* 汇率按1人民币≈20日元估算；机票/签证为出发前固定支出，当地消费按天数计算</p>
     </div>
 
-    <div class="section-title">高频日语短句（点击复制）</div>
-    <div class="card" id="japanList"></div>
+    </div>
+    <div class="tool-pane" id="pane-phrase">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">🗣️ 日语应急速查（点 🔊 朗读、点复制）</div>
+      <div class="phrase-filter" id="phraseFilter"></div>
+      <div id="japanList"></div>
+    </div>
 
-    <div class="section-title" style="font-size:18px;font-weight:700;">🚨 紧急联系方式（建议截图保存）</div>
+    <div class="tool-pane" id="pane-pack">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">🎒 行李清单（勾选自动保存）</div>
+      <div class="pack-progress" id="packProgress"></div>
+      <div id="packList"></div>
+      <div class="pack-add"><input id="packCustom" placeholder="加一个自己的物品…" onkeydown="if(event.key==='Enter')addPackItem()"><button onclick="addPackItem()">添加</button></div>
+      <button class="pack-reset" onclick="resetPack()">↩ 清空勾选与自定义</button>
+    </div>
+    <div class="tool-pane" id="pane-visit">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">✅ 东京打卡足迹（点右侧方框标记去过）</div>
+      <div class="visit-hero" id="visitHero"></div>
+      <div id="visitList"></div>
+    </div>
+    <div class="tool-pane" id="pane-emergency">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">🚨 紧急联系方式（建议截图保存）</div>
     <div class="emergency-card">
         <div class="emergency-row"><span>🚓 报警（盗抢/事故）</span><span class="emergency-num">110</span></div>
         <div class="emergency-row"><span>🚑 火警/急救</span><span class="emergency-num">119</span></div>
@@ -506,7 +632,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     </div>
     <p style="font-size:11.5px;color:#718096;margin:6px 0 0;padding:0 4px;">📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。日本紧急电话接通后可说 "Chinese" 安排中文翻译。</p>
 
-    <div class="copyright">© 东京自由行实操手册 · 交互版 v1.0.0· 最后更新：2026-09-04</div>
+    </div>
+    <div class="copyright">© 东京自由行实操手册 · 交互版 v1.2.0 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 底部导航 -->
@@ -895,25 +1022,134 @@ const PITFALLS = [
 ];
 
 const JAPAN_PHRASES = [
-    { jp:"すみません", cn:"不好意思/打扰一下（万能用语）" },
-    { jp:"ありがとうございます", cn:"谢谢" },
-    { jp:"いくらですか", cn:"多少钱？" },
-    { jp:"これをください", cn:"请给我这个" },
-    { jp:"お会計お願いします", cn:"买单" },
-    { jp:"駅はどこですか", cn:"车站在哪里？" },
-    { jp:"トイレはどこですか", cn:"洗手间在哪里？" },
-    { jp:"英語は話せますか", cn:"会说英语吗？" },
-    { jp:"中国語は話せますか", cn:"会说中文吗？" },
-    { jp:"助けてください", cn:"请帮帮我" },
-    { jp:"病院に行きたい", cn:"我想去医院" },
-    { jp:"財布をなくしました", cn:"我钱包丢了" },
-    { jp:"予約しています", cn:"我有预约" },
-    { jp:"免税できますか", cn:"可以免税吗？" },
-    { jp:"写真を撮ってもいいですか", cn:"可以拍照吗？" },
-    { jp:"美味しいです", cn:"很好吃" },
-    { jp:"ちょっと待ってください", cn:"请稍等" },
-    { jp:"わかりません", cn:"我不明白" },
-    { jp:"さようなら", cn:"再见" }
+    { scene:"emergency", jp:"助けてください", roma:"tasukete kudasai", cn:"请帮帮我·救命" },
+    { scene:"emergency", jp:"気分が悪いです", roma:"kibun ga warui desu", cn:"我身体不舒服" },
+    { scene:"emergency", jp:"病院に行きたいです", roma:"byouin ni ikitai desu", cn:"我想去医院" },
+    { scene:"emergency", jp:"救急車を呼んでください", roma:"kyuukyuusha wo yonde kudasai", cn:"请叫救护车" },
+    { scene:"emergency", jp:"財布をなくしました", roma:"saifu wo nakushimashita", cn:"我的钱包丢了" },
+    { scene:"emergency", jp:"パスポートをなくしました", roma:"pasupooto wo nakushimashita", cn:"我的护照丢了" },
+    { scene:"emergency", jp:"中国語が話せる人はいますか", roma:"chuugokugo ga hanaseru hito wa imasu ka", cn:"有会说中文的人吗" },
+    { scene:"emergency", jp:"トイレはどこですか", roma:"toire wa doko desu ka", cn:"洗手间在哪里" },
+    { scene:"airport", jp:"入国審査はどこですか", roma:"nyuukoku shinsa wa doko desu ka", cn:"入境审查在哪里" },
+    { scene:"airport", jp:"〇〇ホテルまでお願いします", roma:"〇〇 hoteru made onegai shimasu", cn:"打车：请到〇〇酒店" },
+    { scene:"airport", jp:"この電車は〇〇に行きますか", roma:"kono densha wa 〇〇 ni ikimasu ka", cn:"这趟电车到〇〇吗" },
+    { scene:"airport", jp:"〇〇駅までいくらですか", roma:"〇〇 eki made ikura desu ka", cn:"到〇〇站多少钱" },
+    { scene:"airport", jp:"切符はどこで買えますか", roma:"kippu wa doko de kaemasu ka", cn:"车票在哪里买" },
+    { scene:"airport", jp:"空港リムジンバスはどこですか", roma:"kuukou rimujin basu wa doko desu ka", cn:"机场大巴在哪里坐" },
+    { scene:"hotel", jp:"チェックインをお願いします", roma:"chekkuin wo onegai shimasu", cn:"我要办理入住" },
+    { scene:"hotel", jp:"予約しています、〇〇です", roma:"yoyaku shiteimasu, 〇〇 desu", cn:"我有预约，名字是〇〇" },
+    { scene:"hotel", jp:"何時にチェックアウトですか", roma:"nanji ni chekkuauto desu ka", cn:"几点退房" },
+    { scene:"hotel", jp:"荷物を預かってもらえますか", roma:"nimotsu wo azukatte moraemasu ka", cn:"可以寄存行李吗" },
+    { scene:"hotel", jp:"Wi-Fiのパスワードを教えてください", roma:"wifi no pasuwaado wo oshiete kudasai", cn:"请告诉我WiFi密码" },
+    { scene:"hotel", jp:"タクシーを呼んでください", roma:"takushii wo yonde kudasai", cn:"请帮我叫出租车" },
+    { scene:"food", jp:"一人です", roma:"hitori desu", cn:"一位" },
+    { scene:"food", jp:"二人です", roma:"futari desu", cn:"两位" },
+    { scene:"food", jp:"メニューをください", roma:"menyuu wo kudasai", cn:"请给我菜单" },
+    { scene:"food", jp:"おすすめは何ですか", roma:"osusume wa nan desu ka", cn:"有什么推荐" },
+    { scene:"food", jp:"これをください", roma:"kore wo kudasai", cn:"我要这个（可指着菜单）" },
+    { scene:"food", jp:"お水をください", roma:"omizu wo kudasai", cn:"请给我水" },
+    { scene:"food", jp:"卵アレルギーがあります", roma:"tamago arerugii ga arimasu", cn:"我对鸡蛋过敏（可替换食材）" },
+    { scene:"food", jp:"辛くないものをお願いします", roma:"karakunai mono wo onegai shimasu", cn:"请给我不辣的" },
+    { scene:"food", jp:"クレジットカードは使えますか", roma:"kurejitto kaado wa tsukaemasu ka", cn:"可以刷卡吗" },
+    { scene:"food", jp:"お会計お願いします", roma:"okaikei onegai shimasu", cn:"买单" },
+    { scene:"food", jp:"ごちそうさまでした", roma:"gochisousama deshita", cn:"谢谢款待（离店时说）" },
+    { scene:"shop", jp:"免税できますか", roma:"menzei dekimasu ka", cn:"可以免税吗" },
+    { scene:"shop", jp:"これはいくらですか", roma:"kore wa ikura desu ka", cn:"这个多少钱" },
+    { scene:"shop", jp:"試着してもいいですか", roma:"shichaku shitemo ii desu ka", cn:"可以试穿吗" },
+    { scene:"shop", jp:"別の色はありますか", roma:"betsu no iro wa arimasu ka", cn:"有别的颜色吗" },
+    { scene:"shop", jp:"別のサイズはありますか", roma:"betsu no saizu wa arimasu ka", cn:"有别的尺码吗" },
+    { scene:"shop", jp:"レシートをください", roma:"reshiito wo kudasai", cn:"请给我小票" },
+    { scene:"shop", jp:"袋に入れてください", roma:"fukuro ni irete kudasai", cn:"请帮我装袋" },
+    { scene:"daily", jp:"すみません", roma:"sumimasen", cn:"不好意思·打扰一下（万能用语）" },
+    { scene:"daily", jp:"ありがとうございます", roma:"arigatou gozaimasu", cn:"谢谢" },
+    { scene:"daily", jp:"ごめんなさい", roma:"gomen nasai", cn:"对不起" },
+    { scene:"daily", jp:"はい", roma:"hai", cn:"是·好的" },
+    { scene:"daily", jp:"いいえ", roma:"iie", cn:"不是·不用" },
+    { scene:"daily", jp:"大丈夫です", roma:"daijoubu desu", cn:"没关系·不用了" },
+    { scene:"daily", jp:"英語は話せますか", roma:"eigo wa hanasemasu ka", cn:"会说英语吗" },
+    { scene:"daily", jp:"中国語は話せますか", roma:"chuugokugo wa hanasemasu ka", cn:"会说中文吗" },
+    { scene:"daily", jp:"写真を撮ってもいいですか", roma:"shashin wo totte mo ii desu ka", cn:"可以拍照吗" },
+    { scene:"daily", jp:"ちょっと待ってください", roma:"chotto matte kudasai", cn:"请稍等" },
+    { scene:"daily", jp:"わかりません", roma:"wakarimasen", cn:"我不明白" },
+    { scene:"daily", jp:"さようなら", roma:"sayounara", cn:"再见" }
+];
+
+const PACK_LIST = [
+  { group:"📄 证件财物", items:[
+    "护照（有效期6个月以上）",
+    "签证页/电子签打印件",
+    "Visit Japan Web 二维码截图（出发前3天填）",
+    "身份证（国内交通用）",
+    "机票行程单、酒店订单（截图或打印）",
+    "现金5-10万日元（约2500-5000人民币）",
+    "Visa/Master信用卡",
+    "银联卡（7-11的ATM可取现）",
+    "证件照电子版备用（补办证件用）"
+  ]},
+  { group:"🔌 电子设备", items:[
+    "手机+充电线",
+    "充电宝（≤100Wh/约2万毫安，随身带不能托运）",
+    "eSIM/随身WiFi（出发前激活测试）",
+    "备用两脚扁插（多数充电器宽压可直插）",
+    "耳机、相机（按需）"
+  ]},
+  { group:"👕 衣物洗漱", items:[
+    "按季节准备衣物（对照季节时间表）",
+    "舒适步行鞋（东京日均步数很高）",
+    "折叠伞/轻便雨衣",
+    "洗漱护肤旅行装",
+    "防晒霜、墨镜（夏季）",
+    "薄外套（商场地铁空调很足）"
+  ]},
+  { group:"💊 药品健康", items:[
+    "感冒药、肠胃药、止痛药",
+    "创可贴",
+    "个人长期服用药（带说明书）",
+    "晕车晕船药（镰仓/台场按需）"
+  ]},
+  { group:"🎒 实用好物", items:[
+    "小号购物袋（便利店不主动给袋）",
+    "纸巾、湿巾",
+    "笔（填入境卡/海关单）",
+    "保温杯、少量零食",
+    "零钱包（日本硬币很多）"
+  ]}
+];
+
+const CHANGELOGS = [
+  { v:"v1.2", date:"2026-09-06", title:"工具箱升级，手册从「能看」变「能用」", logs:[
+    {t:"add", txt:"新增<b>工具箱</b>：日语速查、行李清单、打卡清单统一入口"},
+    {t:"add", txt:"日语升级为<b>50句场景速查</b>：6大场景分类+罗马音+点按喇叭朗读"},
+    {t:"add", txt:"新增<b>行李清单</b>：5类29项逐项勾选，进度自动保存，可自己加物品"},
+    {t:"add", txt:"新增<b>打卡清单</b>：景点去过打卡，统计你的东京足迹"},
+    {t:"add", txt:"收藏升级双状态：❤️想去 / ✅去过，互不冲突"},
+    {t:"add", txt:"首页新增<b>更新日志</b>，每次改动可追溯"}
+  ]},
+  { v:"v1.1", date:"2026-09-05", title:"预算计算器大升级 · 费用修正", logs:[
+    {t:"add", txt:"计算器加入<b>机票、签证保险、WiFi/eSIM</b>三项出发前硬性支出"},
+    {t:"add", txt:"总价<b>日元+人民币双显示</b>，新增日均花费和彩色占比图"},
+    {t:"add", txt:"新增<b>穷游/当前/豪华三档对比</b>，点卡片一键填充"},
+    {t:"add", txt:"预算可<b>本地保存</b>，下次打开自动恢复"},
+    {t:"up", txt:"每个费用选项补上人民币金额和联动说明"},
+    {t:"data", txt:"签证费按<b>2026年7月涨价后</b>修正：单次约900、多次约1800元"}
+  ]},
+  { v:"v1.0", date:"2026-09-05", title:"七大栏目完整成型", logs:[
+    {t:"add", txt:"新增<b>住宿板块</b>：43家酒店/民宿，14区域×价位双筛选"},
+    {t:"add", txt:"新增<b>预约攻略26条</b>，标注影视原型地、放票时间与渠道"},
+    {t:"add", txt:"新增<b>购物板块</b>：8商圈+4药妆店+6特色小店+12必买清单"},
+    {t:"add", txt:"<b>6条路线30天行程</b>细化到时间块，每天标预计花销"},
+    {t:"add", txt:"分区扩为<b>14区域40+景点美食</b>，需预约项红色标记"},
+    {t:"add", txt:"首页必看扩到7步：机场交通双表格+市内票种对比"},
+    {t:"add", txt:"工具栏新增<b>紧急联系9项</b>与日语短句"},
+    {t:"up", txt:"避坑指南整合进路线页，分四大类共36条"}
+  ]},
+  { v:"v0.9", date:"2026-09-04", title:"视觉升级与基础打磨", logs:[
+    {t:"up", txt:"全局视觉升级：统一配色、卡片质感、毛玻璃导航"},
+    {t:"up", txt:"全部价格统一为「日元（人民币）」双货币格式"},
+    {t:"fix", txt:"修复7天长路线展开内容被截断的问题"},
+    {t:"up", txt:"预算计算器选项精简，选中联动显示明细"},
+    {t:"data", txt:"迪士尼门票更新为2026官方动态票价"}
+  ]}
 ];
 
 // ==================== 住宿数据（2026-09 核实） ====================
@@ -1069,6 +1305,7 @@ const SHOPPING = [
 ];
 
 let favorites = JSON.parse(localStorage.getItem('tokyo_favs') || '[]');
+let visited = JSON.parse(localStorage.getItem('tokyo_visited') || '[]');
 
 // 底部导航切换
 const navItems = document.querySelectorAll('.nav-item');
@@ -1099,7 +1336,8 @@ function renderAreaList(area='', type='', tag='') {
         const tt = item.tags.includes('must')?'必去':item.tags.includes('local')?'本地人推':item.tags.includes('free')?'免费':'';
         const bk = item.tags.includes('book');
         const fav = favorites.includes(item.id);
-        html += `<div class="card"><div class="card-title" onclick="toggleDetail(${item.id})"><span>${item.name} <span class="tag ${tc}">${tt}</span>${bk?` <span class="tag book-tag">需预约</span>`:''}</span><span class="fav-btn ${fav?'active':''}" onclick="event.stopPropagation();toggleFav(${item.id})">${fav?'❤️':'🤍'}</span></div><div class="card-detail" id="detail-${item.id}"><p><b>📍 地址：</b>${item.address} <button class="copy-btn" onclick="copyText('${item.address}')">复制</button></p><p><b>🚃 交通：</b>${item.traffic}</p><p><b>💰 ${item.type==='spot'?'门票':'人均'}：</b>${item.ticket||item.price}</p><p><b>⏰ 开放时间：</b>${item.time||'详见店内'}</p><p style="margin-top:8px;">${item.desc}</p>${item.book?`<p style="color:#c53030;margin-top:6px;">⚠️ ${item.book}</p>`:''}</div></div>`;
+        const vis = visited.includes(item.id);
+        html += `<div class="card"><div class="card-title" onclick="toggleDetail(${item.id})"><span>${item.name} <span class="tag ${tc}">${tt}</span>${bk?` <span class="tag book-tag">需预约</span>`:''}</span><span><span class="fav-btn ${fav?'active':''}" onclick="event.stopPropagation();toggleFav(${item.id})" title="想去">${fav?'❤️':'🤍'}</span><span class="visit-btn ${vis?'active':''}" onclick="event.stopPropagation();toggleVisit(${item.id})" title="去过">${vis?'✅':'⬜'}</span></span></div><div class="card-detail" id="detail-${item.id}"><p><b>📍 地址：</b>${item.address} <button class="copy-btn" onclick="copyText('${item.address}')">复制</button></p><p><b>🚃 交通：</b>${item.traffic}</p><p><b>💰 ${item.type==='spot'?'门票':'人均'}：</b>${item.ticket||item.price}</p><p><b>⏰ 开放时间：</b>${item.time||'详见店内'}</p><p style="margin-top:8px;">${item.desc}</p>${item.book?`<p style="color:#c53030;margin-top:6px;">⚠️ ${item.book}</p>`:''}</div></div>`;
     });
     if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">没有找到匹配的内容</div>';
     box.innerHTML = html;
@@ -1110,6 +1348,14 @@ window.toggleFav = id => {
     i>-1 ? favorites.splice(i,1) : favorites.push(id);
     localStorage.setItem('tokyo_favs', JSON.stringify(favorites));
     renderAreaList(document.getElementById('filterArea').value, document.getElementById('filterType').value, document.getElementById('filterTag').value);
+    if(document.getElementById('visitList')) renderVisitList();
+};
+window.toggleVisit = id => {
+    const i = visited.indexOf(id);
+    i>-1 ? visited.splice(i,1) : visited.push(id);
+    localStorage.setItem('tokyo_visited', JSON.stringify(visited));
+    renderAreaList(document.getElementById('filterArea').value, document.getElementById('filterType').value, document.getElementById('filterTag').value);
+    if(document.getElementById('visitList')) renderVisitList();
 };
 
 // 渲染路线
@@ -1237,15 +1483,134 @@ function renderShoppingList(cat='') {
 }
 window.toggleShopping = id => document.getElementById('shop-'+id).classList.toggle('open');
 
-// 渲染日语短句
+// 日语速查：场景筛选 + 卡片 + 朗读
+const PHRASE_SCENES = [
+    {k:'all', label:'全部'},
+    {k:'emergency', label:'🆘 应急'},
+    {k:'airport', label:'✈️ 机场交通'},
+    {k:'hotel', label:'🏨 酒店'},
+    {k:'food', label:'🍜 餐厅'},
+    {k:'shop', label:'🛍️ 购物'},
+    {k:'daily', label:'💬 日常'}
+];
+let phraseCur = 'all';
+function renderPhraseFilter(){
+    document.getElementById('phraseFilter').innerHTML = PHRASE_SCENES.map(s=>`<div class="pf-chip ${phraseCur===s.k?'on':''}" onclick="setPhraseScene('${s.k}')">${s.label}</div>`).join('');
+}
+window.setPhraseScene = k => { phraseCur=k; renderPhraseFilter(); renderJapanList(); };
 function renderJapanList() {
     const box = document.getElementById('japanList');
-    let html = '';
-    JAPAN_PHRASES.forEach(item => {
-        html += `<div class="japan-item"><div><div class="japan-jp">${item.jp}</div><div class="japan-cn">${item.cn}</div></div><button class="copy-btn" onclick="copyText('${item.jp}')">复制</button></div>`;
-    });
-    box.innerHTML = html;
+    const list = JAPAN_PHRASES.filter(p=>phraseCur==='all'||p.scene===phraseCur);
+    box.innerHTML = list.map(p=>`<div class="phrase-card ${p.scene==='emergency'?'em':''}"><div class="phrase-top"><div><div class="phrase-jp">${p.jp}</div><div class="phrase-roma">${p.roma}</div><div class="phrase-cn">${p.cn}</div></div><div class="phrase-btns"><button class="pbtn speak" data-jp="${p.jp}" onclick="speakJp(this.dataset.jp)">🔊</button><button class="pbtn copy" data-jp="${p.jp}" onclick="copyText(this.dataset.jp)">复制</button></div></div></div>`).join('');
 }
+window.speakJp = text => {
+    if(!('speechSynthesis' in window)){ alert('当前浏览器不支持语音朗读，可照罗马音念'); return; }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP'; u.rate = 0.85;
+    const voices = window.speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().indexOf('ja')===0);
+    if(voices.length) u.voice = voices[0];
+    window.speechSynthesis.speak(u);
+};
+
+// ===== M1 工具箱切换 =====
+window.showTool = name => {
+    document.querySelectorAll('#page-tool .tool-pane').forEach(p=>p.classList.remove('active'));
+    const el = document.getElementById('pane-'+name);
+    if(el) el.classList.add('active');
+    window.scrollTo(0,0);
+};
+
+// ===== 行李清单 =====
+let packChecked = JSON.parse(localStorage.getItem('tokyo_pack') || '{}');
+let packCustom = JSON.parse(localStorage.getItem('tokyo_pack_custom') || '[]');
+function savePack(){
+    localStorage.setItem('tokyo_pack', JSON.stringify(packChecked));
+    localStorage.setItem('tokyo_pack_custom', JSON.stringify(packCustom));
+}
+window.togglePack = function(text){
+    if(packChecked[text]) delete packChecked[text]; else packChecked[text]=1;
+    savePack(); renderPackList();
+};
+window.addPackItem = function(){
+    const inp = document.getElementById('packCustom');
+    const v = inp.value.trim();
+    if(!v) return;
+    if(!packCustom.includes(v)) packCustom.push(v);
+    inp.value=''; savePack(); renderPackList();
+};
+window.delCustomPack = function(text){
+    packCustom = packCustom.filter(x=>x!==text);
+    delete packChecked[text];
+    savePack(); renderPackList();
+};
+window.resetPack = function(){
+    if(!confirm('确定清空所有勾选和自定义物品？')) return;
+    packChecked={}; packCustom=[]; savePack(); renderPackList();
+};
+function renderPackList(){
+    const box = document.getElementById('packList');
+    let h='', total=0, done=0;
+    PACK_LIST.forEach(g=>{
+        h += `<div class="pack-group">${g.group}</div>`;
+        g.items.forEach(it=>{
+            total++; const ck=!!packChecked[it]; if(ck)done++;
+            h += `<div class="pack-item ${ck?'checked':''}" data-k="${it}" onclick="togglePack(this.dataset.k)"><span class="box">${ck?'✓':''}</span><span class="ptxt">${it}</span></div>`;
+        });
+    });
+    if(packCustom.length){
+        h += `<div class="pack-group">✏️ 我自己加的</div>`;
+        packCustom.forEach(it=>{
+            total++; const ck=!!packChecked[it]; if(ck)done++;
+            h += `<div class="pack-item ${ck?'checked':''}" data-k="${it}" onclick="togglePack(this.dataset.k)"><span class="box">${ck?'✓':''}</span><span class="ptxt">${it}</span><span style="margin-left:auto;color:#c53030;font-size:11px;" data-k="${it}" onclick="event.stopPropagation();delCustomPack(this.dataset.k)">删除</span></div>`;
+        });
+    }
+    box.innerHTML=h;
+    const pct = total? Math.round(done/total*100):0;
+    document.getElementById('packProgress').innerHTML = `已打包 <b>${done}</b> / ${total} 项 · ${pct}%<div class="pack-bar"><div class="pack-fill" style="width:${pct}%"></div></div>`;
+}
+
+// ===== 打卡清单 =====
+function renderVisitList(){
+    const box = document.getElementById('visitList');
+    if(!box) return;
+    const areas = {};
+    SPOTS_AND_FOOD.forEach(s=>{ (areas[s.area]=areas[s.area]||[]).push(s); });
+    const total=SPOTS_AND_FOOD.length, done=visited.length;
+    document.getElementById('visitHero').innerHTML = `<div class="vh-num">${done} / ${total}</div><div class="vh-sub">已打卡地点 · ${Math.round(done/total*100)}%</div>`;
+    let h='';
+    Object.keys(areas).forEach(a=>{
+        const arr=areas[a]; const got=arr.filter(s=>visited.includes(s.id)).length;
+        h += `<div class="pack-group">${a} <span style="font-weight:400;font-size:11px;color:#718096;">${got}/${arr.length}</span></div>`;
+        arr.forEach(s=>{
+            const ck=visited.includes(s.id), fv=favorites.includes(s.id);
+            h += `<div class="check-item ${ck?'checked':''}"><div><div class="ci-name">${s.name}</div><div class="ci-meta">${s.type==='spot'?'景点':'美食'}</div></div><div class="ci-btns"><button class="mini-btn fav ${fv?'on':''}" onclick="toggleFav(${s.id})">${fv?'❤️':'🤍'}</button><button class="mini-btn vis ${ck?'on':''}" onclick="toggleVisit(${s.id})">${ck?'✅':'⬜'}</button></div></div>`;
+        });
+    });
+    box.innerHTML=h;
+}
+
+// ===== 首页更新日志 =====
+const CL_ICON={add:'✨',up:'⚡',fix:'🐛',data:'📅'};
+const CL_LABEL={all:'全部',add:'✨ 新增',up:'⚡ 优化',fix:'🐛 修复',data:'📅 数据'};
+let clCur='all';
+function renderChangelog(){
+    document.getElementById('clFilters').innerHTML = Object.keys(CL_LABEL).map(k=>`<div class="clf ${clCur===k?'on':''}" onclick="setClFilter('${k}')">${CL_LABEL[k]}</div>`).join('');
+    let h='';
+    CHANGELOGS.forEach(r=>{
+        const logs=r.logs.filter(l=>clCur==='all'||l.t===clCur);
+        if(!logs.length) return;
+        h+=`<div class="cl-rel"><div class="cl-dot"></div><div class="cl-v">${r.v}<span class="cl-vb">${logs.length}项</span></div><div class="cl-d">${r.date} · ${r.title}</div>`+
+          logs.map(l=>`<div class="cl-log lt-${l.t}"><div class="lic">${CL_ICON[l.t]}</div><div>${l.txt}</div></div>`).join('')+`</div>`;
+    });
+    document.getElementById('clTimeline').innerHTML=h;
+}
+window.setClFilter = k => {
+    clCur=k;
+    const c=document.getElementById('changelogCard');
+    if(!c.classList.contains('open')) c.classList.add('open');
+    renderChangelog();
+};
 
 // 筛选器绑定
 document.getElementById('filterArea').onchange = updateArea;
@@ -1298,7 +1663,8 @@ function initSearch() {
                 const tt = item.tags.includes('must')?'必去':item.tags.includes('local')?'本地人推':item.tags.includes('free')?'免费':'';
                 const name = item.name.replace(new RegExp(kw,'gi'),'<span class="highlight">$&</span>');
                 const desc = item.desc.replace(new RegExp(kw,'gi'),'<span class="highlight">$&</span>');
-                html += `<div class="card"><div class="card-title" onclick="toggleDetail(${item.id})"><span>${name} <span class="tag ${tc}">${tt}</span></span></div><div class="card-detail open" id="detail-${item.id}"><p><b>📍 地址：</b>${item.address}</p><p><b>🚃 交通：</b>${item.traffic}</p><p><b>💰 ${item.type==='spot'?'门票':'人均'}：</b>${item.ticket||item.price}</p><p style="margin-top:8px;">${desc}</p></div></div>`;
+                const sfav=favorites.includes(item.id), svis=visited.includes(item.id);
+                html += `<div class="card"><div class="card-title" onclick="toggleDetail(${item.id})"><span>${name} <span class="tag ${tc}">${tt}</span></span><span><span class="fav-btn ${sfav?'active':''}" onclick="event.stopPropagation();toggleFav(${item.id})">${sfav?'❤️':'🤍'}</span><span class="visit-btn ${svis?'active':''}" onclick="event.stopPropagation();toggleVisit(${item.id})">${svis?'✅':'⬜'}</span></span></div><div class="card-detail open" id="detail-${item.id}"><p><b>📍 地址：</b>${item.address}</p><p><b>🚃 交通：</b>${item.traffic}</p><p><b>💰 ${item.type==='spot'?'门票':'人均'}：</b>${item.ticket||item.price}</p><p style="margin-top:8px;">${desc}</p></div></div>`;
             });
             if(!list.length) html = '<div class="card" style="text-align:center;color:#a0aec0;">未找到相关内容</div>';
             box.innerHTML = html;
@@ -1552,7 +1918,11 @@ renderPitfallList();
 renderHotelList();
 renderReserveList();
 renderShoppingList();
+renderPhraseFilter();
 renderJapanList();
+renderPackList();
+renderVisitList();
+renderChangelog();
 initSearch();
 initBudget();
 </script>
