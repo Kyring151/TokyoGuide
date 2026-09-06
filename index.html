@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>东京自由行攻略手册</title>
-<meta name="version" content="1.2.0">
+<meta name="version" content="1.3.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#faf8f5;color:#2d3748;line-height:1.65;padding-bottom:72px;padding-top:50px;-webkit-font-smoothing:antialiased}
@@ -204,6 +204,104 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .cl-log .lic{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px}
 .lt-add .lic{background:#e8f6ee}.lt-up .lic{background:#e9f1fb}.lt-fix .lic{background:#fff4e8}.lt-data .lic{background:#f3effa}
 .cl-log b{color:#1a2b45}
+
+/* ===== v1.3 九宫格高档化（覆盖旧样式） ===== */
+.tool-grid{gap:12px;margin:4px 0 16px}
+.tool-entry{padding:16px 6px 13px;border-radius:18px;border:1px solid rgba(28,39,60,.06);box-shadow:0 2px 4px rgba(28,39,60,.04),0 8px 20px rgba(28,39,60,.07);transition:transform .15s,box-shadow .2s}
+.tool-entry:active{transform:scale(.95);box-shadow:0 2px 6px rgba(28,39,60,.1)}
+.tool-entry .te-ic{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:23px;margin:0 auto 8px;box-shadow:0 4px 10px rgba(28,39,60,.08)}
+.te-c1{background:linear-gradient(135deg,#eef4ff,#dbe9fe)}
+.te-c2{background:linear-gradient(135deg,#f4f0ff,#e7ddfa)}
+.te-c3{background:linear-gradient(135deg,#fff6ea,#ffe7cc)}
+.te-c4{background:linear-gradient(135deg,#edfdf3,#d4f3e1)}
+.te-c5{background:linear-gradient(135deg,#e9fbf9,#cdf2ed)}
+.te-c6{background:linear-gradient(135deg,#fef9e6,#fcedc4)}
+.te-c7{background:linear-gradient(135deg,#fff0f3,#ffd8e1)}
+.te-c8{background:linear-gradient(135deg,#eeeffe,#d8ddfb)}
+.te-c9{background:linear-gradient(135deg,#fef0ef,#fad4d4)}
+.tool-entry .te-tx{font-size:13px;font-weight:800;color:#1a2b45}
+.tool-entry .te-sub{font-size:10px;color:#9aa7b5;margin-top:3px;line-height:1.3}
+/* 汇率换算 */
+.rate-status{font-size:11.5px;padding:9px 12px;border-radius:11px;background:#eef4ff;color:#2b6cb0;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.rate-status.live{background:#e8f6ee;color:#1f7a48}
+.rate-refresh{border:none;background:rgba(0,0,0,.07);border-radius:10px;padding:5px 11px;font-size:11px;cursor:pointer;color:inherit;font-weight:600;flex-shrink:0}
+.rate-box{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 4px 12px rgba(28,39,60,.06)}
+.rate-box label{font-size:11.5px;color:#718096;font-weight:600}
+.rate-box input{width:100%;height:46px;border:1.5px solid #e8e2d8;border-radius:11px;font-size:20px;font-weight:800;color:#1a2b45;padding:0 12px;margin-top:6px;outline:none;background:#fdfcf9}
+.rate-quick{display:flex;gap:7px;margin:2px 0 12px;flex-wrap:wrap}
+.rate-q{border:1px solid #e3ddd3;background:#fff;border-radius:14px;padding:6px 13px;font-size:11.5px;cursor:pointer;color:#4a5568}
+.rate-set{display:flex;align-items:center;gap:8px;font-size:12px;color:#4a5568;background:#fff;border-radius:12px;padding:10px 13px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 3px 10px rgba(28,39,60,.05)}
+.rate-set input{width:78px;height:34px;border:1px solid #e3ddd3;border-radius:8px;padding:0 8px;font-size:13px;outline:none}
+.rate-hint{font-size:10.5px;color:#a0aec0;margin-top:9px;line-height:1.5}
+/* 旅行记账 */
+.led-hero{background:linear-gradient(135deg,#152746,#274a78);color:#fff;border-radius:14px;padding:15px;margin-bottom:12px;text-align:center}
+.led-total{font-size:24px;font-weight:800}
+.led-cny{font-size:12px;opacity:.85;margin-top:3px}
+.led-budget{font-size:11px;opacity:.9;margin-top:6px;background:rgba(255,255,255,.12);border-radius:8px;padding:5px 9px;display:inline-block}
+.led-cats{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 11px}
+.led-cat{font-size:12px;border-radius:14px;padding:7px 13px;border:1.5px solid #e3ddd3;background:#fff;cursor:pointer;color:#4a5568;font-weight:600}
+.led-cat.on{border-color:#d97706;background:#fff7e6;color:#b45309;font-weight:800}
+.led-row{display:flex;gap:8px;margin-bottom:10px}
+.led-row input{flex:1;min-width:0;height:40px;border:1px solid #e3ddd3;border-radius:10px;padding:0 12px;font-size:14px;outline:none}
+.led-add{background:#d97706;color:#fff;border:none;border-radius:10px;padding:0 18px;font-weight:800;font-size:13px;cursor:pointer}
+.led-sum{font-size:11.5px;color:#718096;background:#fff;border-radius:10px;padding:9px 12px;margin-bottom:10px;line-height:1.7}
+.led-item{display:flex;align-items:center;gap:9px;background:#fff;border-radius:11px;padding:9px 12px;margin-bottom:6px;font-size:13px}
+.led-ic{width:31px;height:31px;border-radius:9px;background:#f7f5f1;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.led-main{flex:1;min-width:0}.led-name{color:#1a2b45;font-weight:600}.led-note{font-size:10.5px;color:#a0aec0}
+.led-amt{font-weight:800;color:#1a2b45;text-align:right;font-size:12.5px;flex-shrink:0}
+.led-amt small{display:block;font-weight:400;color:#a0aec0;font-size:10px}
+.led-del{border:none;background:none;color:#c53030;font-size:14px;cursor:pointer;padding:4px;flex-shrink:0}
+.led-clear{background:#f1f4f8;color:#5a6b7d;border:none;border-radius:9px;padding:8px 15px;font-size:12px;cursor:pointer}
+/* 季节查询 */
+.season-months{display:flex;gap:7px;overflow-x:auto;padding-bottom:9px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.season-months::-webkit-scrollbar{display:none}
+.sm{flex-shrink:0;width:48px;height:48px;border-radius:14px;background:#fff;border:1px solid #e4e1db;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#4a5568;cursor:pointer}
+.sm small{font-size:9px;font-weight:400;color:#a0aec0;margin-top:1px}
+.sm.on{background:linear-gradient(135deg,#fb7185,#e11d48);color:#fff;border-color:transparent;box-shadow:0 4px 10px rgba(225,29,72,.25)}
+.sm.on small{color:rgba(255,255,255,.85)}
+.season-wcard{background:linear-gradient(135deg,#fff7f8,#fdeef1);border-radius:13px;padding:11px 14px;margin-bottom:12px;font-size:12px;color:#4a5568}
+.season-wcard .sw-row{display:flex;gap:7px;margin-bottom:5px;line-height:1.5}
+.season-wcard .sw-row:last-child{margin-bottom:0}
+.season-wcard b{color:#1a2b45;flex-shrink:0}
+.sev{background:#fff;border-radius:12px;padding:11px 13px;margin-bottom:8px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 3px 10px rgba(28,39,60,.05)}
+.sev-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.sev-ic{font-size:17px}.sev-name{font-weight:800;color:#1a2b45;font-size:13.5px}
+.sev-when{margin-left:auto;font-size:10.5px;background:#fde8ec;color:#c53030;border-radius:8px;padding:2px 8px;flex-shrink:0;font-weight:700}
+.sev-tip{font-size:12px;color:#4a5568;line-height:1.55}
+.season-note{font-size:10.5px;color:#a0aec0;margin-top:10px;line-height:1.6}
+/* 行程规划器 */
+.pl-step{font-size:13px;font-weight:800;color:#1a2b45;margin:15px 0 8px;display:flex;align-items:center;gap:6px}
+.pl-step .n{width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center}
+.pl-opts{display:flex;gap:8px;flex-wrap:wrap}
+.pl-opt{border:1.5px solid #e3ddd3;background:#fff;border-radius:14px;padding:8px 15px;font-size:12.5px;color:#4a5568;cursor:pointer;font-weight:600}
+.pl-opt.on{background:#4f46e5;border-color:#4f46e5;color:#fff;font-weight:800;box-shadow:0 3px 8px rgba(79,70,229,.25)}
+.pl-gen{width:100%;height:48px;border:none;border-radius:13px;background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff;font-size:15px;font-weight:800;margin:18px 0 10px;cursor:pointer;box-shadow:0 6px 16px rgba(79,70,229,.25)}
+.pl-favhint{font-size:11.5px;background:#fff7e6;color:#b45309;border-radius:10px;padding:9px 12px;margin-bottom:10px;line-height:1.5}
+.pl-rname{font-size:15px;font-weight:800;color:#1a2b45;margin-bottom:4px;line-height:1.4}
+.pl-rsum{font-size:12px;color:#718096;margin-bottom:10px}
+.pl-day{background:#fff;border-radius:13px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 2px rgba(28,39,60,.04),0 3px 10px rgba(28,39,60,.05)}
+.pl-day-head{background:#eef0ff;padding:10px 13px;font-size:13px;font-weight:800;color:#3730a3;display:flex;justify-content:space-between;gap:8px}
+.pl-day-head span:last-child{font-size:11px;color:#6366f1;font-weight:700;flex-shrink:0}
+.pl-blk{display:flex;gap:9px;padding:9px 13px;border-top:1px solid #f4f1ec;cursor:pointer}
+.pl-blk.off{opacity:.36}
+.pl-blk.off .pl-text{text-decoration:line-through}
+.pl-check{width:18px;height:18px;border-radius:6px;border:2px solid #c7d2fe;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+.pl-blk:not(.off) .pl-check{background:#4f46e5;border-color:#4f46e5}
+.pl-time{font-size:10.5px;color:#a0aec0;font-weight:700}
+.pl-text{font-size:12.5px;color:#3d4a5c;line-height:1.5}
+.pl-book{font-size:10.5px;color:#c53030;margin-top:3px}
+.pl-tip{font-size:10.5px;color:#718096;margin-top:3px}
+.pl-actions{display:flex;gap:8px;margin:4px 0 12px}
+.pl-btn{flex:1;border:none;border-radius:10px;padding:11px;font-size:12.5px;font-weight:800;cursor:pointer}
+.pl-btn.ghost{background:#eef0ff;color:#4338ca}
+.pl-btn.dark{background:#152746;color:#fff}
+/* 避坑折叠 */
+.pf-group{margin-bottom:10px}
+.pf-group-head{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fff;border-radius:11px;padding:12px 14px;font-size:13.5px;font-weight:800;color:#1a2b45;cursor:pointer;box-shadow:0 1px 2px rgba(28,39,60,.04),0 3px 10px rgba(28,39,60,.05)}
+.pf-arrow{font-size:11px;color:#a0aec0;transition:transform .25s;flex-shrink:0}
+.pf-group:not(.collapse) .pf-arrow{transform:rotate(180deg)}
+.pf-body{padding-top:8px}
+.pf-group.collapse .pf-body{display:none}
 </style>
 </head>
 <body>
@@ -325,7 +423,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         </p>
     </div>
 
-    <div class="copyright">© 东京自由行攻略手册 · 交互版 v1.2.0 · 最后更新：2026-09-06</div>
+    <div class="copyright">© 东京自由行攻略手册 · 交互版 v1.3.0 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 分区攻略 -->
@@ -461,11 +559,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <div class="tool-pane active" id="pane-home">
       <div class="section-title">🧰 实用工具箱</div>
       <div class="tool-grid">
-        <div class="tool-entry" onclick="showTool('calc')"><span class="te-ic">🧮</span><div class="te-tx">预算计算器</div><div class="te-sub">算清花多少</div></div>
-        <div class="tool-entry" onclick="showTool('phrase')"><span class="te-ic">🗣️</span><div class="te-tx">日语速查</div><div class="te-sub">50句·可朗读</div></div>
-        <div class="tool-entry" onclick="showTool('pack')"><span class="te-ic">🎒</span><div class="te-tx">行李清单</div><div class="te-sub">逐项打勾</div></div>
-        <div class="tool-entry" onclick="showTool('visit')"><span class="te-ic">✅</span><div class="te-tx">打卡清单</div><div class="te-sub">足迹进度</div></div>
-        <div class="tool-entry" onclick="showTool('emergency')"><span class="te-ic">🚨</span><div class="te-tx">紧急联系</div><div class="te-sub">建议截图</div></div>
+        <div class="tool-entry" onclick="showTool('calc')"><span class="te-ic te-c1">🧮</span><div class="te-tx">预算计算器</div><div class="te-sub">算清花多少</div></div>
+        <div class="tool-entry" onclick="showTool('phrase')"><span class="te-ic te-c2">🗣️</span><div class="te-tx">日语速查</div><div class="te-sub">50句·可朗读</div></div>
+        <div class="tool-entry" onclick="showTool('pack')"><span class="te-ic te-c3">🎒</span><div class="te-tx">行李清单</div><div class="te-sub">逐项打勾</div></div>
+        <div class="tool-entry" onclick="showTool('visit')"><span class="te-ic te-c4">✅</span><div class="te-tx">打卡清单</div><div class="te-sub">足迹进度</div></div>
+        <div class="tool-entry" onclick="showTool('rate')"><span class="te-ic te-c5">💴</span><div class="te-tx">汇率换算</div><div class="te-sub">日元⇄人民币</div></div>
+        <div class="tool-entry" onclick="showTool('ledger')"><span class="te-ic te-c6">📒</span><div class="te-tx">旅行记账</div><div class="te-sub">边花边记</div></div>
+        <div class="tool-entry" onclick="showTool('season')"><span class="te-ic te-c7">🌸</span><div class="te-tx">季节查询</div><div class="te-sub">花历花火灯饰</div></div>
+        <div class="tool-entry" onclick="showTool('planner')"><span class="te-ic te-c8">🧩</span><div class="te-tx">行程规划</div><div class="te-sub">自动生成行程</div></div>
+        <div class="tool-entry" onclick="showTool('emergency')"><span class="te-ic te-c9">🚨</span><div class="te-tx">紧急联系</div><div class="te-sub">建议截图</div></div>
       </div>
       <div class="card"><p style="font-size:12.5px;color:#4a5568;">所有勾选与记录都保存在你自己的手机上，退出再进来不会丢。</p></div>
     </div>
@@ -616,6 +718,67 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
       <div class="visit-hero" id="visitHero"></div>
       <div id="visitList"></div>
     </div>
+    <div class="tool-pane" id="pane-rate">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">💴 汇率换算</div>
+      <div class="rate-status" id="rateStatus">正在获取实时汇率…<button class="rate-refresh" onclick="fetchRate(true)">刷新</button></div>
+      <div class="rate-box"><label>日元 JPY</label><input id="rateJpy" type="number" inputmode="decimal" placeholder="输入日元金额" oninput="onRateInput('jpy')"></div>
+      <div class="rate-quick">
+        <button class="rate-q" onclick="quickJpy(1000)">1000日元</button>
+        <button class="rate-q" onclick="quickJpy(5000)">5000日元</button>
+        <button class="rate-q" onclick="quickJpy(10000)">1万日元</button>
+        <button class="rate-q" onclick="quickJpy(50000)">5万日元</button>
+      </div>
+      <div class="rate-box"><label>人民币 CNY</label><input id="rateCny" type="number" inputmode="decimal" placeholder="自动换算人民币" oninput="onRateInput('cny')"></div>
+      <div class="rate-set">汇率：1 人民币 = <input id="rateManual" type="number" inputmode="decimal" step="0.01"> 日元 <button class="rate-refresh" onclick="saveManualRate()">记住</button></div>
+      <p class="rate-hint">全站价格按 1人民币≈20日元 估算；这里联网取实时汇率（每日更新），网络不通时自动用估算值；汇率也可手动修改并记住。</p>
+    </div>
+    <div class="tool-pane" id="pane-ledger">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">📒 旅行记账（自动保存）</div>
+      <div class="led-hero"><div class="led-total" id="ledTotal">0 日元</div><div class="led-cny" id="ledCny">约 0 人民币</div><div class="led-budget" id="ledBudget"></div></div>
+      <div class="led-cats" id="ledCats"></div>
+      <div class="led-row"><input id="ledAmt" type="number" inputmode="numeric" placeholder="金额（日元）"><input id="ledNote" type="text" placeholder="备注（可选）" maxlength="20"></div>
+      <div class="led-row"><button class="led-add" style="width:100%" onclick="addLedger()">＋ 记一笔</button></div>
+      <div class="led-sum" id="ledSum"></div>
+      <div id="ledList"></div>
+      <button class="led-clear" onclick="clearLedger()">↩ 清空全部账目</button>
+    </div>
+    <div class="tool-pane" id="pane-season">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">🌸 季节查询（花历·花火·祭典·灯饰）</div>
+      <div class="season-months" id="seasonMonths"></div>
+      <div id="seasonBody"></div>
+      <p class="season-note">花期、花火每年随气候微调：本页按 2026 年实际日程与历年规律整理（核实于 2026-09），2027 年日程公布后免费更新。</p>
+    </div>
+    <div class="tool-pane" id="pane-planner">
+      <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
+      <div class="tool-pane-title">🧩 行程规划器（选条件自动生成）</div>
+      <div class="pl-step"><span class="n">1</span>玩几天</div>
+      <div class="pl-opts" id="plDays">
+        <div class="pl-opt" data-v="3" onclick="pickPl('days',3)">3天</div>
+        <div class="pl-opt" data-v="5" onclick="pickPl('days',5)">5天</div>
+        <div class="pl-opt" data-v="7" onclick="pickPl('days',7)">7天</div>
+        <div class="pl-opt" data-v="10" onclick="pickPl('days',10)">10天</div>
+      </div>
+      <div class="pl-step"><span class="n">2</span>兴趣（可多选）</div>
+      <div class="pl-opts" id="plInts">
+        <div class="pl-opt" data-v="classic" onclick="pickPl('ints','classic')">经典打卡</div>
+        <div class="pl-opt" data-v="food" onclick="pickPl('ints','food')">美食探店</div>
+        <div class="pl-opt" data-v="anime" onclick="pickPl('ints','anime')">二次元</div>
+        <div class="pl-opt" data-v="family" onclick="pickPl('ints','family')">亲子友好</div>
+        <div class="pl-opt" data-v="shop" onclick="pickPl('ints','shop')">购物扫货</div>
+        <div class="pl-opt" data-v="night" onclick="pickPl('ints','night')">夜景浪漫</div>
+      </div>
+      <div class="pl-step"><span class="n">3</span>节奏</div>
+      <div class="pl-opts" id="plPace">
+        <div class="pl-opt" data-v="easy" onclick="pickPl('pace','easy')">轻松（睡够再出门）</div>
+        <div class="pl-opt" data-v="std" onclick="pickPl('pace','std')">标准</div>
+        <div class="pl-opt" data-v="full" onclick="pickPl('pace','full')">暴走（值回机票）</div>
+      </div>
+      <button class="pl-gen" onclick="genPlan()">✨ 生成我的行程</button>
+      <div id="plResult"></div>
+    </div>
     <div class="tool-pane" id="pane-emergency">
       <button class="tool-back" onclick="showTool('home')">← 返回工具箱</button>
       <div class="tool-pane-title">🚨 紧急联系方式（建议截图保存）</div>
@@ -633,7 +796,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <p style="font-size:11.5px;color:#718096;margin:6px 0 0;padding:0 4px;">📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。日本紧急电话接通后可说 "Chinese" 安排中文翻译。</p>
 
     </div>
-    <div class="copyright">© 东京自由行实操手册 · 交互版 v1.2.0 · 最后更新：2026-09-06</div>
+    <div class="copyright">© 东京自由行实操手册 · 交互版 v1.3.0 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 底部导航 -->
@@ -1117,6 +1280,14 @@ const PACK_LIST = [
 ];
 
 const CHANGELOGS = [
+  { v:"v1.3", date:"2026-09-06", title:"工具箱扩到9个：能算账、能查季节、能自动排行程", logs:[
+    {t:"add", txt:"新增<b>汇率换算</b>：日元⇄人民币双向换算，联网取当日实时汇率，也可手动改"},
+    {t:"add", txt:"新增<b>旅行记账</b>：分类记一笔、自动折人民币，直接对照预算计算器"},
+    {t:"add", txt:"新增<b>季节查询</b>：12个月花历/花火/祭典/灯饰/穿衣，按2026真实日程整理"},
+    {t:"add", txt:"新增<b>行程规划器</b>：选天数+兴趣+节奏自动匹配路线，可删改、保存、复制行程单"},
+    {t:"up", txt:"工具箱升级为<b>九宫格</b>，图标卡片重新设计，更大更清楚"},
+    {t:"up", txt:"避坑指南改为<b>分类折叠</b>，点小标题展开，不用一直往下拉"}
+  ]},
   { v:"v1.2", date:"2026-09-06", title:"工具箱升级，手册从「能看」变「能用」", logs:[
     {t:"add", txt:"新增<b>工具箱</b>：日语速查、行李清单、打卡清单统一入口"},
     {t:"add", txt:"日语升级为<b>50句场景速查</b>：6大场景分类+罗马音+点按喇叭朗读"},
@@ -1149,6 +1320,71 @@ const CHANGELOGS = [
     {t:"fix", txt:"修复7天长路线展开内容被截断的问题"},
     {t:"up", txt:"预算计算器选项精简，选中联动显示明细"},
     {t:"data", txt:"迪士尼门票更新为2026官方动态票价"}
+  ]}
+];
+
+const SEASON = [
+  { m:1, weather:"2～9℃，干冷晴朗，偶有小雨夹雪", wear:"厚羽绒+围巾+保暖鞋，室内暖气足注意穿脱", crowd:"元旦初诣人多，中下旬转淡，全年机酒低价期", events:[
+    {ic:"🎍", name:"新年初诣", when:"1/1-3", tip:"明治神宫、浅草寺排队祈福，求御守、抽御签；多数商铺年初休息"},
+    {ic:"🛍️", name:"初卖福袋", when:"1/2 起", tip:"百货和品牌福袋开售，内容物价值常翻倍，热门店需排队"},
+    {ic:"🌸", name:"早梅报春", when:"1月下旬-2月", tip:"汤岛天满宫梅花率先开放，人少好拍"}
+  ]},
+  { m:2, weather:"3～10℃，全年最冷，干燥少雪", wear:"羽绒+保暖内层，月底可减一层", crowd:"全年最淡、性价比最高（避开国内春节档）", events:[
+    {ic:"🌸", name:"梅花季", when:"2月全月", tip:"汤岛天满宫梅祭、靖国神社，粉色花海配老街"},
+    {ic:"💡", name:"灯饰尾声", when:"至2月中旬", tip:"丸之内、Caretta汐留灯饰中旬收官，圣诞没赶上还能看尾巴"}
+  ]},
+  { m:3, weather:"7～14℃，早春早晚凉、温差大", wear:"薄毛衣+风衣/薄外套，随身一件", crowd:"下旬樱花季启动，酒店越早订越贵", events:[
+    {ic:"🌸", name:"樱花初花", when:"通常3月下旬", tip:"东京常年3月最后一周开花（2026年约3/21），满开晚一周；目黑川、上野、千鸟渊、新宿御苑"},
+    {ic:"⏰", name:"订房提示", when:"花期前", tip:"满开日房价翻倍，建议提前3-4个月订；花前线预报1月起发布"}
+  ]},
+  { m:4, weather:"12～20℃，全年最舒适的月份之一", wear:"长袖+薄外套，下旬可单穿", crowd:"上旬满开高峰+月底黄金周，日本人也出游", events:[
+    {ic:"🌸", name:"晚樱", when:"4月上旬", tip:"新宿御苑有晚樱品种，错峰也赶得上"},
+    {ic:"💜", name:"紫藤", when:"4月下旬-5月初", tip:"市内龟户天神社；栃木足利花卉公园是世界级紫藤夜景"},
+    {ic:"🎏", name:"黄金周", when:"4/29-5/5", tip:"日本全国出游高峰，景点拥挤、部分小店休息，能避则避"}
+  ]},
+  { m:5, weather:"17～24℃，新绿清爽少雨", wear:"短袖+薄外套，最舒服的穿衣季", crowd:"黄金周后迅速回落，体验感极佳", events:[
+    {ic:"⛩️", name:"三社祭", when:"5月第三周末（2026:5/15-17）", tip:"浅草·东京三大祭之一，约百台神舆巡街，想看大游行提前查当日时段"},
+    {ic:"💐", name:"春日花海", when:"全月", tip:"昭和纪念公园粉蝶花/罂粟，近郊玫瑰园"},
+    {ic:"🎆", name:"足立花火大会", when:"2026:5/30", tip:"东京夏季花火季开场，荒川河川敷约1.3万发"}
+  ]},
+  { m:6, weather:"20～27℃，梅雨季（6月初-7月中）潮湿多雨", wear:"透气棉麻+折叠伞+防水鞋，空调房备薄衫", crowd:"雨季游客少、机酒便宜，多排室内行程", events:[
+    {ic:"💠", name:"紫阳花（绣球）", when:"6月、中旬最盛", tip:"文京紫阳花节(2026:6/6-14)、白山神社、飞鸟山；镰仓明月院是关东第一"},
+    {ic:"⛩️", name:"山王祭", when:"偶数年（2026:6/7-17）", tip:"日枝神社·江户三大祭，偶数年才有大型巡行，2026正好赶上"},
+    {ic:"☔", name:"梅雨提示", when:"全月", tip:"雨不大但缠绵，正好安排美术馆、百货、teamLab"}
+  ]},
+  { m:7, weather:"24～31℃，梅雨后暴晒闷热", wear:"短袖+防晒+遮阳伞，小风扇毛巾多补水", crowd:"暑假启动，花火当日周边人潮巨大", events:[
+    {ic:"🎆", name:"隅田川花火大会", when:"2026:7/25 19:00-20:30", tip:"东京规模最大约2万发，浅草会场，下午就要占位，想舒服选付费席或周边高楼"},
+    {ic:"🏮", name:"靖国みたま祭", when:"2026:7/13-16", tip:"3万盏灯笼点亮夏夜，免费，氛围最佳时段在入夜后"},
+    {ic:"🌻", name:"向日葵", when:"7月中下旬起", tip:"清濑向日葵节、昭和纪念公园金色花田"},
+    {ic:"🎆", name:"其他花火", when:"7月下旬", tip:"立川昭和纪念公园7/25、东京竞马场7/21（付费）"}
+  ]},
+  { m:8, weather:"25～32℃，全年最热最湿，午后多雷阵雨", wear:"最薄短袖+强防晒，夜祭备薄衣", crowd:"盂兰盆节(8月中)日本人返乡，市区反而略空", events:[
+    {ic:"🎆", name:"花火续篇", when:"2026:葛饰7/28、江户川8/1、板桥8/1、神宫外苑8/8", tip:"江户川与板桥同日对打选一边；2027日程提前1-2个月公布"},
+    {ic:"⛩️", name:"深川八幡祭", when:"2026:8/12-16（16日大渡御）", tip:"富冈八幡宫·三年一度本祭2026正逢，别名泼水祭，观众向神舆泼水"},
+    {ic:"💃", name:"高圆寺阿波踊", when:"2026:8/29-30", tip:"东京规模最大阿波踊，上万人沿街起舞，夏夜祭典天花板"},
+    {ic:"🛍️", name:"夏季大促", when:"全月", tip:"百货夏促+奥莱折扣，扫货好时机"}
+  ]},
+  { m:9, weather:"21～28℃，暑气渐退仍闷热，台风季高峰", wear:"短袖为主+薄长袖，随身带伞", crowd:"暑假结束转淡，价格回落", events:[
+    {ic:"🌀", name:"台风季", when:"8-10月、9月最多", tip:"多为大雨而非正面登陆，出行看JMA预报，备好室内替代行程"},
+    {ic:"🌾", name:"彼岸花·胡枝子", when:"9月中下旬", tip:"向岛百花园胡枝子隧道、近郊彼岸花田"},
+    {ic:"🌙", name:"十五夜", when:"中秋前后", tip:"日本赏月称月见，寺社有月见活动，便利店卖月见团子"}
+  ]},
+  { m:10, weather:"15～22℃，秋高气爽，最舒适月份", wear:"长袖+薄外套，下旬加针织", crowd:"整体舒适，仅万圣节周末涩谷特殊", events:[
+    {ic:"🍂", name:"早红叶", when:"10月下旬起", tip:"市区尚绿，高尾山、奥多摩山区先红，适合一日游"},
+    {ic:"🌼", name:"秋花", when:"全月", tip:"昭和纪念公园扫帚草变红、波斯菊花海"},
+    {ic:"🎃", name:"万圣节", when:"10/31前后", tip:"涩谷近年安保管制、街头禁酒，不建议人挤人；迪士尼/三丽鸥主题活动更稳"}
+  ]},
+  { m:11, weather:"9～17℃，干爽通透，早晚凉", wear:"针织+风衣/薄羽绒，早晚加衣", crowd:"下旬红叶银杏高峰，酒店渐涨", events:[
+    {ic:"🍁", name:"红叶", when:"市区11月下旬-12/10", tip:"2026预测峰值约11/29起；六义园、明治神宫外苑、新宿御苑，夜间点灯更美"},
+    {ic:"💛", name:"银杏", when:"11月中-12月初", tip:"神宫外苑银杏并木金黄隧道、八王子甲州街道(11月中下)、东京站行幸通"},
+    {ic:"🏮", name:"酉之市", when:"11月酉日（一酉/二酉）", tip:"浅草鹫神社、花园神社，买开运熊手，夜市氛围拉满"},
+    {ic:"💡", name:"灯饰点灯", when:"11月中旬起", tip:"丸之内(2025年11/13点灯)、Caretta汐留陆续亮起"}
+  ]},
+  { m:12, weather:"4～12℃，干冷晴天多", wear:"羽绒+围巾+手套，圣诞跨年房价高", crowd:"圣诞(12/23-25)、跨年两个高峰", events:[
+    {ic:"💡", name:"灯饰巅峰", when:"12月全月", tip:"涩谷青之洞窟(通常12月初-12/25，17-22点免费)、Caretta迪士尼主题、丸之内、读卖乐园(到次年4月)"},
+    {ic:"🎄", name:"圣诞市集", when:"12月", tip:"明治神宫、六本木、日比谷市集，热红酒配德式小食"},
+    {ic:"🔔", name:"跨年", when:"12/31", tip:"寺院除夜之钟108响、明治神宫初诣；涩谷跨年有管制，推荐东京塔或神社"},
+    {ic:"🛍️", name:"年末打折", when:"下旬", tip:"年末SALE+福袋预告，退税排队预留时间"}
   ]}
 ];
 
@@ -1400,10 +1636,11 @@ function renderPitfallList() {
     groups.forEach(g => {
         const items = PITFALLS.filter(p=>p.type===g.key);
         if(items.length===0) return;
-        html += `<div class="pitfall-group-title">${g.icon} ${g.label}（${items.length}条）</div>`;
+        let inner = '';
         items.forEach(item => {
-            html += `<div class="card pitfall"><div class="card-title" onclick="togglePitfall(${item.id})"><span>${item.title}</span></div><div class="card-detail open" id="pitfall-${item.id}">${item.content}</div></div>`;
+            inner += `<div class="card pitfall"><div class="card-title" onclick="togglePitfall(${item.id})"><span>${item.title}</span></div><div class="card-detail open" id="pitfall-${item.id}">${item.content}</div></div>`;
         });
+        html += `<div class="pf-group collapse"><div class="pf-group-head" onclick="this.parentNode.classList.toggle('collapse')"><span>${g.icon} ${g.label}（${items.length}条）</span><span class="pf-arrow">▼</span></div><div class="pf-body">${inner}</div></div>`;
     });
     list.innerHTML = html;
 }
@@ -1611,6 +1848,201 @@ window.setClFilter = k => {
     if(!c.classList.contains('open')) c.classList.add('open');
     renderChangelog();
 };
+
+// ===== v1.3 汇率换算 =====
+let fxRate = parseFloat(localStorage.getItem('tokyo_rate')) || 20;
+window.fetchRate = function(manual){
+    const st = document.getElementById('rateStatus');
+    if(manual) st.className='rate-status', st.innerHTML='正在获取实时汇率…<button class="rate-refresh" onclick="fetchRate(true)">刷新</button>';
+    fetch('https://open.er-api.com/v6/latest/CNY')
+      .then(r=>r.json())
+      .then(d=>{
+        if(d && d.result==='success' && d.rates && d.rates.JPY){
+          fxRate = +(+d.rates.JPY).toFixed(2);
+          localStorage.setItem('tokyo_rate', fxRate);
+          document.getElementById('rateManual').value = fxRate;
+          const dt = d.time_last_update_utc ? d.time_last_update_utc.slice(0,16) : '';
+          st.className='rate-status live';
+          st.innerHTML=`实时汇率：1 人民币 ≈ ${fxRate} 日元（${dt}更新）<button class="rate-refresh" onclick="fetchRate(true)">刷新</button>`;
+          onRateInput('jpy'); renderLedger();
+        }
+      })
+      .catch(()=>{
+        document.getElementById('rateManual').value = fxRate;
+        st.className='rate-status';
+        st.innerHTML='当前用估算汇率：1 人民币 ≈ '+fxRate+' 日元（联网失败，可手动改）<button class="rate-refresh" onclick="fetchRate(true)">重试</button>';
+      });
+};
+window.onRateInput = function(src){
+    const j=document.getElementById('rateJpy'), c=document.getElementById('rateCny');
+    if(!j||!c) return;
+    if(src==='jpy'){ const v=parseFloat(j.value); c.value = v? (v/fxRate).toFixed(2):''; }
+    else { const v=parseFloat(c.value); j.value = v? Math.round(v*fxRate):''; }
+};
+window.quickJpy = v => { document.getElementById('rateJpy').value=v; onRateInput('jpy'); };
+window.saveManualRate = function(){
+    const v=parseFloat(document.getElementById('rateManual').value);
+    if(!v||v<=0){alert('请输入正确汇率');return;}
+    fxRate=v; localStorage.setItem('tokyo_rate',fxRate);
+    const st=document.getElementById('rateStatus'); st.className='rate-status';
+    st.innerHTML='已设为：1 人民币 ≈ '+fxRate+' 日元（手动）<button class="rate-refresh" onclick="fetchRate(true)">取实时</button>';
+    onRateInput('jpy'); renderLedger();
+};
+function initRate(){ document.getElementById('rateManual').value=fxRate; fetchRate(false); }
+
+// ===== v1.3 旅行记账 =====
+const LED_CATS=[
+  {k:'food',ic:'🍜',name:'餐饮'},{k:'traffic',ic:'🚃',name:'交通'},{k:'hotel',ic:'🏨',name:'住宿'},
+  {k:'ticket',ic:'🎫',name:'门票'},{k:'shop',ic:'🛍️',name:'购物'},{k:'other',ic:'📝',name:'其他'}
+];
+let ledger = JSON.parse(localStorage.getItem('tokyo_ledger')||'[]');
+let ledCat='food';
+function saveLedger(){localStorage.setItem('tokyo_ledger',JSON.stringify(ledger));}
+window.addLedger=function(){
+  const amt=parseFloat(document.getElementById('ledAmt').value);
+  if(!amt||amt<=0){alert('先填金额（日元）');return;}
+  const note=document.getElementById('ledNote').value.trim();
+  ledger.unshift({t:Date.now(),amt:Math.round(amt),cat:ledCat,note});
+  saveLedger();
+  document.getElementById('ledAmt').value='';document.getElementById('ledNote').value='';
+  renderLedger();
+};
+window.delLedger=function(ts){ ledger=ledger.filter(x=>x.t!==ts);saveLedger();renderLedger(); };
+window.pickLedCat=function(k){ledCat=k;renderLedger();};
+window.clearLedger=function(){ if(!confirm('确定清空全部账目？'))return; ledger=[];saveLedger();renderLedger(); };
+function renderLedger(){
+    const box1=document.getElementById('ledCats'); if(!box1) return;
+    box1.innerHTML=LED_CATS.map(c=>`<div class="led-cat ${ledCat===c.k?'on':''}" onclick="pickLedCat('${c.k}')">${c.ic} ${c.name}</div>`).join('');
+    const total=ledger.reduce((s,x)=>s+x.amt,0);
+    document.getElementById('ledTotal').innerText=Number(total).toLocaleString('zh-CN')+' 日元';
+    document.getElementById('ledCny').innerText='约 '+Number(Math.round(total/fxRate)).toLocaleString('zh-CN')+' 人民币（按1:'+fxRate+'）';
+    let bh='';
+    const tc=document.getElementById('calcTotalCny');
+    if(tc){ const m=tc.innerText.replace(/,/g,'').match(/[\d.]+/); const budgetCny=m?parseFloat(m[0]):0;
+      if(budgetCny>0){ const spentCny=Math.round(total/fxRate); const pct=Math.round(spentCny/budgetCny*100); const left=budgetCny-spentCny;
+        bh=`预算 ${Number(budgetCny).toLocaleString('zh-CN')}元 · 已花 ${Number(spentCny).toLocaleString('zh-CN')}元 · ${left>=0?'剩余':'超支'} ${Number(Math.abs(left)).toLocaleString('zh-CN')}元（${pct}%）`; }
+    }
+    document.getElementById('ledBudget').innerText=bh;
+    const sum={};LED_CATS.forEach(c=>sum[c.k]=0);
+    ledger.forEach(x=>{sum[x.cat]=(sum[x.cat]||0)+x.amt;});
+    document.getElementById('ledSum').innerHTML = ledger.length? '共 '+ledger.length+' 笔　'+LED_CATS.filter(c=>sum[c.k]).map(c=>`${c.ic}${Number(sum[c.k]).toLocaleString('zh-CN')}`).join('　') : '按分类记，随时对照预算';
+    document.getElementById('ledList').innerHTML = ledger.length? ledger.map(x=>{
+      const c=LED_CATS.find(z=>z.k===x.cat)||LED_CATS[5];
+      return `<div class="led-item"><div class="led-ic">${c.ic}</div><div class="led-main"><div class="led-name">${c.name}${x.note?' · '+x.note:''}</div><div class="led-note">${new Date(x.t).toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}</div></div><div class="led-amt">${Number(x.amt).toLocaleString('zh-CN')}日元<small>约${Number(Math.round(x.amt/fxRate)).toLocaleString('zh-CN')}元</small></div><button class="led-del" onclick="delLedger(${x.t})">✕</button></div>`;
+    }).join('') : '<div class="card" style="text-align:center;color:#a0aec0;font-size:12.5px;">还没有记录，玩起来后记第一笔吧</div>';
+}
+
+// ===== v1.3 季节查询 =====
+const SEASON_TAG=['','初诣','梅','梅','樱','花','紫阳','花火','祭典','台风','秋','红叶','灯饰'];
+let seasonCur=(new Date().getMonth()+1);
+function renderSeasonMonths(){
+    const box=document.getElementById('seasonMonths');
+    box.innerHTML=SEASON.map(s=>`<div class="sm ${seasonCur===s.m?'on':''}" onclick="pickSeason(${s.m})">${s.m}月<small>${SEASON_TAG[s.m]}</small></div>`).join('');
+    box.scrollLeft = Math.max(0,(seasonCur-3)*62);
+    renderSeason();
+}
+window.pickSeason=m=>{seasonCur=m;renderSeasonMonths();};
+function renderSeason(){
+    const s=SEASON.find(x=>x.m===seasonCur);
+    let h=`<div class="season-wcard"><div class="sw-row"><b>🌡 气温</b><span>${s.weather}</span></div><div class="sw-row"><b>👗 穿衣</b><span>${s.wear}</span></div><div class="sw-row"><b>👥 人流</b><span>${s.crowd}</span></div></div>`;
+    h+=s.events.map(e=>`<div class="sev"><div class="sev-top"><span class="sev-ic">${e.ic}</span><span class="sev-name">${e.name}</span><span class="sev-when">${e.when}</span></div><div class="sev-tip">${e.tip}</div></div>`).join('');
+    document.getElementById('seasonBody').innerHTML=h;
+}
+
+// ===== v1.3 行程规划器 =====
+let plState={days:null,ints:[],pace:null,routeId:null,off:{}};
+window.pickPl=function(k,v){
+    if(k==='days')plState.days=v;
+    else if(k==='pace')plState.pace=v;
+    else { const i=plState.ints.indexOf(v); i>-1?plState.ints.splice(i,1):plState.ints.push(v); }
+    paintPlOpts();
+};
+function paintPlOpts(){
+    document.querySelectorAll('#plDays .pl-opt').forEach(el=>el.classList.toggle('on',+el.dataset.v===plState.days));
+    document.querySelectorAll('#plInts .pl-opt').forEach(el=>el.classList.toggle('on',plState.ints.includes(el.dataset.v)));
+    document.querySelectorAll('#plPace .pl-opt').forEach(el=>el.classList.toggle('on',el.dataset.v===plState.pace));
+}
+function planCandidates(){
+    let cand=ROUTES.filter(r=>r.days===plState.days);
+    if(!cand.length) cand=ROUTES.filter(r=>r.days===7); // 10天用7天全景打底
+    return cand;
+}
+function matchRoute(){
+    const cand=planCandidates();
+    if(cand.length===1) return cand[0];
+    const typeMap={classic:'classic',food:'food',anime:'anime',family:'family'};
+    let best=cand[0],bs=-1;
+    cand.forEach(r=>{
+        let s=0;
+        plState.ints.forEach(i=>{ if(typeMap[i]&&r.type===typeMap[i]) s+=2; });
+        const all=r.days_detail.map(x=>x.items.map(i=>i.text).join('')).join('');
+        if(plState.ints.includes('shop')&&/购|银座|表参道|竹下通/.test(all))s+=1;
+        if(plState.ints.includes('night')&&/夜景|SKY|彩虹/.test(all))s+=1;
+        if(s>bs){bs=s;best=r;}
+    });
+    if(plState.routeId && cand.some(r=>r.id===plState.routeId)) best=ROUTES.find(r=>r.id===plState.routeId);
+    return best;
+}
+window.genPlan=function(){
+    if(!plState.days){alert('先选玩几天');return;}
+    if(!plState.pace){alert('再选个节奏');return;}
+    plState.routeId=null; plState.off={}; renderPlan();
+};
+window.switchRoute=function(){
+    const cand=planCandidates();
+    if(cand.length<=1){alert('这个天数只有一条精选路线，换个天数选择更多');return;}
+    const idx=cand.findIndex(r=>r.id===plState.routeId);
+    plState.routeId=cand[(idx+1)%cand.length].id; plState.off={}; renderPlan();
+};
+window.toggleBlk=function(key){ plState.off[key]=!plState.off[key]; renderPlan(); };
+window.resetPlanner=function(){plState={days:null,ints:[],pace:null,routeId:null,off:{}};localStorage.removeItem('tokyo_plan');paintPlOpts();document.getElementById('plResult').innerHTML='';};
+function copyPlain(text){
+    if(navigator.clipboard) navigator.clipboard.writeText(text);
+    else {const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
+}
+window.copyPlan=function(){
+    const r=ROUTES.find(x=>x.id===plState.routeId); if(!r)return;
+    let txt='【'+r.name+'】\n';
+    r.days_detail.forEach((d,di)=>{
+        txt+='\n'+d.day+(d.cost?'（约'+d.cost*20+'日元/'+d.cost+'人民币）':'')+'\n';
+        d.items.forEach((it,ii)=>{ if(!plState.off[di+'-'+ii]) txt+=(it.time?it.time+' ':'')+it.text+'\n'; });
+    });
+    copyPlain(txt); alert('行程单已复制，可粘贴发给同行人或备忘录');
+};
+function savePlan(){localStorage.setItem('tokyo_plan',JSON.stringify(plState));}
+function renderPlan(){
+    const r=matchRoute(); plState.routeId=r.id; savePlan(); paintPlOpts();
+    if(plState.pace==='easy'){ r.days_detail.forEach((d,di)=>{ const k=di+'-'+(d.items.length-1); if(!(k in plState.off))plState.off[k]=true; }); }
+    let totalCost=0, kept=0, all=0, body='';
+    r.days_detail.forEach((d,di)=>{
+        let dh='';
+        d.items.forEach((it,ii)=>{
+            const key=di+'-'+ii; all++; const off=!!plState.off[key]; if(!off)kept++;
+            dh+=`<div class="pl-blk ${off?'off':''}" onclick="toggleBlk('${key}')"><span class="pl-check">${off?'':'✓'}</span><div><div class="pl-time">${it.time||''}</div><div class="pl-text">${it.text}</div>${it.book?`<div class="pl-book">🔖 ${it.book}</div>`:''}${it.tip?`<div class="pl-tip">💡 ${it.tip}</div>`:''}</div></div>`;
+        });
+        totalCost+=d.cost||0;
+        body+=`<div class="pl-day"><div class="pl-day-head"><span>${d.day}</span><span>约${(d.cost||0)*20}日元（${d.cost||0}人民币）/人</span></div>${dh}</div>`;
+    });
+    let favHint='';
+    if(favorites.length){
+        const allText=r.days_detail.map(d=>d.items.map(i=>i.text).join('')).join('');
+        const inPlan=favorites.filter(id=>{const s=SPOTS_AND_FOOD.find(x=>x.id===id);return s&&allText.includes(s.name.slice(0,3));}).length;
+        favHint=`<div class="pl-favhint">❤️ 你收藏了 ${favorites.length} 个点，其中 ${inPlan} 个在这条路线里；没覆盖的点可去「分区」看位置后自行加入。</div>`;
+    }
+    const extra = r.days!==plState.days?`<div class="pl-favhint">没有10天的现成路线，先用最丰富的7天全景线打底，多出的3天可安排购物日、迪士尼二刷或近郊一日游（镰仓/河口湖）。</div>`:'';
+    document.getElementById('plResult').innerHTML=`
+      <div class="pl-rname">${r.name}</div>
+      <div class="pl-rsum">${r.days}天 · 保留 ${kept}/${all} 个安排 · 基础花销约 ${Number(totalCost*20).toLocaleString('zh-CN')} 日元（${totalCost}人民币，不含机票购物）</div>
+      ${extra}${favHint}
+      <div class="pl-actions"><button class="pl-btn ghost" onclick="switchRoute()">🔄 换一条</button><button class="pl-btn ghost" onclick="copyPlan()">📑 复制行程单</button><button class="pl-btn dark" onclick="resetPlanner()">重选</button></div>
+      ${body}
+      <p class="rate-hint">点任意安排可去掉/找回（划掉=当天不安排），选择自动保存在本机；标 🔖 的是需预约项，去「预约」栏看订法。</p>`;
+    document.getElementById('plResult').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function initPlanner(){
+    try{ const saved=JSON.parse(localStorage.getItem('tokyo_plan')||'null'); if(saved){plState=saved;paintPlOpts();if(plState.routeId)renderPlan();return;} }catch(e){}
+    paintPlOpts();
+}
 
 // 筛选器绑定
 document.getElementById('filterArea').onchange = updateArea;
@@ -1923,6 +2355,10 @@ renderJapanList();
 renderPackList();
 renderVisitList();
 renderChangelog();
+initRate();
+renderLedger();
+renderSeasonMonths();
+initPlanner();
 initSearch();
 initBudget();
 </script>
