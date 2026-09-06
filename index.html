@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>东京自由行手册（2026最新版）</title>
-<meta name="version" content="1.3.2">
+<meta name="version" content="1.4.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 :root{
@@ -346,9 +346,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .guide-row .gr-ic{font-size:15px;flex-shrink:0;width:24px;text-align:center;line-height:1.5}
 .guide-row b{color:#16294a}
 .guide-tip{margin-top:10px;padding-top:9px;border-top:1px dashed #d9e0ea;font-size:12px;color:#718096;line-height:1.75}
+/* v1.4 激活遮罩与授权水印 */
+#lockMask{position:fixed;inset:0;z-index:3000;background:linear-gradient(150deg,#0d1a30 0%,#1c3560 60%,#2a4a77 100%);display:flex;align-items:center;justify-content:center;padding:26px;overflow-y:auto}
+#lockMask.hide{display:none}
+.lock-card{width:100%;max-width:360px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:30px 24px 24px;text-align:center;color:#fff;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.lock-logo{width:62px;height:62px;border-radius:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;margin:0 auto 12px;font-family:"Songti SC","Noto Serif SC",serif}
+.lock-name{font-size:18px;font-weight:700;letter-spacing:1px}
+.lock-en{font-size:9.5px;letter-spacing:3px;color:#c9a86a;margin-top:3px}
+.lock-ti{font-size:13.5px;margin:18px 0 14px;opacity:.92}
+.lock-input{width:100%;height:46px;border-radius:12px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:16px;letter-spacing:2px;text-align:center;outline:none;font-weight:600}
+.lock-input::placeholder{color:rgba(255,255,255,.4);letter-spacing:1px}
+.lock-input:focus{border-color:#c9a86a;background:rgba(255,255,255,.15)}
+.lock-err{color:#ffc2c2;font-size:12px;min-height:18px;margin-top:8px;opacity:0;transition:opacity .2s}
+.lock-err.show{opacity:1}
+.lock-btn{width:100%;height:46px;margin-top:6px;border:none;border-radius:12px;background:linear-gradient(135deg,#c53030,#9b2c2c);color:#fff;font-size:15px;font-weight:700;letter-spacing:2px;cursor:pointer;box-shadow:0 8px 20px rgba(197,48,48,.35)}
+.lock-btn:active{transform:scale(.98)}
+.lock-peek{margin-top:10px;background:none;border:none;color:rgba(255,255,255,.65);font-size:12px;cursor:pointer;text-decoration:underline}
+.lock-note{font-size:11px;line-height:1.8;color:rgba(255,255,255,.55);margin-top:16px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px}
+.lock-shake{animation:lkshake .4s}
+@keyframes lkshake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+#licMark{position:fixed;right:8px;bottom:64px;z-index:900;font-size:10px;color:rgba(0,0,0,.16);pointer-events:none;letter-spacing:.5px;display:none}
+#licMark.show{display:block}
+.trial-banner{background:linear-gradient(135deg,#c53030,#9b2c2c);color:#fff;border-radius:12px;padding:11px 14px;font-size:12.5px;margin-bottom:14px;line-height:1.6;box-shadow:0 6px 16px rgba(197,48,48,.25);cursor:pointer}
+.trial-banner b{text-decoration:underline}
 </style>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#14213d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="东京手册">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" href="./favicon-32.png">
 </head>
 <body>
+
+<div id="lockMask" class="hide">
+  <div class="lock-card">
+    <div class="lock-logo">東</div>
+    <div class="lock-name">东京自由行手册</div>
+    <div class="lock-en">TOKYO GUIDE · 2026</div>
+    <div class="lock-ti">输入激活码，解锁完整手册</div>
+    <input id="lockInput" class="lock-input" type="text" placeholder="XXXX-XXXX-XXXX" maxlength="14" autocomplete="off" autocapitalize="characters">
+    <div id="lockErr" class="lock-err"></div>
+    <button class="lock-btn" onclick="doUnlock()">立即解锁</button>
+    <button class="lock-peek" onclick="peekHome()">先逛逛首页试看</button>
+    <div class="lock-note">激活码在订单的自动发货消息里，注意查收<br>换手机重新输入同一个码即可，不额外收费</div>
+  </div>
+</div>
+<div id="licMark"></div>
 
 <div class="top-bar">
     <div class="title">东京自由行手册</div>
@@ -489,7 +535,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
         <div class="guide-tip">💡 点任意卡片可展开详情，地址点一下即复制；点 ❤️ 标「想去」、✅ 标「去过」，右上角可全局搜索；所有勾选、记账和收藏都自动保存在你自己的手机上，退出再进不会丢。建议出行前通读一遍，旅途中靠底部导航随用随查。</div>
     </div>
 
-    <div class="copyright">© 东京自由行手册 · 交互版 v1.3.2 · 最后更新：2026-09-06</div>
+    <div class="copyright">© 东京自由行手册 · 交互版 v1.4.0 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 分区攻略 -->
@@ -862,7 +908,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <p style="font-size:11.5px;color:#718096;margin:6px 0 0;padding:0 4px;">📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。日本紧急电话接通后可说 "Chinese" 安排中文翻译。</p>
 
     </div>
-    <div class="copyright">© 东京自由行手册 · 交互版 v1.3.2 · 最后更新：2026-09-06</div>
+    <div class="copyright">© 东京自由行手册 · 交互版 v1.4.0 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 底部导航 -->
@@ -1346,6 +1392,11 @@ const PACK_LIST = [
 ];
 
 const CHANGELOGS = [
+  { v:"v1.4.0", date:"2026-09-06", title:"可装到手机主屏幕，像 App 一样离线使用", logs:[
+    {t:"add", txt:"支持<b>添加到手机主屏幕</b>（PWA）：独立图标、全屏打开、没网也能浏览，体验接近 App"},
+    {t:"up", txt:"新增品牌图标与浏览器标签图标，打开更有辨识度"},
+    {t:"up", txt:"联网时自动保持最新版本，断网自动用本地缓存，持续更新不丢失"}
+  ]},
   { v:"v1.3.2", date:"2026-09-06", title:"视觉底座：设计变量与色彩收敛", logs:[
     {t:"up", txt:"建立全站设计变量（主色/强调色/文字层级/圆角/阴影统一收口），后续整体换风格改一处即可全局生效"},
     {t:"up", txt:"工具箱九宫格配色收敛为统一柔和色系，九色不再跳脱，整体更协调"}
@@ -1624,6 +1675,7 @@ const pages = document.querySelectorAll('.page');
 navItems.forEach(item => {
     item.onclick = function() {
         const target = this.getAttribute('data-page');
+        if(target!=='home' && !isLic()){ openLock(); return; }
         navItems.forEach(n => n.classList.remove('active'));
         this.classList.add('active');
         pages.forEach(p => p.classList.remove('active'));
@@ -1631,6 +1683,54 @@ navItems.forEach(item => {
         window.scrollTo(0, 0);
     };
 });
+
+// ===== v1.4 授权激活（纯前端签名校验，防随手转发）=====
+const _ALPH="23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+const _S=String.fromCharCode(84,103,45,107,121,114,105,110,45,50,48,50,54);
+function _mix(s){let h1=2166136261>>>0,h2=305419896>>>0;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);h1=Math.imul(h1^c,16777619)>>>0;h2=Math.imul(h2+Math.imul(c,2654435761),2246822519)>>>0;}return ((h1^h2)>>>0);}
+function _b32(n,len){let s="";for(let i=0;i<len;i++){s=_ALPH[n%32]+s;n=Math.floor(n/32);}return s;}
+function validCode(raw){
+    let s=(raw||"").toUpperCase().replace(/[^0-9A-Z]/g,"");
+    if(s.length!==12)return null;
+    const head=s.slice(0,4),sig=s.slice(4);let n=0;
+    for(let i=0;i<head.length;i++){const ix=_ALPH.indexOf(head[i]);if(ix<0)return null;n=n*32+ix;}
+    if(n<1)return null;
+    if(_b32(_mix(_S+":"+n),8)!==sig)return null;
+    return {n:n,code:head+"-"+sig.slice(0,4)+"-"+sig.slice(4)};
+}
+let lic=(function(){try{const v=JSON.parse(localStorage.getItem('tokyo_lic_v1')||'null');if(v&&v.c&&validCode(v.c))return v;}catch(e){}return null;})();
+function isLic(){return !!lic;}
+window.openLock=function(){document.getElementById('lockMask').classList.remove('hide');};
+window.peekHome=function(){document.getElementById('lockMask').classList.add('hide');navItems[0].click();};
+window.doUnlock=function(){
+    const inp=document.getElementById('lockInput'),err=document.getElementById('lockErr'),card=document.querySelector('.lock-card');
+    const r=validCode(inp.value);
+    if(!r){err.classList.add('show');err.innerText='激活码不对哦，检查下有没有输错～';card.classList.remove('lock-shake');void card.offsetWidth;card.classList.add('lock-shake');return;}
+    lic={c:r.code,t:Date.now()};localStorage.setItem('tokyo_lic_v1',JSON.stringify(lic));
+    err.classList.remove('show');document.getElementById('lockMask').classList.add('hide');
+    paintLicMark();paintTrial();
+    alert('解锁成功，欢迎使用东京自由行手册～');
+};
+function paintLicMark(){
+    const m=document.getElementById('licMark');
+    if(lic){m.innerText='已授权 ·•••• '+lic.c.slice(-4);m.classList.add('show');}else m.classList.remove('show');
+}
+function paintTrial(){
+    let b=document.getElementById('trialBanner');
+    if(!lic){
+        if(!b){b=document.createElement('div');b.id='trialBanner';b.className='trial-banner';b.onclick=window.openLock;document.querySelector('#page-home .hero').after(b);}
+        b.innerHTML='🔓 你正在试看首页 · <b>点此输入激活码</b>，解锁分区 / 路线 / 住宿 / 预约 / 购物 / 工具箱全部内容';
+    }else if(b)b.remove();
+}
+(function bindLock(){
+    const inp=document.getElementById('lockInput');
+    inp.addEventListener('input',()=>{let s=inp.value.toUpperCase().replace(/[^0-9A-Z]/g,'').slice(0,12);inp.value=s.replace(/(.{4})/g,'$1-').replace(/-$/,'');});
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')doUnlock();});
+    const gs=document.getElementById('globalSearch');
+    gs.addEventListener('focus',()=>{if(!isLic()){gs.blur();window.openLock();}});
+    paintLicMark();paintTrial();
+})();
+if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{});});}
 
 // 渲染分区攻略
 function renderAreaList(area='', type='', tag='') {
