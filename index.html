@@ -7,8 +7,34 @@
 <meta name="version" content="1.3.1">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#faf8f5;color:#2d3748;line-height:1.65;padding-bottom:72px;padding-top:50px;-webkit-font-smoothing:antialiased}
-.top-bar{position:fixed;top:0;left:0;right:0;height:50px;background:linear-gradient(90deg,#152746 0%,#1c3560 55%,#274a78 100%);color:#fff;z-index:1000;display:flex;align-items:center;padding:0 15px;box-shadow:0 2px 14px rgba(21,39,70,.28)}
+:root{
+  /* 品牌主色·藏青系 */
+  --brand-deep:#14213d;
+  --brand:#1c3560;
+  --brand-mid:#2a4a77;
+  --brand-ink:#16294a;
+  /* 强调色·朱红系 */
+  --accent:#c53030;
+  --accent-deep:#9b2c2c;
+  --accent-soft:#fef2f2;
+  --accent-line:#fed7d7;
+  /* 背景与面 */
+  --bg:#faf8f5;
+  --card:#ffffff;
+  --soft:#f6f8fb;
+  --line:#e8e4de;
+  /* 文字层级 */
+  --t1:#2d3748;
+  --t2:#4a5568;
+  --t3:#718096;
+  /* 圆角与阴影 */
+  --r-card:14px;
+  --r-sm:9px;
+  --shadow-card:0 1px 2px rgba(28,39,60,.04),0 4px 14px rgba(28,39,60,.06);
+  --shadow-hero:0 6px 22px rgba(20,33,61,.28)
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--t1);line-height:1.65;padding-bottom:72px;padding-top:50px;-webkit-font-smoothing:antialiased}
+.top-bar{position:fixed;top:0;left:0;right:0;height:50px;background:linear-gradient(90deg,var(--brand-deep) 0%,var(--brand) 55%,var(--brand-mid) 100%);color:#fff;z-index:1000;display:flex;align-items:center;padding:0 15px;box-shadow:0 2px 14px rgba(21,39,70,.28)}
 .top-bar .title{font-size:16px;font-weight:700;flex:1;letter-spacing:.5px}
 .top-bar .search-box{flex:1;max-width:200px;height:32px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:0 15px;color:#fff;font-size:13px;outline:none;user-select:text;-webkit-user-select:text;transition:background .2s,border-color .2s}
 .top-bar .search-box:focus{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.28)}
@@ -20,7 +46,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .page.active { display: block !important; }
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-.card{background:#fff;border-radius:14px;padding:15px;margin-bottom:13px;box-shadow:0 1px 2px rgba(28,39,60,.04),0 4px 14px rgba(28,39,60,.06);border:1px solid rgba(28,39,60,.05);transition:transform .15s ease,box-shadow .2s ease}
+.card{background:var(--card);border-radius:var(--r-card);padding:15px;margin-bottom:13px;box-shadow:var(--shadow-card);border:1px solid rgba(28,39,60,.05);transition:transform .15s ease,box-shadow .2s ease}
 .card:active{transform:scale(.99)}
 .card-title{font-size:15px;font-weight:700;color:#1a2b45;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;letter-spacing:.2px}
 .card-title .tag{font-size:11px;padding:2px 9px;border-radius:20px;background:#f1f4f8;color:#5a6b7d;font-weight:600;letter-spacing:.3px}
@@ -83,16 +109,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .nav-item:active{transform:scale(.92)}
 .nav-icon{font-size:20px;margin-bottom:1px;filter:grayscale(.35);transition:filter .2s}
 .nav-item.active .nav-icon{filter:none}
-.hero{background:linear-gradient(135deg,#14213d 0%,#1c3560 55%,#2a4a77 100%);color:#fff;padding:22px 20px;border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 6px 22px rgba(20,33,61,.28)}
+.hero{background:linear-gradient(135deg,var(--brand-deep) 0%,var(--brand) 55%,var(--brand-mid) 100%);color:#fff;padding:22px 20px;border-radius:16px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:var(--shadow-hero)}
 .hero::before{content:"";position:absolute;right:-40px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.05)}
 .hero::after{content:"";position:absolute;right:40px;bottom:-70px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.04)}
 .hero h2{font-size:21px;margin-bottom:7px;font-weight:700;letter-spacing:.5px;position:relative;z-index:1}
 .hero p{font-size:13px;opacity:.92;margin-bottom:12px;position:relative;z-index:1}
 .hero .badges{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
 .hero .badge{font-size:11px;padding:3px 12px;border-radius:20px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
-.section-title{font-size:16px;font-weight:700;color:#16294a;margin:18px 0 12px;padding-left:11px;border-left:4px solid #c53030;border-radius:2px;letter-spacing:.3px}
+.section-title{font-size:16px;font-weight:700;color:var(--brand-ink);margin:18px 0 12px;padding-left:11px;border-left:4px solid var(--accent);border-radius:2px;letter-spacing:.3px}
 .step-item{display:flex;gap:13px;margin-bottom:14px}
-.step-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#1c3560,#2a4a77);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(28,53,96,.3)}
+.step-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(28,53,96,.3)}
 .step-content{flex:1;font-size:13.5px;color:#3d4a5c}
 .step-content h4{font-size:14.5px;margin-bottom:5px;color:#1a2b45;font-weight:700}
 .budget-calc{background:linear-gradient(180deg,#f4fbf6 0%,#eef8f1 100%);border:1px solid #e0f0e6;border-radius:16px;padding:16px;margin-bottom:16px}
@@ -101,7 +127,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .calc-row select{flex:1;height:38px;border:1px solid #d5e8dc;border-radius:10px;padding:0 12px;font-size:13px;color:#2d3748;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' stroke='%236b8f7a' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 12px center}
 .calc-row select:focus{border-color:#38a169;box-shadow:0 0 0 3px rgba(56,161,105,.12)}
 .calc-detail{font-size:12px;color:#4d6b57;background:rgba(255,255,255,.72);border-left:3px solid #48bb78;padding:7px 11px;border-radius:0 8px 8px 0;margin:-4px 0 13px;line-height:1.55;user-select:text;-webkit-user-select:text}
-.calc-result{text-align:center;padding:13px;background:linear-gradient(135deg,#1c3560,#2a4a77);border-radius:12px;font-size:19px;font-weight:700;color:#fff;margin-top:12px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(28,53,96,.22)}
+.calc-result{text-align:center;padding:13px;background:linear-gradient(135deg,var(--brand),var(--brand-mid));border-radius:12px;font-size:19px;font-weight:700;color:#fff;margin-top:12px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(28,53,96,.22)}
 .japan-item{display:flex;justify-content:space-between;align-items:center;padding:11px 2px;border-bottom:1px solid #f0ece6;font-size:13px}
 .japan-item:last-child{border-bottom:none}
 .japan-jp{color:#1a2b45;font-weight:600;user-select:text;-webkit-user-select:text}
@@ -210,15 +236,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .tool-entry{padding:16px 6px 13px;border-radius:18px;border:1px solid rgba(28,39,60,.06);box-shadow:0 2px 4px rgba(28,39,60,.04),0 8px 20px rgba(28,39,60,.07);transition:transform .15s,box-shadow .2s}
 .tool-entry:active{transform:scale(.95);box-shadow:0 2px 6px rgba(28,39,60,.1)}
 .tool-entry .te-ic{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:23px;margin:0 auto 8px;box-shadow:0 4px 10px rgba(28,39,60,.08)}
-.te-c1{background:linear-gradient(135deg,#eef4ff,#dbe9fe)}
-.te-c2{background:linear-gradient(135deg,#f4f0ff,#e7ddfa)}
-.te-c3{background:linear-gradient(135deg,#fff6ea,#ffe7cc)}
-.te-c4{background:linear-gradient(135deg,#edfdf3,#d4f3e1)}
-.te-c5{background:linear-gradient(135deg,#e9fbf9,#cdf2ed)}
-.te-c6{background:linear-gradient(135deg,#fef9e6,#fcedc4)}
-.te-c7{background:linear-gradient(135deg,#fff0f3,#ffd8e1)}
-.te-c8{background:linear-gradient(135deg,#eeeffe,#d8ddfb)}
-.te-c9{background:linear-gradient(135deg,#fef0ef,#fad4d4)}
+.te-c1{background:linear-gradient(135deg,#eef2f8,#dde5f0)}
+.te-c2{background:linear-gradient(135deg,#f3f0f9,#e4ddf0)}
+.te-c3{background:linear-gradient(135deg,#faf3ea,#f2e6d6)}
+.te-c4{background:linear-gradient(135deg,#eef6f0,#dcebe2)}
+.te-c5{background:linear-gradient(135deg,#ebf6f4,#d8ece8)}
+.te-c6{background:linear-gradient(135deg,#f8f5e8,#efe8d2)}
+.te-c7{background:linear-gradient(135deg,#faf0f3,#f4dfe6)}
+.te-c8{background:linear-gradient(135deg,#eff0f8,#dfe2f0)}
+.te-c9{background:linear-gradient(135deg,#faf0ee,#f2dedb)}
 .tool-entry .te-tx{font-size:13px;font-weight:800;color:#1a2b45}
 .tool-entry .te-sub{font-size:10px;color:#9aa7b5;margin-top:3px;line-height:1.3}
 /* 汇率换算 */
