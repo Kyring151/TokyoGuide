@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>东京自由行攻略手册</title>
-<meta name="version" content="1.3.0">
+<title>东京自由行手册（2026最新版）</title>
+<meta name="version" content="1.3.1">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#faf8f5;color:#2d3748;line-height:1.65;padding-bottom:72px;padding-top:50px;-webkit-font-smoothing:antialiased}
@@ -302,6 +302,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 .pf-group:not(.collapse) .pf-arrow{transform:rotate(180deg)}
 .pf-body{padding-top:8px}
 .pf-group.collapse .pf-body{display:none}
+/* 首页必看知识卡 */
+.know-grid{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.know-cell{background:#f6f8fb;border:1px solid #e8edf4;border-left:3px solid #1c3560;border-radius:9px;padding:8px 10px;font-size:12.5px;line-height:1.62;color:#3d4a5c}
+.know-cell.red{border-left-color:#c53030;background:#fdf6f5}
+.know-cell b{color:#16294a}
+.know-cell.red b{color:#b02a2a}
+.know-cell .kc-t{font-weight:700;color:#16294a;display:block;margin-bottom:1px;font-size:12.5px}
+.know-cell.red .kc-t{color:#c53030}
+.know-hint{font-size:12px;color:#718096;margin:2px 0 5px;line-height:1.6}
+.know-line{display:flex;gap:7px;align-items:flex-start;font-size:12.5px;line-height:1.65;color:#3d4a5c;margin-top:5px}
+.know-line .kl-dot{flex-shrink:0;color:#c53030;font-weight:700}
+.know-line b{color:#16294a}
+/* 使用说明导览 */
+.guide-grid{display:flex;flex-direction:column;gap:7px}
+.guide-row{display:flex;gap:9px;align-items:flex-start;background:#f6f8fb;border-radius:9px;padding:8px 10px;font-size:12.5px;line-height:1.58;color:#3d4a5c}
+.guide-row .gr-ic{font-size:15px;flex-shrink:0;width:24px;text-align:center;line-height:1.5}
+.guide-row b{color:#16294a}
+.guide-tip{margin-top:10px;padding-top:9px;border-top:1px dashed #d9e0ea;font-size:12px;color:#718096;line-height:1.75}
 </style>
 </head>
 <body>
@@ -311,12 +329,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <input type="text" class="search-box" id="globalSearch" placeholder="搜索景点/美食/路线...">
 </div>
 <div class="metro-line"></div>
-<div class="watermark">东京自由行攻略手册 仅供购买者个人使用</div>
+<div class="watermark">东京自由行手册 仅供购买者个人使用</div>
 
 <!-- 首页 -->
 <div class="page active" id="page-home">
     <div class="hero">
-        <h2>东京深度自由行攻略手册</h2>
+        <h2>东京自由行手册</h2>
         <p>2026 最新版 · 本地人实测 · 全程避坑</p>
         <div class="badges">
             <span class="badge">最后更新：2026-09-06</span>
@@ -343,14 +361,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <div class="step-num">1</div>
             <div class="step-content">
                 <h4>签证与入境</h4>
-               提前办理签证：单次签（有效期 3 个月，可停留 15 天）适合首次出行；三年多次签（有效期 3 年，每次最长停留 30 天）适合会再去的人（部分类型首次须在冲绳或东北六县住宿，办理时向代理确认）。出发前 3 天左右填写 *Visit Japan Web*，生成一个二合一二维码（入境审查＋海关申报），截图保存备用，最迟须在落地前 6 小时完成。
+               <div class="know-grid">
+                  <div class="know-cell"><span class="kc-t">📄 单次签证</span>有效期 3 个月、可停留 <b>15 天</b>，第一次去选它就够</div>
+                  <div class="know-cell"><span class="kc-t">📄 三年多次签证</span>有效期 3 年、每次最长 <b>30 天</b>，适合会再去的人；部分类型首次须在冲绳或东北六县住宿，办理时向代理确认</div>
+                  <div class="know-cell red"><span class="kc-t">✈️ Visit Japan Web（VJW）</span>出发前 <b>3 天</b>左右在线填写，生成「入境审查＋海关申报」二合一二维码并<b>截图保存</b>，最迟落地前 6 小时完成</div>
+                </div>
             </div>
         </div>
         <div class="step-item">
             <div class="step-num">2</div>
             <div class="step-content">
                 <h4>交通卡</h4>
-                机场可购买 *Suica / Pasmo* 交通卡，地铁、公交、便利店通用。普通卡离境时可退：退还 500 日元押金＋余额，手续费 220 日元从余额扣除（余额不足 220 日元则免手续费，只退押金）。注意：机场的游客版 *Welcome Suica / Pasmo Passport* 免押金但不可退，卡内余额需花完；用 iPhone 可直接在 Apple 钱包添加手机 Suica，免押金、免退卡、随时手机充值，更省事。
+                <div class="know-hint">地铁、公交、便利店通用，三种卡按情况选：</div>
+                <div class="know-grid">
+                  <div class="know-cell"><span class="kc-t">普通 Suica / Pasmo</span>机场可买、押金 500 日元；离境可退押金和余额，手续费 220 日元（余额不足 220 日元则免手续费，只退押金）</div>
+                  <div class="know-cell"><span class="kc-t">Welcome Suica / Pasmo Passport（游客版）</span>免押金但<b>不可退</b>，卡内余额离境前花完</div>
+                  <div class="know-cell"><span class="kc-t">📱 iPhone 手机 Suica（最省事）</span>直接在 Apple 钱包添加，免押金、免退卡、随时手机充值</div>
+                </div>
             </div>
         </div>
         <div class="step-item">
@@ -369,14 +396,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
             <div class="step-num">4</div>
             <div class="step-content">
                 <h4>支付与换汇</h4>
-                支付宝 / 微信覆盖很广：便利店、药妆店、百货、家电量贩基本都能刷*店门口的 PayPay 二维码，直接打开微信扫码就能付*（按实时汇率用人民币结算）；但个人小店、景点摊贩、部分居酒屋仍只收现金，建议按每天约 1 万日元准备，共带 5-10 万日元备用（约合人民币 2500-5000）。换汇优先国内银行预约，或到日本后在 7-11 等 ATM 用银联卡取现（按实时汇率，优于机场柜台）。Visa/Master 信用卡大范围通用，Suica/Pasmo 也能在便利店和部分餐厅小额支付。
+                <div class="know-grid">
+                  <div class="know-cell"><span class="kc-t">💚 哪里能扫码</span>便利店、药妆店、百货、家电量贩：支付宝/微信扫店家 <b>PayPay 码</b>就能付，按实时汇率人民币结算</div>
+                  <div class="know-cell red"><span class="kc-t">💴 哪里必须用现金</span>个人小店、景点摊贩、部分居酒屋只收现金；建议按每天约 1 万日元准备，共带 <b>5-10 万日元（2500-5000人民币）</b>备用</div>
+                  <div class="know-cell"><span class="kc-t">🏦 怎么换汇划算</span>优先国内银行预约；到日本可在 7-11 等 ATM 用银联卡取现（实时汇率，比机场柜台划算）</div>
+                  <div class="know-cell"><span class="kc-t">💳 信用卡</span>Visa / Mastercard 大范围通用；Suica/Pasmo 也能在便利店和部分餐厅小额支付</div>
+                </div>
             </div>
         </div>
         <div class="step-item">
             <div class="step-num">5</div>
             <div class="step-content">
                 <h4>基本礼仪</h4>
-                 电车上手机静音、不打电话、不大声交谈；扶梯在"东京站左侧"（大阪等关西地区相反，站右侧），且官方现在提倡扶梯上站定扶好、不要跑动；快餐店、美食广场、部分连锁拉面店吃完需"自行把餐盘送回返却口"，居酒屋和正餐餐馆则由店员收拾，直接离席即可。
+                 <div class="know-line"><span class="kl-dot">·</span><span>电车上手机静音、不打电话、不大声交谈</span></div>
+                <div class="know-line"><span class="kl-dot">·</span><span>扶梯在东京站<b>左侧</b>站立（大阪等关西相反、站右侧），官方现在提倡站定扶好、不要跑动</span></div>
+                <div class="know-line"><span class="kl-dot">·</span><span>快餐店、美食广场、连锁拉面店吃完自行把餐盘送回「返却口」；居酒屋和正餐餐馆由店员收拾，直接离席即可</span></div>
             </div>
         </div>
         <div class="step-item">
@@ -418,12 +452,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
 
     <div class="section-title">手册使用说明</div>
     <div class="card">
-        <p style="font-size:13px; color:#4a5568;">
-          本手册分为「分区」「路线」「避坑」「住宿」「预约」「购物」「工具」七大模块，所有内容均可点击展开查看详情，地址支持一键复制。建议出行前通读一遍，旅途中配合底部导航快速查询。 
-        </p>
+        <div class="guide-grid">
+          <div class="guide-row"><span class="gr-ic">🗺️</span><span><b>分区</b>：14 个区域、46 个景点餐馆，可按区域筛选，红色「需预约」标签与预约栏联动</span></div>
+          <div class="guide-row"><span class="gr-ic">🗓️</span><span><b>路线</b>：6 条精选路线共 30 天行程，细化到上午/下午/晚上，每天标注预计花销；下方是避坑指南（点标题展开）</span></div>
+          <div class="guide-row"><span class="gr-ic">🏨</span><span><b>住宿</b>：43 家酒店/民宿/青旅，按区域和价位挑选，日元人民币双标注</span></div>
+          <div class="guide-row"><span class="gr-ic">📋</span><span><b>预约</b>：26 个热门景点、餐厅、体验的预约方式、提前天数与价格</span></div>
+          <div class="guide-row"><span class="gr-ic">🛍️</span><span><b>购物</b>：8 大商圈、4 家药妆店龙头货、6 家特色小店、12 项必买清单</span></div>
+          <div class="guide-row"><span class="gr-ic">🛠️</span><span><b>工具</b>：预算计算、日语 50 句朗读、行李/打卡清单、汇率换算、旅行记账、季节查询、行程规划等 9 个工具</span></div>
+        </div>
+        <div class="guide-tip">💡 点任意卡片可展开详情，地址点一下即复制；点 ❤️ 标「想去」、✅ 标「去过」，右上角可全局搜索；所有勾选、记账和收藏都自动保存在你自己的手机上，退出再进不会丢。建议出行前通读一遍，旅途中靠底部导航随用随查。</div>
     </div>
 
-    <div class="copyright">© 东京自由行攻略手册 · 交互版 v1.3.0 · 最后更新：2026-09-06</div>
+    <div class="copyright">© 东京自由行手册 · 交互版 v1.3.1 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 分区攻略 -->
@@ -796,7 +836,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hira
     <p style="font-size:11.5px;color:#718096;margin:6px 0 0;padding:0 4px;">📍 大使馆地址：东京都港区元麻布3-4-33。护照丢失→大使馆补办；银行卡丢失→先打客服冻结。日本紧急电话接通后可说 "Chinese" 安排中文翻译。</p>
 
     </div>
-    <div class="copyright">© 东京自由行实操手册 · 交互版 v1.3.0 · 最后更新：2026-09-06</div>
+    <div class="copyright">© 东京自由行手册 · 交互版 v1.3.1 · 最后更新：2026-09-06</div>
 </div>
 
 <!-- 底部导航 -->
@@ -1280,6 +1320,11 @@ const PACK_LIST = [
 ];
 
 const CHANGELOGS = [
+  { v:"v1.3.1", date:"2026-09-06", title:"首页改版：更好读、名字统一、说明同步", logs:[
+    {t:"up", txt:"首页「第一次去东京必看」重排：签证/交通卡/支付/礼仪由大段文字改为分块小卡，手机上更好读"},
+    {t:"up", txt:"全站名称统一为<b>「东京自由行手册」</b>"},
+    {t:"fix", txt:"首页使用说明更新，与 7 大栏目、9 个工具和收藏/搜索功能完全对应"}
+  ]},
   { v:"v1.3", date:"2026-09-06", title:"工具箱扩到9个：能算账、能查季节、能自动排行程", logs:[
     {t:"add", txt:"新增<b>汇率换算</b>：日元⇄人民币双向换算，联网取当日实时汇率，也可手动改"},
     {t:"add", txt:"新增<b>旅行记账</b>：分类记一笔、自动折人民币，直接对照预算计算器"},
